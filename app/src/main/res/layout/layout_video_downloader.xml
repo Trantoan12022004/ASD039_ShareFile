@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_radius_24"
+    android:elevation="2dp"
+    android:padding="@dimen/_8sdp">
+
+    <!-- Tiêu đề: Video Downloader -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/video_downloader"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:fontFamily="@font/outfit_semibold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Nút View All > -->
+    <LinearLayout
+        android:id="@+id/btnViewAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTitle">
+
+        <TextView
+            android:id="@+id/tvViewAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View All"
+            android:textColor="@color/primary_35"
+            android:textSize="14sp"
+            android:fontFamily="@font/outfit_semibold" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="4dp"
+            android:contentDescription="View All Arrow"
+            android:src="@drawable/ic_chevron_right" />
+    </LinearLayout>
+
+    <!-- Danh sách Nút MXH: Instagram, Tiktok, Facebook, X -->
+
+    <!-- Instagram -->
+    <LinearLayout
+        android:id="@+id/layoutInstagram"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/layoutTiktok"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+        <ImageView
+            android:id="@+id/imgInstagram"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="Instagram"
+            android:src="@drawable/instagram" />
+
+        <TextView
+            android:id="@+id/tvInstagram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Instagram"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/outfit_semibold" />
+    </LinearLayout>
+
+    <!-- Tiktok -->
+    <LinearLayout
+        android:id="@+id/layoutTiktok"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/layoutFacebook"
+        app:layout_constraintStart_toEndOf="@id/layoutInstagram"
+        app:layout_constraintTop_toTopOf="@id/layoutInstagram">
+
+        <ImageView
+            android:id="@+id/imgTiktok"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="Tiktok"
+            android:src="@drawable/tiktok" />
+
+        <TextView
+            android:id="@+id/tvTiktok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Tiktok"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/outfit_semibold" />
+    </LinearLayout>
+
+    <!-- Facebook -->
+    <LinearLayout
+        android:id="@+id/layoutFacebook"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/layoutX"
+        app:layout_constraintStart_toEndOf="@id/layoutTiktok"
+        app:layout_constraintTop_toTopOf="@id/layoutInstagram">
+
+        <ImageView
+            android:id="@+id/imgFacebook"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="Facebook"
+            android:src="@drawable/facebook" />
+
+        <TextView
+            android:id="@+id/tvFacebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Facebook"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/outfit_semibold" />
+    </LinearLayout>
+
+    <!-- X (Twitter) -->
+    <LinearLayout
+        android:id="@+id/layoutX"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/layoutFacebook"
+        app:layout_constraintTop_toTopOf="@id/layoutInstagram">
+
+        <ImageView
+            android:id="@+id/imgX"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="X"
+            android:src="@drawable/x" />
+
+        <TextView
+            android:id="@+id/tvX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="X"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/outfit_semibold" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

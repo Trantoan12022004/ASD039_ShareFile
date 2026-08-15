@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "350755900636",
+    "project_id": "basekotlin-5faf4",
+    "storage_bucket": "basekotlin-5faf4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350755900636:android:1d51057134f38929b8f819",
+        "android_client_info": {
+          "package_name": "com.example.basekotlin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKAubDg3tIkYPBpp4QOp-SWDHv8jwOe_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

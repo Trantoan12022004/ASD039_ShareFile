@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main">
+
+    <!-- 1. Toolbar cố định ở trên cùng -->
+    <include
+        android:id="@+id/layoutToolbar"
+        layout="@layout/toolbar_song_play"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 2. NestedScrollView bọc nội dung (mâm gỗ, lời bài hát, nút hành động) -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/clPlayerControl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutToolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_12sdp">
+
+            <!-- Trình phát đĩa Vinyl (Đế gỗ tỉ lệ 380:340) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardWoodBase"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/ic_wood_base"
+                android:padding="6dp"
+                app:layout_constraintBottom_toTopOf="@+id/cardLyrics"
+                app:layout_constraintDimensionRatio="380:340"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!-- Khung bọc đĩa Vinyl -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/flVinylContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:padding="@dimen/_8sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <!-- Lớp 1: Mặt đĩa đen bóng (Dùng vector ellipse_1) -->
+                    <ImageView
+                        android:id="@+id/ivVinylBase"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:contentDescription="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_elip"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
+
+                    <!-- Lớp 2: Rãnh đĩa -->
+
+                    <!-- Lớp 3: Tâm đĩa xanh -->
+                    <ImageView
+                        android:id="@+id/ivVinylGrooves"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:contentDescription="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_vinyl_grooves"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0"
+                        tools:ignore="ContentDescription" />
+
+                    <ImageView
+                        android:id="@+id/ivVinylCenterLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:contentDescription="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_vinyl_center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_percent="0.28"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.28"
+                        tools:ignore="ContentDescription" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Cần kim đĩa (Tonearm) -->
+                <ImageView
+                    android:id="@+id/ivTonearm"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:contentDescription="@null"
+                    android:padding="8dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/ic_evil_knidle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.75"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.3"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 3. Khung lời bài hát -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardLyrics"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@drawable/bg_radius_24"
+                android:padding="@dimen/_12sdp"
+                app:layout_constraintBottom_toTopOf="@id/llMiddleActions"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardWoodBase">
+                <LinearLayout
+                    android:id="@+id/llLyricsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvLyricPrev"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/outfit_medium"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="They only see the results, the pain, they don't know the half"
+                        android:paddingHorizontal="@dimen/_12sdp"
+                        android:textColor="@color/sub_title"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvLyricCurrent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="4dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/outfit_semibold"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="This part of my life's redemption"
+                        android:paddingHorizontal="@dimen/_12sdp"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tvLyricNext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/outfit_medium"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="I see it, I want it, we get it"
+                        android:paddingHorizontal="@dimen/_12sdp"
+                        android:textColor="@color/sub_title"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <!-- Hiện khi bài hát không có lời (không tìm thấy file .lrc) -->
+                <TextView
+                    android:id="@+id/tvNoLyrics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_24sdp"
+                    android:fontFamily="@font/outfit_medium"
+                    android:text="@string/no_lyrics"
+                    android:textColor="@color/sub_title"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 4. Hành động giữa: Yêu thích, Playlist, Lời -->
+            <LinearLayout
+                android:id="@+id/llMiddleActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_6sdp"
+                android:background="@drawable/bg_radius_24"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardLyrics">
+
+                <ImageView
+                    android:id="@+id/btnFavorite"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_favorite" />
+
+                <ImageView
+                    android:id="@+id/btnPlaylist"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="12dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_playlist" />
+
+                <ImageView
+                    android:id="@+id/btn_queue"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="12dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_queue" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- 5. Bộ điều khiển phát nhạc cố định ở dưới đáy -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clPlayerControl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_music_play"
+        android:elevation="8dp"
+        android:padding="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:maxHeight="5dp"
+            android:minHeight="5dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:progress="90"
+            android:progressDrawable="@drawable/bg_progress_bar_purple"
+            android:thumbTint="#FFFFFF"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvCurrentTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_radius_24"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/outfit_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/seekBar"
+            tools:text="08:54" />
+
+        <TextView
+            android:id="@+id/tvTotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_radius_24"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/outfit_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/seekBar"
+            tools:text="08:55" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCurrentTime">
+
+            <!-- Shuffle: Nằm ngoài cùng bên trái -->
+            <ImageView
+                android:id="@+id/btn_shuffle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_shuffle2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <!-- Play / Pause: Nằm chính giữa màn hình -->
+            <ImageView
+                android:id="@+id/btn_play_pause"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:src="@drawable/ic_play"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <!-- Previous: Nằm bên trái nút Play -->
+            <ImageView
+                android:id="@+id/btn_prev"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_prev"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_play_pause"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <!-- Next: Nằm bên phải nút Play -->
+            <ImageView
+                android:id="@+id/btn_next"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/ic_next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_play_pause"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <!-- Repeat: Nằm ngoài cùng bên phải -->
+            <ImageView
+                android:id="@+id/btn_repeat"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_repeat_none"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/btn_search"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_repeat"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

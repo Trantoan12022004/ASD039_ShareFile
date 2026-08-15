@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_radius_24"
+    android:elevation="2dp"
+    android:padding="@dimen/_8sdp">
+
+    <!-- Tiêu đề Quick Tools -->
+    <TextView
+        android:id="@+id/tvQuickToolsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quick Tools"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:fontFamily="@font/outfit_semibold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- HÀNG 1 -->
+
+    <!-- Item 1: Clone Phone -->
+    <LinearLayout
+        android:id="@+id/layoutClonePhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/layoutGroupShare"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvQuickToolsTitle">
+
+        <ImageView
+            android:id="@+id/btnClonePhone"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="Clone Phone"
+            android:elevation="4dp"
+            
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_clone_phone" />
+
+        <TextView
+            android:id="@+id/tvClonePhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Clone Phone"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/outfit_semibold" />
+    </LinearLayout>
+
+    <!-- Item 2: Group Share -->
+    <LinearLayout
+        android:id="@+id/layoutGroupShare"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/layoutNearbyPlay"
+        app:layout_constraintStart_toEndOf="@id/layoutClonePhone"
+        app:layout_constraintTop_toTopOf="@id/layoutClonePhone">
+
+        <ImageView
+            android:id="@+id/btnGroupShare"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="Group Share"
+            android:elevation="4dp"
+            
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_group_share" />
+
+        <TextView
+            android:id="@+id/tvGroupShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Group Share"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/outfit_semibold" />
+    </LinearLayout>
+
+    <!-- Item 3: Nearby Play -->
+    <LinearLayout
+        android:id="@+id/layoutNearbyPlay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/layoutGroupShare"
+        app:layout_constraintTop_toTopOf="@id/layoutClonePhone">
+
+        <ImageView
+            android:id="@+id/btnNearbyPlay"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="Nearby Play"
+            android:elevation="4dp"
+            
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_nearby_play" />
+
+        <TextView
+            android:id="@+id/tvNearbyPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Nearby Play"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/outfit_semibold" />
+    </LinearLayout>
+
+    <!-- HÀNG 2 -->
+
+    <!-- Item 4: Invite -->
+    <LinearLayout
+        android:id="@+id/layoutInvite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@id/layoutClonePhone"
+        app:layout_constraintStart_toStartOf="@id/layoutClonePhone"
+        app:layout_constraintTop_toBottomOf="@id/layoutClonePhone">
+
+        <ImageView
+            android:id="@+id/btnInvite"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="Invite"
+            android:elevation="4dp"
+            
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_invite" />
+
+        <TextView
+            android:id="@+id/tvInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Invite"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/outfit_semibold" />
+    </LinearLayout>
+
+    <!-- Item 5: Download -->
+    <LinearLayout
+        android:id="@+id/layoutDownload"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@id/layoutGroupShare"
+        app:layout_constraintStart_toStartOf="@id/layoutGroupShare"
+        app:layout_constraintTop_toTopOf="@id/layoutInvite">
+
+        <ImageView
+            android:id="@+id/btnDownload"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="Download"
+            android:elevation="4dp"
+            
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_download_doc" />
+
+        <TextView
+            android:id="@+id/tvDownload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Download"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:fontFamily="@font/outfit_semibold" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

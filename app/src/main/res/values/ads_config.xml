@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fb_app_id" translatable="false">123456789</string>
+
+    <string name="facebook_client_token" translatable="false">123456789</string>
+
+    <string name="app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+
+    <string name="resume" translatable="false">ca-app-pub-3940256099942544/9257395921</string>
+
+</resources>

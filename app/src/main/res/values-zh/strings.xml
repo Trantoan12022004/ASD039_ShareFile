@@ -1,0 +1,123 @@
+<resources>
+    <string name="app_name">ShareFile</string>
+    <string name="english" translatable="false">English</string>
+    <string name="french" translatable="false">French</string>
+    <string name="portuguese" translatable="false">Portuguese</string>
+    <string name="spanish" translatable="false">Spanish</string>
+    <string name="german" translatable="false">German</string>
+    <string name="hindi" translatable="false">Hindi</string>
+    <string name="indonesia" translatable="false">Indonesia</string>
+    <string name="china" translatable="false">China</string>
+    <string name="Send_Email">傳送電子郵件</string>
+    <string name="There_is_no">沒有</string>
+    <string name="feedback_failed">回饋失敗</string>
+    <string name="app_review_failed">應用審核失敗</string>
+    <string name="thank_you">謝謝</string>
+    <string name="rate_us">請給我們評分</string>
+    <string name="not_now">現在不要</string>
+    <string name="this_action_may_contain_advertising">此操作可能包含廣告</string>
+    <string name="your_opinion_matter_to_us">你使用MP3下載器的體驗如何？</string>
+    <string name="if_you_enjoy_this_know_your_device_would_you_mind_rating_us_on_the_google_play_then">如果您喜歡這款基本產品，能否請您在 Google Play 上為我們評分呢？</string>
+    <string name="language">語言</string>
+    <string name="rate">速度</string>
+    <string name="share">分享</string>
+    <string name="privacy_policy">隱私權政策</string>
+    <string name="next">下一個</string>
+    <string name="quit">辭職</string>
+    <string name="cancel">取消</string>
+    <string name="continue_">繼續</string>
+    <string name="are_you_sure_want_to_quit_app">您確定要退出應用程式嗎？</string>
+    <string name="please_choose_a_language">請選擇一種語言</string>
+    <string name="no_internet_connection">沒有網路連線！</string>
+    <string name="title_intro_01">跟隨節奏</string>
+    <string name="title_intro_02">跟著歌詞走</string>
+    <string name="title_intro_03">大量優質曲目</string>
+    <string name="content_intro_01">發現最動聽的音樂。</string>
+    <string name="content_intro_02">跟著歌詞一起唱。</string>
+    <string name="content_intro_03">探索你喜愛的旋律。</string>
+    <string name="about">關於</string>
+    <string name="feedback">回饋</string>
+    <string name="settings">設定</string>
+    <string name="version">版本：</string>
+    <string name="title_music">歌曲</string>
+    <string name="title_playlist">播放清單</string>
+    <string name="title_download">下載</string>
+    <string name="shuffle_all">全部隨機播放</string>
+    <string name="text_input_failed">“播放清單名稱不能為空白”</string>
+    <string name="text_input_failed1">該名稱已被佔用，請嘗試其他名稱。</string>
+    <string name="ringtone_permission_desc">要設定您的鈴聲，%1$s 需要獲得您設備系統的許可。</string>
+    <string name="ringtone_permission_highlight">允許</string>
+    <string name="ringtone_set_success">鈴聲設定成功</string>
+    <string name="ringtone_set_failed">設定鈴聲失敗</string>
+    <string name="delete_song_desc">您確定要從設備中刪除“%1$s”嗎？</string>
+    <string name="delete_song">刪除歌曲？</string>
+    <string name="delete_song_success">歌曲已成功刪除</string>
+    <string name="delete_song_failed">刪除歌曲失敗</string>
+    <string name="playlist">播放清單</string>
+    <string name="playlist_empty_title">開啟你的音樂之旅</string>
+    <string name="playlist_empty_desc">添加您的播放清單即可開始收聽</string>
+    <string name="song">歌曲</string>
+    <string name="hello_blank_fragment">你好，空白片段</string>
+    <string name="unknown_artist">未知</string>
+    <string name="set_timer">設定定時器</string>
+    <string name="timer_set">放</string>
+    <string name="timer_set_success">定時器設定為 %1$s</string>
+    <string name="timer_set_invalid">請選擇大於 0 的時間。</string>
+    <string name="timer_remaining">剩餘時間為 %1$s</string>
+    <string name="timer_stop_at">音樂將在 %1$s 處停止</string>
+    <string name="playing_queue">遊戲隊列</string>
+    <string name="clear_queue">清除佇列</string>
+    <string name="clear">清除</string>
+    <string name="clear_desc">您確定要清空播放佇列嗎？</string>
+    <string name="search">搜尋</string>
+    <string name="empty_search">沒有搜尋記錄！</string>
+    <string name="empty_search_result">未找到結果</string>
+    <string name="choose_language">選擇語言</string>
+    <string name="please_select_a_language_to_continue">請選擇語言繼續</string>
+    <string name="permission_title">允許</string>
+    <string name="permission_desc">該應用程式需要以下權限才能正常運作：</string>
+    <string name="permission_notification">通知</string>
+    <string name="agree_and_continue">同意並繼續</string>
+    <string name="permission_memory">記憶體存取</string>
+    <string name="permission_write">寫入設定</string>
+    <string name="welcome_back">歡迎回來</string>
+    <string name="welcome_desc">很高興你再次光臨。讓我們繼續你上次的旅程吧！</string>
+    <string name="lyrics">歌詞</string>
+    <string name="create_new_playlist">建立新播放列表</string>
+    <string name="add_to_playlist">新增到播放列表</string>
+    <string name="enter_playlist_s_name">請輸入播放清單名稱</string>
+    <string name="create">創造</string>
+    <string name="delete">刪除</string>
+    <string name="import_lyrics">導入歌詞</string>
+    <string name="save">節省</string>
+    <string name="import_lyrics_online">線上導入歌詞</string>
+    <string name="got_it">知道了</string>
+    <string name="play_next">下一個</string>
+    <string name="add_to_queue">添加到隊列</string>
+    <string name="set_as_ringtone">設定為鈴聲</string>
+    <string name="allow">允許</string>
+    <string name="details">細節</string>
+    <string name="title">標題</string>
+    <string name="album">專輯</string>
+    <string name="artist">藝術家</string>
+    <string name="duration">期間</string>
+    <string name="size">尺寸</string>
+    <string name="location">地點</string>
+    <string name="delete_from_device">從設備中刪除</string>
+    <string name="cancel_timer">取消計時器</string>
+    <string name="ok">好的</string>
+    <string name="search_lyrics">搜尋歌詞</string>
+    <string name="delete_history_item">刪除歷史記錄項</string>
+    <string name="pause_download">暫停下載</string>
+    <string name="resume_download">履歷下載</string>
+    <string-array name="random_notifications">
+        <item>Choose from hundreds of clothing templates and start designing today.</item>
+        <item>Create unique T-shirts, hoodies, shirts, jackets, and pants with ease.</item>
+        <item>Add text, stickers, emojis, and drawings to personalize your design.</item>
+        <item>Use brushes, shapes, and colors to bring your creative ideas to life.</item>
+        <item>Edit your design anytime with Undo and Redo for maximum flexibility.</item>
+        <item>Explore the latest clothing templates and customize them your way.</item>
+        <item>Save your finished design in high quality and share it with friends.</item>
+        <item>Start creating stylish outfits with powerful and easy-to-use design tools.</item>
+    </string-array>
+</resources>

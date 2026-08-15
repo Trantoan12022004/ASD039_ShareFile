@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>show_ump</key>
+        <value>true</value>
+    </entry>
+
+    <entry>
+        <key>open_splash</key>
+        <value>true</value>
+    </entry>
+
+    <entry>
+        <key>banner_splash</key>
+        <value>true</value>
+    </entry>
+
+    <entry>
+        <key>inter_splash</key>
+        <value>true</value>
+    </entry>
+
+    <entry>
+        <key>show_language</key>
+        <value>1,2,3</value>
+    </entry>
+
+    <entry>
+        <key>native_language</key>
+        <value>true</value>
+    </entry>
+
+    <entry>
+        <key>show_intro</key>
+        <value>false</value>
+    </entry>
+
+    <entry>
+        <key>native_intro</key>
+        <value>true</value>
+    </entry>
+
+    <entry>
+        <key>inter_intro</key>
+        <value>false</value>
+    </entry>
+
+    <entry>
+        <key>native_permission</key>
+        <value>true</value>
+    </entry>
+
+    <entry>
+        <key>inter_permission</key>
+        <value>true</value>
+    </entry>
+
+    <entry>
+        <key>rate_aoa_inter_splash</key>
+        <value>30_70</value>
+    </entry>
+
+    <entry>
+        <key>interval_interstitial_from_start</key>
+        <value>15</value>
+    </entry>
+
+    <entry>
+        <key>interval_between_interstitial</key>
+        <value>20</value>
+    </entry>
+
+</defaultsMap>

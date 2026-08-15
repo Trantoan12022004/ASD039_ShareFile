@@ -1,0 +1,21 @@
+---
+description: Kotlin coding style
+globs:
+- "**/*.kt"
+alwaysApply: true
+---
+
+Write Kotlin code in an imperative style.
+
+Requirements:
+
+- Use explicit if/else blocks.
+- Declare variables before assigning.
+- Do not use expression-bodied if/when unless requested.
+- Avoid nested scope functions (let, apply, run, with, also).
+- Avoid smart one-line Kotlin syntax.
+- Prefer multiple simple statements over one complex expression.
+- Use meaningful variable names.
+- Comment each logical step.
+- Optimize for readability, not brevity.
+- Do not hashcode the string.

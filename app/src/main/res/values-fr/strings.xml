@@ -1,0 +1,123 @@
+<resources>
+    <string name="app_name">ShareFile</string>
+    <string name="english" translatable="false">English</string>
+    <string name="french" translatable="false">French</string>
+    <string name="portuguese" translatable="false">Portuguese</string>
+    <string name="spanish" translatable="false">Spanish</string>
+    <string name="german" translatable="false">German</string>
+    <string name="hindi" translatable="false">Hindi</string>
+    <string name="indonesia" translatable="false">Indonesia</string>
+    <string name="china" translatable="false">China</string>
+    <string name="Send_Email">Envoyer un courriel</string>
+    <string name="There_is_no">Il n\'y a pas</string>
+    <string name="feedback_failed">Échec du retour d\'information</string>
+    <string name="app_review_failed">L\'examen de l\'application a échoué</string>
+    <string name="thank_you">Merci</string>
+    <string name="rate_us">Évaluez-nous</string>
+    <string name="not_now">Pas maintenant</string>
+    <string name="this_action_may_contain_advertising">Cette action peut contenir de la publicité</string>
+    <string name="your_opinion_matter_to_us">Quelle est votre expérience avec ShareFile ?</string>
+    <string name="if_you_enjoy_this_know_your_device_would_you_mind_rating_us_on_the_google_play_then">Si vous appréciez ce produit, pourriez-vous nous laisser une note sur Google Play ?</string>
+    <string name="language">Langue</string>
+    <string name="rate">Taux</string>
+    <string name="share">Partager</string>
+    <string name="privacy_policy">politique de confidentialité</string>
+    <string name="next">Suivant</string>
+    <string name="quit">Quitter</string>
+    <string name="cancel">Annuler</string>
+    <string name="continue_">Continuer</string>
+    <string name="are_you_sure_want_to_quit_app">Êtes-vous sûr de vouloir quitter l\'application ?</string>
+    <string name="please_choose_a_language">Veuillez choisir une langue</string>
+    <string name="no_internet_connection">Pas de connexion Internet !</string>
+    <string name="title_intro_01">Suivez le rythme</string>
+    <string name="title_intro_02">Suivez les paroles</string>
+    <string name="title_intro_03">Musique énorme et de qualité</string>
+    <string name="content_intro_01">Découvrez les meilleurs morceaux.</string>
+    <string name="content_intro_02">Chantez en suivant les paroles.</string>
+    <string name="content_intro_03">Explorez les morceaux que vous aimez.</string>
+    <string name="about">À propos</string>
+    <string name="feedback">Retour</string>
+    <string name="settings">Paramètres</string>
+    <string name="version">Version: </string>
+    <string name="title_music">Chanson</string>
+    <string name="title_playlist">Liste de lecture</string>
+    <string name="title_download">Télécharger</string>
+    <string name="shuffle_all">Mélanger tout</string>
+    <string name="text_input_failed">"Le nom de la playlist ne peut pas être vide."</string>
+    <string name="text_input_failed1">Ce nom existe déjà, veuillez en choisir un autre.</string>
+    <string name="ringtone_permission_desc">Pour définir votre sonnerie, %1$s requiert l\'autorisation du système de votre appareil.</string>
+    <string name="ringtone_permission_highlight">autorisation</string>
+    <string name="ringtone_set_success">Sonnerie définie avec succès</string>
+    <string name="ringtone_set_failed">Impossible de définir la sonnerie</string>
+    <string name="delete_song_desc">Êtes-vous sûr de vouloir supprimer « %1$s » de votre appareil ?</string>
+    <string name="delete_song">Supprimer la chanson ?</string>
+    <string name="delete_song_success">Chanson supprimée avec succès</string>
+    <string name="delete_song_failed">Impossible de supprimer la chanson</string>
+    <string name="playlist">Liste de lecture</string>
+    <string name="playlist_empty_title">Commencez votre voyage musical</string>
+    <string name="playlist_empty_desc">Ajoutez vos playlists pour commencer à écouter</string>
+    <string name="song">Chanson</string>
+    <string name="hello_blank_fragment">Bonjour fragment vide</string>
+    <string name="unknown_artist">inconnu</string>
+    <string name="set_timer">Régler la minuterie</string>
+    <string name="timer_set">Ensemble</string>
+    <string name="timer_set_success">Minuteur réglé sur %1$s</string>
+    <string name="timer_set_invalid">Veuillez sélectionner une heure supérieure à 0</string>
+    <string name="timer_remaining">Temps restant : %1$s</string>
+    <string name="timer_stop_at">La musique s\'arrêtera à %1$s</string>
+    <string name="playing_queue">File d\'attente</string>
+    <string name="clear_queue">Vider la file d\'attente</string>
+    <string name="clear">Clair</string>
+    <string name="clear_desc">Êtes-vous sûr de vouloir vider la file d\'attente ?</string>
+    <string name="search">Recherche</string>
+    <string name="empty_search">Aucun historique de recherche !</string>
+    <string name="empty_search_result">Aucun résultat trouvé</string>
+    <string name="choose_language">Choisissez la langue</string>
+    <string name="please_select_a_language_to_continue">Veuillez sélectionner une langue pour continuer</string>
+    <string name="permission_title">Autorisation</string>
+    <string name="permission_desc">L\'application nécessite les autorisations suivantes pour fonctionner :</string>
+    <string name="permission_notification">Notification</string>
+    <string name="agree_and_continue">Accepter et continuer</string>
+    <string name="permission_memory">Accès à la mémoire</string>
+    <string name="permission_write">Paramètres d\'écriture</string>
+    <string name="welcome_back">Content de te revoir</string>
+    <string name="welcome_desc">Nous sommes ravis de vous accueillir à nouveau. Reprenons là où vous vous étiez arrêté et poursuivons votre voyage !</string>
+    <string name="lyrics">Paroles</string>
+    <string name="create_new_playlist">Créer une nouvelle playlist</string>
+    <string name="add_to_playlist">Ajouter à la playlist</string>
+    <string name="enter_playlist_s_name">Saisissez le nom de la playlist</string>
+    <string name="create">Créer</string>
+    <string name="delete">Supprimer</string>
+    <string name="import_lyrics">Paroles importées</string>
+    <string name="save">Sauvegarder</string>
+    <string name="import_lyrics_online">Importer des paroles en ligne</string>
+    <string name="got_it">J\'ai compris</string>
+    <string name="play_next">Jouer ensuite</string>
+    <string name="add_to_queue">Ajouter à la file d\'attente</string>
+    <string name="set_as_ringtone">Définir comme sonnerie</string>
+    <string name="allow">Permettre</string>
+    <string name="details">Détails</string>
+    <string name="title">Titre</string>
+    <string name="album">Album</string>
+    <string name="artist">Artiste</string>
+    <string name="duration">Durée</string>
+    <string name="size">Taille</string>
+    <string name="location">Emplacement</string>
+    <string name="delete_from_device">Supprimer de l\'appareil</string>
+    <string name="cancel_timer">Annuler le minuteur</string>
+    <string name="ok">D\'ACCORD</string>
+    <string name="search_lyrics">Rechercher les paroles</string>
+    <string name="delete_history_item">Supprimer l\'élément de l\'historique</string>
+    <string name="pause_download">Mettre en pause le téléchargement</string>
+    <string name="resume_download">Téléchargement du CV</string>
+    <string-array name="random_notifications">
+        <item>Choose from hundreds of clothing templates and start designing today.</item>
+        <item>Create unique T-shirts, hoodies, shirts, jackets, and pants with ease.</item>
+        <item>Add text, stickers, emojis, and drawings to personalize your design.</item>
+        <item>Use brushes, shapes, and colors to bring your creative ideas to life.</item>
+        <item>Edit your design anytime with Undo and Redo for maximum flexibility.</item>
+        <item>Explore the latest clothing templates and customize them your way.</item>
+        <item>Save your finished design in high quality and share it with friends.</item>
+        <item>Start creating stylish outfits with powerful and easy-to-use design tools.</item>
+    </string-array>
+</resources>

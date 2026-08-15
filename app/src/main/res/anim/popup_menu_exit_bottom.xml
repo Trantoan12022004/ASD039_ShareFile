@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dùng khi popup hiện phía TRÊN anchor: thu nhỏ dần về góc dưới-phải khi đóng -->
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <scale
+        android:duration="140"
+        android:fromXScale="1.0"
+        android:fromYScale="1.0"
+        android:toXScale="0.9"
+        android:toYScale="0.85"
+        android:pivotX="100%"
+        android:pivotY="100%"
+        android:interpolator="@android:interpolator/accelerate_cubic" />
+    <alpha
+        android:duration="120"
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0" />
+</set>

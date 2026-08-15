@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_radius_24"
+    android:clickable="true"
+    android:focusable="true">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imgThumbnail"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:src="@drawable/ic_audio"
+        android:clipToOutline="true"
+        app:riv_corner_radius="16dp"
+        app:riv_border_width="1dp"
+        app:riv_border_color="#BDBDBD"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Tên File -->
+    <com.example.basekotlin.util.AlwaysMarqueeTextView
+        android:id="@+id/tvFileName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/outfit_semibold"
+        android:maxLines="1"
+        android:text="Redemption"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/tvFileInfo"
+        app:layout_constraintEnd_toStartOf="@id/btn_install"
+        app:layout_constraintStart_toEndOf="@id/imgThumbnail"
+        app:layout_constraintTop_toTopOf="@id/imgThumbnail" />
+
+    <!-- Thông tin dung lượng và ngày tháng -->
+    <TextView
+        android:id="@+id/tvFileInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/outfit_medium"
+        android:maxLines="1"
+        android:text="Kidwild ft Nemzzz"
+        android:textColor="#6E7569"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/imgThumbnail"
+        app:layout_constraintEnd_toStartOf="@id/btn_install"
+        app:layout_constraintStart_toEndOf="@id/imgThumbnail"
+        app:layout_constraintTop_toBottomOf="@id/tvFileName" />
+    
+    <ImageView
+        android:id="@+id/btn_uninstall"
+        android:layout_width="97dp"
+        android:layout_height="48dp"
+        android:src="@drawable/uninstall"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

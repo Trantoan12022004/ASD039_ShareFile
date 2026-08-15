@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/_4sdp"
+    android:background="@drawable/bg_btn_100"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:paddingHorizontal="@dimen/_8sdp"
+    android:paddingVertical="@dimen/_8sdp">
+
+    <!-- Icon nốt nhạc hình tròn bên trái -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_playlist_thumb"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/icon_music"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/CircleImage" />
+
+    <!-- Tên Playlist -->
+    <TextView
+        android:id="@+id/tv_playlist_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:ellipsize="end"
+        android:fontFamily="@font/plusjakartasans_bold"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_song_count"
+        app:layout_constraintEnd_toStartOf="@+id/btn_playlist_more"
+        app:layout_constraintStart_toEndOf="@+id/iv_playlist_thumb"
+        app:layout_constraintTop_toTopOf="@+id/iv_playlist_thumb"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Field Trip" />
+
+    <!-- Số lượng bài hát -->
+    <TextView
+        android:id="@+id/tv_song_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#A099A5"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_playlist_thumb"
+        app:layout_constraintEnd_toEndOf="@+id/tv_playlist_name"
+        app:layout_constraintStart_toStartOf="@+id/tv_playlist_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_playlist_name"
+        tools:text="7 Songs" />
+
+    <!-- Nút 3 chấm bên phải -->
+    <ImageView
+        android:id="@+id/btn_playlist_more"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_btn_circle"
+        android:padding="8dp"
+        android:src="@drawable/more_vert"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

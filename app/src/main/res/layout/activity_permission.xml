@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:text="@string/permission_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:fontFamily="@font/anton_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Image Illustration -->
+    <ImageView
+        android:id="@+id/iv_chest"
+        android:layout_width="360dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:src="@drawable/permission"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <!-- Description -->
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:gravity="center"
+        android:text="@string/permission_desc"
+        android:textColor="#CCFFFFFF"
+        android:textSize="@dimen/_11ssp"
+        android:fontFamily="@font/outfit_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_chest" />
+
+    <!-- Notification Permission Item -->
+    <LinearLayout
+        android:id="@+id/ll_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@drawable/bg_lang_item_sn"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/_14sdp"
+        app:layout_constraintTop_toBottomOf="@id/tv_desc">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/permission_notification"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            android:fontFamily="@font/plusjakartasans_regular" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:thumbTint="@color/white"
+            app:track="@drawable/switch_track_selector" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_memory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@drawable/bg_lang_item_sn"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/_14sdp"
+        app:layout_constraintTop_toBottomOf="@id/ll_notification">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/permission_memory"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            android:fontFamily="@font/plusjakartasans_regular" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_memory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:thumbTint="@color/white"
+            app:track="@drawable/switch_track_selector" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_write"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@drawable/bg_lang_item_sn"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/_14sdp"
+        app:layout_constraintTop_toBottomOf="@id/ll_memory">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/permission_write"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            android:fontFamily="@font/plusjakartasans_regular" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:thumbTint="@color/white"
+            app:track="@drawable/switch_track_selector" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_continue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_semibold"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:text="@string/agree_and_continue"
+        android:textColor="#B79BFF"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

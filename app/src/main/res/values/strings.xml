@@ -1,0 +1,234 @@
+<resources>
+    <string name="app_name">ShareFile</string>
+    <string name="english" translatable="false">English</string>
+    <string name="french" translatable="false">French</string>
+    <string name="portuguese" translatable="false">Portuguese</string>
+    <string name="spanish" translatable="false">Spanish</string>
+    <string name="german" translatable="false">German</string>
+    <string name="hindi" translatable="false">Hindi</string>
+    <string name="indonesia" translatable="false">Indonesia</string>
+    <string name="china" translatable="false">China</string>
+    <string name="Send_Email">Send Email</string>
+    <string name="There_is_no">There is no</string>
+    <string name="feedback_failed">Feedback failed</string>
+    <string name="app_review_failed">App review failed</string>
+    <string name="thank_you">Thank you</string>
+    <string name="rate_us">Rate us</string>
+    <string name="not_now">Not now</string>
+    <string name="this_action_may_contain_advertising">This action may contain advertising</string>
+    <string name="your_opinion_matter_to_us">How is your experience with MP3 Downloader</string>
+    <string name="if_you_enjoy_this_know_your_device_would_you_mind_rating_us_on_the_google_play_then">If you enjoy this MP3 Downloader, would \nyou mind rating us on the Google Play, then?</string>
+    <string name="language">Choose Language</string>
+    <string name="rate">Rate</string>
+    <string name="share">Share</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="next">Next</string>
+    <string name="quit">Exit App?</string>
+    <string name="cancel">Cancel</string>
+    <string name="continue_">Continue</string>
+    <string name="are_you_sure_want_to_quit_app">Are you sure want to quit app?</string>
+    <string name="please_choose_a_language">Please choose a language</string>
+    <string name="no_internet_connection">No Internet Connection!</string>
+    <string name="title_intro_01">Follow The Rhythm</string>
+    <string name="title_intro_02">Follow The Lyrics</string>
+    <string name="title_intro_03">Huge &amp; Quality Tunes</string>
+    <string name="content_intro_01">Discover the best tunes.</string>
+    <string name="content_intro_02">Sing along with lyrics.</string>
+    <string name="content_intro_03">Explores tunes you love.</string>
+    <string name="about">About</string>
+    <string name="feedback">Feedback</string>
+    <string name="settings">Settings</string>
+    <string name="version">Version: </string>
+    <string name="title_music">Song</string>
+    <string name="title_playlist">Playlist</string>
+    <string name="title_download">Download</string>
+    <string name="shuffle_all">Shuffle All</string>
+    <string name="text_input_failed">"Playlist’s name can’t be blank "</string>
+    <string name="text_input_failed1">The name already exists, please try another one.</string>
+    <string name="ringtone_permission_desc">To set your ringtone, %1$s require permission from your device system.</string>
+    <string name="ringtone_permission_highlight">permission</string>
+    <string name="ringtone_set_success">Ringtone set successfully</string>
+    <string name="ringtone_set_failed">Failed to set ringtone</string>
+    <string name="delete_song_desc">Are you sure you want to delete “%1$s” from your device?</string>
+    <string name="delete_song">Delete song?</string>
+    <string name="delete_song_success">Song deleted successfully</string>
+    <string name="delete_song_failed">Failed to delete song</string>
+    <string name="playlist">Playlist</string>
+    <string name="playlist_empty_title">Start Your Music Journey</string>
+    <string name="playlist_empty_desc">Add your playlists to begin listening</string>
+    <string name="no_lyrics">No lyrics</string>
+    <string name="song">Song</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="unknown_artist">unknown</string>
+    <string name="set_timer">Set timer</string>
+    <string name="timer_set">Set</string>
+    <string name="timer_set_success">Timer set to %1$s</string>
+    <string name="timer_set_invalid">Please select a time greater than 0</string>
+    <string name="timer_remaining">Time remaining is %1$s</string>
+    <string name="timer_stop_at">Music will stop at %1$s</string>
+    <string name="playing_queue">Playing Queue</string>
+    <string name="clear_queue">Clear Queue</string>
+    <string name="clear">Clear</string>
+    <string name="clear_desc">Are you sure you want to clear the playing queue?</string>
+    <string name="search">Search</string>
+    <string name="empty_search">No search history!</string>
+    <string name="empty_search_result">No results found</string>
+    <string name="choose_language">Choose language</string>
+    <string name="please_select_a_language_to_continue">Please select a language to continue</string>
+    <string name="permission_title">Permission</string>
+    <string name="permission_desc">The app requires these permissions to work:</string>
+    <string name="permission_notification">Notification</string>
+    <string name="agree_and_continue">Agree and Continue</string>
+    <string name="permission_memory">Memory access</string>
+    <string name="permission_write">Write settings</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="welcome_desc">We’re glad to have you here again. Let’s pickup where you left off and continue your journey!!</string>
+    <string name="lyrics">Lyrics</string>
+    <string name="create_new_playlist">Create new playlist</string>
+    <string name="add_to_playlist">Add to playlist</string>
+    <string name="enter_playlist_s_name">Enter playlist\'s name</string>
+    <string name="create">Create</string>
+    <string name="delete">Delete</string>
+    <string name="import_lyrics">Import lyrics</string>
+    <string name="save">Save</string>
+    <string name="import_lyrics_online">Import lyrics online</string>
+    <string name="got_it">Got It</string>
+    <string name="play_next">Play next</string>
+    <string name="add_to_queue">Add to queue</string>
+    <string name="set_as_ringtone">Set as ringtone</string>
+    <string name="allow">Allow</string>
+    <string name="details">Details</string>
+    <string name="title">Title</string>
+    <string name="album">Album</string>
+    <string name="artist">Artist</string>
+    <string name="duration">Duration</string>
+    <string name="size">Size</string>
+    <string name="location">Location</string>
+    <string name="delete_from_device">Delete from device</string>
+    <string name="cancel_timer">Cancel Timer</string>
+    <string name="ok">OK</string>
+    <string name="search_lyrics">Search Lyrics</string>
+    <string name="delete_history_item">Delete history item</string>
+    <string name="pause_download">Pause download</string>
+    <string name="resume_download">Resume download</string>
+    <string name="file">File</string>
+    <string name="send">Send</string>
+    <string name="receive">Receive</string>
+    <string name="files">Files</string>
+    <string name="files1">files</string>
+    <string name="video_downloader">Video Downloader</string>
+    <string name="junk_memory">Junk Memory :</string>
+    <string name="clean">Clean</string>
+    <string name="home">Home</string>
+    <string name="scan">Scan</string>
+    <string name="music">Music</string>
+    <string name="all">All</string>
+    <string name="recently_added">Recently Added</string>
+    <string name="folders">Folders</string>
+    <string name="favorite">Favorite</string>
+    <string name="recently_played">Recently Played</string>
+    <string name="no_song_available">No Song Available</string>
+    <string name="there_is_no_song_in_this_section_please_import_some">There is no song in this section. Please import some</string>
+    <string name="ringtone_cutter">Ringtone Cutter</string>
+    <string name="sleep_timer">Sleep timer</string>
+    <string name="song_detail">Song Detail</string>
+    <string name="go_to_artist">Go to artist</string>
+    <string name="go_to_album">Go to album</string>
+    <string name="song_count">%1$d songs</string>
+    <string name="clear_history_title">Clear history?</string>
+    <string name="clear_history_desc">This will remove all songs from your recently played history. This action cannot be undone.</string>
+    <string name="no_recently_played_desc">Songs you\'ve played will appear here.</string>
+    <string name="create_add"><![CDATA[Create & Add]]></string>
+    <string name="select_playlist">Select Playlist</string>
+    <string name="play">Play</string>
+    <string name="select">Select</string>
+    <string name="add_to_favorite">Add to favorite</string>
+    <string name="move_to_safebox">Move to SafeBox</string>
+    <string name="song_already_in_playlist">Song is already in this playlist</string>
+    <string name="song_added_to_playlist">Added to playlist</string>
+    <string name="song_already_in_favorite">Song is already in favorites</string>
+    <string name="song_added_to_favorite">Added to favorites</string>
+    <string name="rename">Rename</string>
+    <string name="drag_the_slider_to_select_the_audio_clip_range">Drag the slider to select the audio clip range</string>
+    <string name="save_ringtone">Save Ringtone</string>
+    <string name="preview_ringtone">Preview Ringtone</string>
+    <string name="rename_song_success">Song renamed successfully</string>
+    <string name="rename_song_failed">Failed to rename song</string>
+
+    <string name="save_ringtone_confirm_message">
+    Do you want to trim segment from %1$s to %2$s and save to Ringtones folder?
+</string>
+    <string name="ringtone_save_success">Ringtone saved to Ringtones folder</string>
+    <string name="ringtone_save_failed">Failed to save ringtone</string>
+    <string name="ringtones_folder">Ringtones</string>
+    <string name="start_point">Start Point</string>
+    <string name="end_point">End Point</string>
+    <string name="duration_label">Duration: %1$s</string>
+    <string name="detail_information">Detail Information</string>
+    <string name="label_name">Name :</string>
+    <string name="label_artist">Artist :</string>
+    <string name="label_path">Path :</string>
+    <string name="label_size">Size :</string>
+    <string name="label_date">Date :</string>
+    <string name="select_all">Select All</string>
+    <string name="more">More</string>
+    <string name="selected">Selected </string>
+    <string name="delete_songs_desc">Do you want to delete %1$d selected songs from this device?</string>
+    <string name="please_select_at_least_one_song">Please select at least one song</string>
+    <string name="please_select_at_least_one_item">Please select at least one item</string>
+    <string name="select_only_one_song_to_rename">Please select only one song to rename</string>
+    <string name="select_only_one_item_to_rename">Please select only one item to rename</string>
+    <string name="delete_folder">Delete folder?</string>
+    <string name="delete_folder_desc">Are you sure you want to delete “%1$s” and all songs inside from your device?</string>
+    <string name="delete_folders_desc">Do you want to delete %1$d selected folders and all songs inside from this device?</string>
+    <string name="delete_playlist">Delete playlist?</string>
+    <string name="delete_playlist_desc">Are you sure you want to delete “%1$s”?</string>
+    <string name="delete_playlists_desc">Do you want to delete %1$d selected playlists?</string>
+    <string name="delete_playlist_success">Playlist deleted successfully</string>
+    <string name="rename_folder_success">Folder renamed successfully</string>
+    <string name="rename_folder_failed">Failed to rename folder</string>
+    <string name="rename_playlist_success">Playlist renamed successfully</string>
+    <string name="select_only_one_song_for_ringtone">Please select only one song for ringtone cutter</string>
+    <string name="select_only_one_song_for_info">Please select only one song to view information</string>
+    <string name="add_new_playlist">Add New Playlist</string>
+    <string name="my_playlist">My Playlist</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="remove_from_favorite">Remove from favorite</string>
+    <string name="song_removed_from_favorite">Removed from favorites</string>
+    <string name="search_song">Search song...</string>
+    <string name="no_app_available">No App Available</string>
+    <string name="no_app_available_desc">There is no app in this section. Please import some</string>
+    <string name="not_installed">Not Installed</string>
+    <string name="apk">APK Package</string>
+    <string name="installed">Installed App</string>
+    <string name="deletable">Deletable</string>
+    <string name="information">Information</string>
+    <string name="delete_apk">Delete APK?</string>
+    <string name="delete_apk_desc">Are you sure you want to delete “%1$s” from your device?</string>
+    <string name="delete_apk_success">APK deleted successfully</string>
+    <string name="delete_apk_failed">Failed to delete APK</string>
+    <string name="apps">Apps</string>
+    <string name="deselect_all">Deselect All</string>
+    <string name="apk_residual_for_days">%1$s - Residual for %2$d days</string>
+    <string name="search_apps">Search apps...</string>
+    <string name="cannot_uninstall_system_app">Cannot uninstall system apps.</string>
+    <string name="documents">Documents</string>
+    <string name="recent">Recent</string>
+    <string name="pdf">PDF</string>
+    <string name="excel">Excel</string>
+    <string name="ppt">PPT</string>
+    <string name="txt">TXT</string>
+    <string name="doc">DOC</string>
+    <string name="wps">WPS</string>
+    <string name="other">Other</string>
+    <string-array name="random_notifications">
+        <item>Choose from hundreds of clothing templates and start designing today.</item>
+        <item>Create unique T-shirts, hoodies, shirts, jackets, and pants with ease.</item>
+        <item>Add text, stickers, emojis, and drawings to personalize your design.</item>
+        <item>Use brushes, shapes, and colors to bring your creative ideas to life.</item>
+        <item>Edit your design anytime with Undo and Redo for maximum flexibility.</item>
+        <item>Explore the latest clothing templates and customize them your way.</item>
+        <item>Save your finished design in high quality and share it with friends.</item>
+        <item>Start creating stylish outfits with powerful and easy-to-use design tools.</item>
+    </string-array>
+</resources>

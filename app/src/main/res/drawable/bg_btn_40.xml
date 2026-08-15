@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- LỚP 1: Viền kính ngoài (Viền mỏng bo tròn hoàn toàn 100dp) -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="40dp" />
+            <stroke
+                android:width="1.2dp"
+                android:color="#3DFFFFFF" />
+        </shape>
+    </item>
+
+    <!-- LỚP 2: Nền kính tím đen tối sẫm (Deep Dark Purple Body) -->
+    <item
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="40dp" />
+            <gradient
+                android:angle="270"
+                android:centerColor="#FF120815"
+                android:endColor="#FF0B040C"
+                android:startColor="#F51A0B1E"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- LỚP 3: Vệt phản quang nhẹ ở đỉnh mép trên -->
+    <item
+        android:height="1.5dp"
+        android:left="24dp"
+        android:right="24dp"
+        android:top="1dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="40dp" />
+            <gradient
+                android:angle="0"
+                android:centerColor="#60FFFFFF"
+                android:endColor="#00FFFFFF"
+                android:startColor="#00FFFFFF"
+                android:type="linear" />
+        </shape>
+    </item>
+
+</layer-list>

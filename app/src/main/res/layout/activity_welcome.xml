@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    tools:context=".ui.welcome.WelcomeActivity">
+
+    <!-- Top Logo & Name -->
+    <LinearLayout
+        android:id="@+id/ll_app_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_32sdp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:src="@drawable/logo_app" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="@string/app_name"
+            android:fontFamily="@font/outfit_semibold"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Welcome Texts Container -->
+    <LinearLayout
+        android:id="@+id/ll_texts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_24sdp"
+        app:layout_constraintTop_toBottomOf="@id/ll_app_logo">
+
+        <TextView
+            android:id="@+id/tv_welcome_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_back"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/anton_regular"
+            android:textColor="#9C73FF"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_welcome_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:fontFamily="@font/plusjakartasans_medium"
+            android:gravity="center"
+            android:text="@string/welcome_desc"
+            android:textColor="#CCFFFFFF"
+            android:textSize="@dimen/_11ssp" />
+    </LinearLayout>
+
+    <!-- Main Diamond Illustration -->
+    <ImageView
+        android:id="@+id/iv_main_diamond"
+        android:layout_width="320dp"
+        android:layout_height="213dp"
+        android:src="@drawable/welcome"
+        android:scaleType="centerInside"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_texts" />
+
+    <!-- Continue Button -->
+    <TextView
+        android:id="@+id/tv_continue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:text="@string/continue_"
+        android:textColor="#B79BFF"
+        android:textSize="@dimen/_16ssp"
+        android:fontFamily="@font/outfit_semibold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

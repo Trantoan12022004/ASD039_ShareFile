@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_radius_24"
+    android:padding="@dimen/_8sdp">
+
+    <!-- Icon bên trái -->
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:contentDescription="Hotspot Icon"
+        android:src="@drawable/ic_hotspot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Gộp 3 dòng Text Header vào 1 LinearLayout -->
+    <LinearLayout
+        android:id="@+id/layoutHotspotInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="12dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/switchHotspot"
+        app:layout_constraintStart_toEndOf="@id/imgIcon"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Line 1: Local Hotspot (16sp) -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/outfit_semibold"
+            android:text="Local Hotspot"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <!-- Line 2: On - devices can connect (16sp) -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/outfit_semibold"
+            android:text="On - devices can connect"
+            android:textColor="#4E7A0F"
+            android:textSize="16sp" />
+
+        <!-- Line 3: Description (12sp) -->
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/outfit_semibold"
+            android:text="Connect via hotspot for faster transfer speed"
+            android:textColor="#5F6B56"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <!-- Nút công tắc Switch bên phải -->
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchHotspot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:thumbTint="@color/white"
+        app:track="@drawable/switch_track_selector" />
+
+    <!-- ========================================== -->
+    <!-- PHẦN BỔ SUNG: layoutQR                     -->
+    <!-- ========================================== -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutQR"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutHotspotInfo">
+
+        <!-- Ảnh Mã QR Code nằm trong ô bo góc trắng -->
+        <ImageView
+            android:id="@+id/imgQrCode"
+            android:layout_width="104dp"
+            android:layout_height="104dp"
+            android:background="@drawable/bg_radius_16"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="QR Code"
+            tools:src="@tools:sample/avatars"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Cột thông tin SSID, Password, IP -->
+        <LinearLayout
+            android:id="@+id/layoutQrDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgQrCode"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Dòng SSID -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSsidLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_bold"
+                    android:text="SSID: "
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvSsidValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_bold"
+                    android:text="AndroidShare_463"
+                    android:textColor="#4E7A0F"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Dòng Password -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPasswordLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_bold"
+                    android:text="Password: "
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvPasswordValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_semibold"
+                    android:text="h5xaoin102m"
+                    android:textColor="#2A2A2A"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Dòng IP -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvIpLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_bold"
+                    android:text="IP: "
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvIpValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit_semibold"
+                    android:text="192.168.1.223"
+                    android:textColor="#2A2A2A"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

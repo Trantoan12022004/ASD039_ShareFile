@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:background="@drawable/bg_radius_16"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/_12sdp">
+
+        <ImageView
+            android:id="@+id/imgIcon"
+            android:layout_width="@dimen/_56sdp"
+            android:layout_height="@dimen/_56sdp"
+            android:layout_gravity="center"
+            android:background="@drawable/rating_0" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/clashdisplay_bold"
+            android:text="@string/your_opinion_matter_to_us"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:gravity="center"
+            android:fontFamily="@font/plusjakartasans_medium"
+            android:includeFontPadding="false"
+            android:text="@string/if_you_enjoy_this_know_your_device_would_you_mind_rating_us_on_the_google_play_then"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp" />
+
+        <RatingBar
+            android:id="@+id/rtb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:numStars="5"
+            android:progressTint="#FFF732"
+            android:rating="5"
+            android:secondaryProgressTint="#FFF732"
+            android:stepSize="1"
+            tools:ignore="UnusedAttribute" />
+
+        <TextView
+            android:id="@+id/btnRateUs"
+            android:layout_width="@dimen/_111sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_btn_cancel"
+            android:gravity="center"
+            android:fontFamily="@font/plusjakartasans_medium"
+            android:includeFontPadding="false"
+            android:text="@string/rate_us"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp" />
+
+        <TextView
+            android:id="@+id/btnNotNow"
+            android:layout_width="@dimen/_111sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_btn_create"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/not_now"
+            android:fontFamily="@font/plusjakartasans_medium"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

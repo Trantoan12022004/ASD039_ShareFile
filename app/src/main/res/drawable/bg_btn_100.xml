@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- LỚP 1: Viền sáng ngoài cùng (Tạo hiệu ứng khúc xạ ánh sáng quanh viền kính) -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="100dp" />
+            <!-- Viền trắng mờ (Alpha 30%) -->
+            <stroke
+                android:width="1.2dp"
+                android:color="#2914002D" />
+        </shape>
+    </item>
+
+    <!-- LỚP 2: Nền kính tối bán trong suốt dạng Gradient -->
+    <item
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="100dp" />
+            <gradient
+                android:angle="270"
+                android:startColor="#F51A0B1E"
+                android:centerColor="#FF120815"
+                android:endColor="#FF0B040C"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- LỚP 3: Vệt sáng bóng mép trên (Specular Top Highlight) -->
+    <item
+        android:height="1.5dp"
+        android:left="16dp"
+        android:right="16dp"
+        android:top="1dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="100dp" />
+            <gradient
+                android:angle="0"
+                android:startColor="#00FFFFFF"
+                android:centerColor="#99FFFFFF"
+                android:endColor="#00FFFFFF"
+                android:type="linear" />
+        </shape>
+    </item>
+
+</layer-list>

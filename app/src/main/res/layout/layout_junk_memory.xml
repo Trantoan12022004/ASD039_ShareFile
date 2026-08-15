@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_radius_24"
+    android:elevation="2dp"
+    android:padding="@dimen/_8sdp">
+
+    <!-- Icon Thùng rác bên trái -->
+    <ImageView
+        android:id="@+id/layoutIcon"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:contentDescription="Junk Bin"
+        android:src="@drawable/junk"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Gộp 3 Text vào 1 LinearLayout dọc -->
+    <LinearLayout
+        android:id="@+id/layoutJunkInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnClean"
+        app:layout_constraintStart_toEndOf="@id/layoutIcon"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 1. Dòng Tiêu đề: Junk Memory : -->
+        <TextView
+            android:id="@+id/tvJunkTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/outfit_semibold"
+            android:text="@string/junk_memory"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <!-- 2. Dòng Dung lượng rác: 230.8 MB -->
+        <TextView
+            android:id="@+id/tvJunkSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/outfit_semibold"
+            android:text="230.8 MB"
+            android:textColor="@color/primary_35"
+            android:textSize="16sp" />
+
+        <!-- 3. Dòng Dung lượng đã dùng: Used 43.5 GB/ 53.4 GB -->
+        <TextView
+            android:id="@+id/tvJunkUsed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/outfit_semibold"
+            android:text="Used 43.5 GB/ 53.4 GB"
+            android:textColor="#99000E00"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <!-- 4. Nút Clean bên phải -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnClean"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_btn_16"
+        android:fontFamily="@font/outfit_semibold"
+        android:text="@string/clean"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

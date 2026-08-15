@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Kích thước nút kéo (dạng thỏi hình chữ nhật đứng) -->
+    <size
+        android:width="10dp"
+        android:height="26dp" />
+
+    <!-- Bo tròn góc nút kéo -->
+    <corners android:radius="5dp" />
+
+    <!-- Nền màu trắng bên trong nút kéo -->
+    <solid android:color="#FFFFFF" />
+
+    <!-- Viền màu xanh lá -->
+    <stroke
+        android:width="2.5dp"
+        android:color="#589000" />
+</shape>

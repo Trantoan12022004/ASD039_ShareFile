@@ -1,0 +1,48 @@
+{
+  // Android Studio là công cụ build/sync duy nhất cho project này.
+  // Cursor chỉ dùng để đọc - sửa code, tránh giữ lock trên app/build/**.
+  "java.autobuild.enabled": false,
+  "java.configuration.updateBuildConfiguration": "disabled",
+  "java.import.gradle.enabled": false,
+  "java.import.gradle.wrapper.enabled": false,
+  "java.import.maven.enabled": false,
+  "java.compile.nullAnalysis.mode": "disabled",
+  "java.maven.downloadSources": false,
+  "java.eclipse.downloadSources": false,
+  "java.dependency.autoRefresh": false,
+  "java.debug.settings.forceBuildBeforeLaunch": false,
+
+  "gradle.autoDetect": "off",
+  "gradle.nestedProjects": false,
+  "gradle.reuseTerminals": "off",
+
+  // fwcd.kotlin nạp app/build/**/R.jar vào classpath và giữ lock file đó.
+  "kotlin.languageServer.enabled": false,
+  "kotlin.languageServer.watchFiles": false,
+  "kotlin.indexing.enabled": false,
+  "kotlin.debugAdapter.enabled": false,
+
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.gradle/**": true,
+    "**/.kotlin/**": true,
+    "**/.idea/**": true,
+    "**/build/**": true,
+    "**/app/build/**": true
+  },
+  "files.exclude": {
+    "**/.gradle": true,
+    "**/.kotlin": true,
+    "**/build": true
+  },
+  "search.exclude": {
+    "**/.gradle": true,
+    "**/.kotlin": true,
+    "**/build": true,
+    "**/*.iml": true
+  },
+  "files.readonlyInclude": {
+    "**/build/**": true
+  }
+}

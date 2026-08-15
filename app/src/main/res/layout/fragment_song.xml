@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Bìa Album -->
+    <ImageView
+        android:id="@+id/img_album_art"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/bg_image_24"
+        android:src="@drawable/sample_album_art"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_song_title"/>
+
+    <!-- Tên bài hát -->
+    <TextView
+        android:id="@+id/tv_song_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="STARsound"
+        android:fontFamily="@font/clashdisplay_bold"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_artist_name"
+        android:layout_marginBottom="4dp"/>
+
+    <!-- Tên nghệ sĩ -->
+    <TextView
+        android:id="@+id/tv_artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ISOxo"
+        android:textColor="#CCFFFFFF"
+        android:textSize="16sp"
+        android:fontFamily="@font/plusjakartasans_regular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/layout_secondary_actions"
+        android:layout_marginBottom="14dp"/>
+
+    <!-- Nút phụ (+) (Timer) (Playlist) -->
+    <LinearLayout
+        android:id="@+id/layout_secondary_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="12dp">
+
+
+
+        <ImageView
+            android:id="@+id/btn_add"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/add_circle_outline"/>
+
+        <ImageView
+            android:id="@+id/btn_timer"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="28dp"
+            android:src="@drawable/alarm_liquid" />
+
+        <ImageView
+            android:id="@+id/btn_queue"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/queue_music_liquid" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

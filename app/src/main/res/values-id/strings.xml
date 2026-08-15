@@ -1,0 +1,123 @@
+<resources>
+    <string name="app_name">ShareFile</string>
+    <string name="english" translatable="false">English</string>
+    <string name="french" translatable="false">French</string>
+    <string name="portuguese" translatable="false">Portuguese</string>
+    <string name="spanish" translatable="false">Spanish</string>
+    <string name="german" translatable="false">German</string>
+    <string name="hindi" translatable="false">Hindi</string>
+    <string name="indonesia" translatable="false">Indonesia</string>
+    <string name="china" translatable="false">China</string>
+    <string name="Send_Email">Kirim Email</string>
+    <string name="There_is_no">Tidak ada</string>
+    <string name="feedback_failed">Umpan balik gagal</string>
+    <string name="app_review_failed">Peninjauan aplikasi gagal</string>
+    <string name="thank_you">Terima kasih</string>
+    <string name="rate_us">Beri kami nilai</string>
+    <string name="not_now">Tidak sekarang</string>
+    <string name="this_action_may_contain_advertising">Tindakan ini mungkin berisi iklan.</string>
+    <string name="your_opinion_matter_to_us">Bagaimana pengalaman Anda dengan ShareFile?</string>
+    <string name="if_you_enjoy_this_know_your_device_would_you_mind_rating_us_on_the_google_play_then">Jika Anda menyukai ShareFile ini, maukah Anda memberi peringkat kepada kami di Google Play?</string>
+    <string name="language">Bahasa</string>
+    <string name="rate">Kecepatan</string>
+    <string name="share">Membagikan</string>
+    <string name="privacy_policy">Kebijakan Privasi</string>
+    <string name="next">Berikutnya</string>
+    <string name="quit">Berhenti</string>
+    <string name="cancel">Membatalkan</string>
+    <string name="continue_">Melanjutkan</string>
+    <string name="are_you_sure_want_to_quit_app">Apakah Anda yakin ingin keluar dari aplikasi ini?</string>
+    <string name="please_choose_a_language">Silakan pilih bahasa</string>
+    <string name="no_internet_connection">Tidak ada koneksi internet!</string>
+    <string name="title_intro_01">Ikuti Iramanya</string>
+    <string name="title_intro_02">Ikuti Liriknya</string>
+    <string name="title_intro_03">Lagu-lagu Hebat &amp; Berkualitas</string>
+    <string name="content_intro_01">Temukan lagu-lagu terbaik.</string>
+    <string name="content_intro_02">Bernyanyi bersama mengikuti liriknya.</string>
+    <string name="content_intro_03">Menjelajahi lagu-lagu yang Anda sukai.</string>
+    <string name="about">Tentang</string>
+    <string name="feedback">Masukan</string>
+    <string name="settings">Pengaturan</string>
+    <string name="version">Versi:</string>
+    <string name="title_music">Lagu</string>
+    <string name="title_playlist">Daftar Putar</string>
+    <string name="title_download">Unduh</string>
+    <string name="shuffle_all">Acak Semua</string>
+    <string name="text_input_failed">"Nama playlist tidak boleh kosong"</string>
+    <string name="text_input_failed1">Nama tersebut sudah ada, silakan coba nama lain.</string>
+    <string name="ringtone_permission_desc">Untuk mengatur nada dering Anda, %1$s memerlukan izin dari sistem perangkat Anda.</string>
+    <string name="ringtone_permission_highlight">izin</string>
+    <string name="ringtone_set_success">Nada dering berhasil diatur.</string>
+    <string name="ringtone_set_failed">Gagal mengatur nada dering</string>
+    <string name="delete_song_desc">Apakah Anda yakin ingin menghapus “%1$s” dari perangkat Anda?</string>
+    <string name="delete_song">Hapus lagu?</string>
+    <string name="delete_song_success">Lagu berhasil dihapus.</string>
+    <string name="delete_song_failed">Gagal menghapus lagu</string>
+    <string name="playlist">Daftar Putar</string>
+    <string name="playlist_empty_title">Mulailah Perjalanan Musik Anda</string>
+    <string name="playlist_empty_desc">Tambahkan daftar putar Anda untuk mulai mendengarkan.</string>
+    <string name="song">Lagu</string>
+    <string name="hello_blank_fragment">Halo fragmen kosong</string>
+    <string name="unknown_artist">tidak dikenal</string>
+    <string name="set_timer">Atur pengatur waktu</string>
+    <string name="timer_set">Mengatur</string>
+    <string name="timer_set_success">Timer diatur ke %1$s</string>
+    <string name="timer_set_invalid">Silakan pilih waktu yang lebih besar dari 0</string>
+    <string name="timer_remaining">Waktu tersisa adalah %1$s</string>
+    <string name="timer_stop_at">Musik akan berhenti di %1$s</string>
+    <string name="playing_queue">Antrian Bermain</string>
+    <string name="clear_queue">Hapus Antrian</string>
+    <string name="clear">Jernih</string>
+    <string name="clear_desc">Apakah Anda yakin ingin menghapus antrean pemutaran?</string>
+    <string name="search">Mencari</string>
+    <string name="empty_search">Tidak ada riwayat pencarian!</string>
+    <string name="empty_search_result">Tidak ada hasil yang ditemukan</string>
+    <string name="choose_language">Pilih bahasa</string>
+    <string name="please_select_a_language_to_continue">Silakan pilih bahasa untuk melanjutkan</string>
+    <string name="permission_title">Izin</string>
+    <string name="permission_desc">Aplikasi ini memerlukan izin-izin berikut agar dapat berfungsi:</string>
+    <string name="permission_notification">Pemberitahuan</string>
+    <string name="agree_and_continue">Setuju dan Lanjutkan</string>
+    <string name="permission_memory">Akses memori</string>
+    <string name="permission_write">Tulis pengaturan</string>
+    <string name="welcome_back">Selamat Datang kembali</string>
+    <string name="welcome_desc">Kami senang Anda kembali di sini. Mari kita lanjutkan dari tempat Anda berhenti dan melanjutkan perjalanan Anda!!</string>
+    <string name="lyrics">Lirik</string>
+    <string name="create_new_playlist">Buat daftar putar baru</string>
+    <string name="add_to_playlist">Tambahkan ke daftar putar</string>
+    <string name="enter_playlist_s_name">Masukkan nama playlist</string>
+    <string name="create">Membuat</string>
+    <string name="delete">Menghapus</string>
+    <string name="import_lyrics">Impor lirik</string>
+    <string name="save">Menyimpan</string>
+    <string name="import_lyrics_online">Impor lirik secara online</string>
+    <string name="got_it">Mengerti</string>
+    <string name="play_next">Putar selanjutnya</string>
+    <string name="add_to_queue">Tambahkan ke antrean</string>
+    <string name="set_as_ringtone">Tetapkan sebagai nada dering</string>
+    <string name="allow">Mengizinkan</string>
+    <string name="details">Detail</string>
+    <string name="title">Judul</string>
+    <string name="album">Album</string>
+    <string name="artist">Artis</string>
+    <string name="duration">Lamanya</string>
+    <string name="size">Ukuran</string>
+    <string name="location">Lokasi</string>
+    <string name="delete_from_device">Hapus dari perangkat</string>
+    <string name="cancel_timer">Batalkan Pengatur Waktu</string>
+    <string name="ok">OKE</string>
+    <string name="search_lyrics">Cari Lirik</string>
+    <string name="delete_history_item">Hapus item riwayat</string>
+    <string name="pause_download">Jeda unduhan</string>
+    <string name="resume_download">Unduh resume</string>
+    <string-array name="random_notifications">
+        <item>Choose from hundreds of clothing templates and start designing today.</item>
+        <item>Create unique T-shirts, hoodies, shirts, jackets, and pants with ease.</item>
+        <item>Add text, stickers, emojis, and drawings to personalize your design.</item>
+        <item>Use brushes, shapes, and colors to bring your creative ideas to life.</item>
+        <item>Edit your design anytime with Undo and Redo for maximum flexibility.</item>
+        <item>Explore the latest clothing templates and customize them your way.</item>
+        <item>Save your finished design in high quality and share it with friends.</item>
+        <item>Start creating stylish outfits with powerful and easy-to-use design tools.</item>
+    </string-array>
+</resources>

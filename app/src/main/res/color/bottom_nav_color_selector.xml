@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Khi bấm chọn: Màu trắng sáng -->
+    <item android:color="#FFFFFF" android:state_checked="true" />
+
+    <!-- Khi chưa chọn: Màu xám tím mờ -->
+    <item android:color="#998E9E" android:state_checked="false" />
+</selector>

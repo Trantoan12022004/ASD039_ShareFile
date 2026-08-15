@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_tool_bar"
+    android:paddingStart="24dp"
+    android:paddingTop="20dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="28dp">
+    <!-- Tiêu đề: Share File -->
+    <LinearLayout
+        android:id="@+id/layoutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/share"
+            android:textColor="@color/primary_35"
+            android:textSize="24sp"
+            android:fontFamily="@font/anton_regular"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/file"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:fontFamily="@font/anton_regular"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+
+    <!-- Nút Icon góc trên bên phải (Thông báo & Lịch sử nhận) -->
+    <LinearLayout
+        android:id="@+id/layoutHeaderActions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/layoutTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/layoutTitle">
+
+        <!-- Notification Bell Icon -->
+        <ImageView
+            android:id="@+id/btnNotification"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="Notification"
+            android:elevation="2dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_noti" />
+
+        <!-- History/Receive Status Icon -->
+        <ImageView
+            android:id="@+id/btnSync"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="History"
+            android:elevation="2dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_download" />
+    </LinearLayout>
+
+    <!-- 3 Nút chức năng chính: Send, Receive, Files -->
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutActionsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutTitle">
+        <!-- Send Button -->
+        <LinearLayout
+            android:id="@+id/layoutSend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@id/layoutReceive"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutTitle">
+
+            <ImageView
+                android:id="@+id/btnSend"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:contentDescription="Send"
+                android:elevation="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_send" />
+
+            <TextView
+                android:id="@+id/tvSendLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/send"
+                android:fontFamily="@font/outfit_semibold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Receive Button -->
+        <LinearLayout
+            android:id="@+id/layoutReceive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toStartOf="@id/layoutFiles"
+            app:layout_constraintStart_toEndOf="@id/layoutSend"
+            app:layout_constraintTop_toTopOf="@id/layoutSend">
+
+            <ImageView
+                android:id="@+id/btnReceive"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:contentDescription="Receive"
+                android:elevation="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_receive" />
+
+            <TextView
+                android:id="@+id/tvReceiveLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/receive"
+                android:fontFamily="@font/outfit_semibold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Files Button -->
+        <LinearLayout
+            android:id="@+id/layoutFiles"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/layoutReceive"
+            app:layout_constraintTop_toTopOf="@id/layoutSend">
+
+            <ImageView
+                android:id="@+id/btnFiles"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:contentDescription="Files"
+                android:elevation="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_file" />
+
+            <TextView
+                android:id="@+id/tvFilesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/files"
+                android:fontFamily="@font/outfit_semibold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

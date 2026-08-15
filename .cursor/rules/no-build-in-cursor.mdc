@@ -1,0 +1,32 @@
+---
+description: Cursor chỉ dùng để đọc/sửa code và hỏi đáp - không build, không sync Gradle
+alwaysApply: true
+---
+
+# Không build project trong Cursor
+
+Project này được build và chạy bằng Android Studio (mở song song). Nếu Cursor chạy Gradle,
+hai tiến trình sẽ tranh nhau lock file trong `app/build/**` và gây lỗi
+`R.jar: The process cannot access the file because it is being used by another process`.
+
+## Không được chạy
+
+- `./gradlew`, `gradlew.bat`, `gradle` với bất kỳ task nào (`assembleDebug`, `build`, `clean`,
+  `installDebug`, `test`, `lint`, `compileDebugKotlin`, ...)
+- `adb install`, `adb shell am start`, hoặc bất kỳ lệnh nào deploy app
+- Lệnh xoá/ghi vào `build/`, `app/build/`, `.gradle/`, `.kotlin/`
+
+## Được làm
+
+- Đọc, sửa, tạo file source: `app/src/**`, `*.gradle`, `gradle.properties`, resource XML
+- Tìm kiếm, giải thích code, review, đề xuất fix
+- Đọc log/stacktrace mà user paste vào để debug bằng suy luận
+- Lệnh git chỉ đọc (`git status`, `git diff`, `git log`)
+
+## Khi cần kiểm chứng compile
+
+Không tự build. Thay vào đó nói rõ với user:
+"Bạn bấm Build/Run trong Android Studio rồi paste log lỗi vào đây để mình phân tích."
+
+Coi mọi file trong `build/` là artifact sinh tự động: không đọc để suy luận logic,
+không sửa, không dùng làm nguồn tham chiếu.

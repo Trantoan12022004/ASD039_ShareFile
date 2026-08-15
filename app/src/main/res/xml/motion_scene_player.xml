@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <!-- TRANSITION ĐIỀU KHIỂN CHUYỂN CẢNH -->
+    <Transition
+        motion:constraintSetStart="@+id/collapsed"
+        motion:constraintSetEnd="@+id/expanded"
+        motion:duration="400">
+
+        <!-- Cấu hình cử chỉ VUỐT LÊN từ Mini Player -->
+        <OnSwipe
+            motion:touchAnchorId="@+id/layout_mini_player"
+            motion:touchAnchorSide="top"
+            motion:dragDirection="dragUp"
+            motion:onTouchUp="autoComplete" />
+
+        <!-- CẤU HÌNH ALPHA THEO TIẾN TRÌNH VUỐT -->
+        <KeyFrameSet>
+            <!-- Khi vuốt được 30% chặng đường -> Mini Player mờ về 0 -->
+            <KeyAttribute
+                motion:motionTarget="@+id/layout_mini_player"
+                motion:framePosition="30"
+                android:alpha="0.0" />
+
+            <!-- Expand Player bắt đầu hiện từ 0% và rõ 100% khi lên tới đỉnh -->
+            <KeyAttribute
+                motion:motionTarget="@+id/layout_expand_player"
+                motion:framePosition="0"
+                android:alpha="0.0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/layout_expand_player"
+                motion:framePosition="100"
+                android:alpha="1.0" />
+        </KeyFrameSet>
+    </Transition>
+
+    <!-- 1. TRẠNG THÁI BAN ĐẦU: THU GỌN (MINI PLAYER) -->
+    <ConstraintSet android:id="@+id/collapsed">
+        <!-- Mini Player hiển thị dưới đáy màn hình -->
+        <Constraint
+            android:id="@+id/layout_mini_player"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:alpha="1.0"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Expand Player bị đẩy tụt xuống dưới màn hình -->
+        <Constraint
+            android:id="@+id/layout_expand_player"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.0"
+            motion:layout_constraintTop_toBottomOf="parent" />
+    </ConstraintSet>
+
+    <!-- 2. TRẠNG THÁI MỞ RỘNG (EXPAND PLAYER) -->
+    <ConstraintSet android:id="@+id/expanded">
+        <!-- Mini Player ẩn đi và đẩy lên trên -->
+        <Constraint
+            android:id="@+id/layout_mini_player"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:alpha="0.0"
+            motion:layout_constraintBottom_toTopOf="parent" />
+
+        <!-- Expand Player trượt lên lấp đầy toàn bộ màn hình -->
+        <Constraint
+            android:id="@+id/layout_expand_player"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="1.0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+</MotionScene>

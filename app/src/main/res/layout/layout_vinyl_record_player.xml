@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintDimensionRatio="380:340"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- Đế gỗ (Wood Base) chuẩn tỉ lệ 380:340 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardWoodBase"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_wood_base"
+        android:elevation="8dp"
+        android:padding="12dp"
+        app:layout_constraintDimensionRatio="380:340"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Đĩa Vinyl — Tỉ lệ 1:1, chiếm trọn chiều cao căn lề trái -->
+        <FrameLayout
+            android:id="@+id/flVinylContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivVinylRecord"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_vinyl"
+                tools:ignore="ContentDescription" />
+        </FrameLayout>
+
+        <!-- Cần kim đĩa (Tonearm) — Góc trên bên phải, đè nhẹ lên cạnh phải đĩa vinyl -->
+        <ImageView
+            android:id="@+id/ivTonearm"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@null"
+            android:scaleType="fitEnd"
+            android:src="@drawable/ic_evil_knidle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintHeight_percent="0.90"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

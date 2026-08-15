@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- LỚP 1: Nền màu xanh phía dưới (Phủ toàn bộ chiều cao) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#B1F35F" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+
+    <!-- LỚP 2: Nền chính đè lên trên (Thụt đáy 4dp để lộ viền màu xanh bên dưới) -->
+    <item
+        android:top="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#FCFFF5" />
+            <corners
+                android:topLeftRadius="16dp"
+                android:topRightRadius="16dp"
+                android:bottomLeftRadius="16dp"
+                android:bottomRightRadius="16dp" />
+        </shape>
+    </item>
+
+</layer-list>

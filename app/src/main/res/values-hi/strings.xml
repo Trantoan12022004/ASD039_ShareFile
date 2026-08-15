@@ -1,0 +1,123 @@
+<resources>
+    <string name="app_name">ShareFile</string>
+    <string name="english" translatable="false">English</string>
+    <string name="french" translatable="false">French</string>
+    <string name="portuguese" translatable="false">Portuguese</string>
+    <string name="spanish" translatable="false">Spanish</string>
+    <string name="german" translatable="false">German</string>
+    <string name="hindi" translatable="false">Hindi</string>
+    <string name="indonesia" translatable="false">Indonesia</string>
+    <string name="china" translatable="false">China</string>
+    <string name="Send_Email">ईमेल भेजें</string>
+    <string name="There_is_no">कोई नहीं है</string>
+    <string name="feedback_failed">प्रतिक्रिया विफल रही</string>
+    <string name="app_review_failed">ऐप समीक्षा विफल रही</string>
+    <string name="thank_you">धन्यवाद</string>
+    <string name="rate_us">हमें रेटिंग दें</string>
+    <string name="not_now">अभी नहीं</string>
+    <string name="this_action_may_contain_advertising">इस गतिविधि में विज्ञापन शामिल हो सकते हैं।</string>
+    <string name="your_opinion_matter_to_us">एमपी3 डाउनलोडर के साथ आपका अनुभव कैसा रहा?</string>
+    <string name="if_you_enjoy_this_know_your_device_would_you_mind_rating_us_on_the_google_play_then">अगर आपको यह बेसप्रोडक्ट पसंद आया है, तो क्या आप कृपया हमें Google Play पर रेटिंग देंगे?</string>
+    <string name="language">भाषा</string>
+    <string name="rate">दर</string>
+    <string name="share">शेयर करना</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="next">अगला</string>
+    <string name="quit">छोड़ना</string>
+    <string name="cancel">रद्द करना</string>
+    <string name="continue_">जारी रखना</string>
+    <string name="are_you_sure_want_to_quit_app">क्या आप वाकई ऐप बंद करना चाहते हैं?</string>
+    <string name="please_choose_a_language">कृपया एक भाषा चुनें</string>
+    <string name="no_internet_connection">कोई इंटरनेट कनेक्शन नहीं!</string>
+    <string name="title_intro_01">ताल का अनुसरण करें</string>
+    <string name="title_intro_02">गीतों के बोलों का अनुसरण करें</string>
+    <string name="title_intro_03">शानदार और उच्च गुणवत्ता वाले गाने</string>
+    <string name="content_intro_01">सर्वश्रेष्ठ गानों को खोजें।</string>
+    <string name="content_intro_02">गीतों के बोलों के साथ गाएं।</string>
+    <string name="content_intro_03">उन गानों को एक्सप्लोर करें जो आपको पसंद हैं।</string>
+    <string name="about">के बारे में</string>
+    <string name="feedback">प्रतिक्रिया</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="version">संस्करण: </string>
+    <string name="title_music">गाना</string>
+    <string name="title_playlist">प्लेलिस्ट</string>
+    <string name="title_download">डाउनलोड करना</string>
+    <string name="shuffle_all">सभी को शफल करें</string>
+    <string name="text_input_failed">प्लेलिस्ट का नाम खाली नहीं हो सकता।</string>
+    <string name="text_input_failed1">यह नाम पहले से मौजूद है, कृपया कोई दूसरा नाम आजमाएं।</string>
+    <string name="ringtone_permission_desc">रिंगटोन सेट करने के लिए, %1$s को आपके डिवाइस सिस्टम से अनुमति की आवश्यकता होती है।</string>
+    <string name="ringtone_permission_highlight">अनुमति</string>
+    <string name="ringtone_set_success">रिंगटोन सफलतापूर्वक सेट हो गई</string>
+    <string name="ringtone_set_failed">रिंगटोन सेट करने में विफल</string>
+    <string name="delete_song_desc">क्या आप वाकई अपने डिवाइस से “%1$s” को हटाना चाहते हैं?</string>
+    <string name="delete_song">गाना डिलीट करें?</string>
+    <string name="delete_song_success">गाना सफलतापूर्वक डिलीट हो गया</string>
+    <string name="delete_song_failed">गाना डिलीट करने में विफल रहा</string>
+    <string name="playlist">प्लेलिस्ट</string>
+    <string name="playlist_empty_title">अपनी संगीत यात्रा शुरू करें</string>
+    <string name="playlist_empty_desc">सुनना शुरू करने के लिए अपनी प्लेलिस्ट जोड़ें</string>
+    <string name="song">गाना</string>
+    <string name="hello_blank_fragment">हैलो खाली अंश</string>
+    <string name="unknown_artist">अज्ञात</string>
+    <string name="set_timer">टाइमर लगाएं</string>
+    <string name="timer_set">तय करना</string>
+    <string name="timer_set_success">टाइमर %1$s पर सेट किया गया</string>
+    <string name="timer_set_invalid">कृपया 0 से अधिक का समय चुनें</string>
+    <string name="timer_remaining">शेष समय %1$s है</string>
+    <string name="timer_stop_at">संगीत 1% पर बंद हो जाएगा।</string>
+    <string name="playing_queue">खेल कतार</string>
+    <string name="clear_queue">कतार साफ़ करें</string>
+    <string name="clear">स्पष्ट</string>
+    <string name="clear_desc">क्या आप वाकई प्लेइंग क्यू को खाली करना चाहते हैं?</string>
+    <string name="search">खोज</string>
+    <string name="empty_search">कोई खोज इतिहास नहीं!</string>
+    <string name="empty_search_result">कोई परिणाम नहीं मिला</string>
+    <string name="choose_language">भाषा चुनें</string>
+    <string name="please_select_a_language_to_continue">कृपया जारी रखने के लिए एक भाषा चुनें</string>
+    <string name="permission_title">अनुमति</string>
+    <string name="permission_desc">इस ऐप को काम करने के लिए इन अनुमतियों की आवश्यकता है:</string>
+    <string name="permission_notification">अधिसूचना</string>
+    <string name="agree_and_continue">सहमत हों और जारी रखें</string>
+    <string name="permission_memory">मेमोरी एक्सेस</string>
+    <string name="permission_write">सेटिंग्स लिखें</string>
+    <string name="welcome_back">वापसी पर स्वागत है</string>
+    <string name="welcome_desc">हमें खुशी है कि आप फिर से यहाँ आए हैं। चलिए, जहाँ से आपने छोड़ा था वहीं से शुरू करते हैं और अपनी यात्रा जारी रखते हैं!!</string>
+    <string name="lyrics">गीत के बोल</string>
+    <string name="create_new_playlist">नई प्लेलिस्ट बनाएं</string>
+    <string name="add_to_playlist">प्लेलिस्ट में जोड़ें</string>
+    <string name="enter_playlist_s_name">प्लेलिस्ट का नाम दर्ज करें</string>
+    <string name="create">बनाएं</string>
+    <string name="delete">मिटाना</string>
+    <string name="import_lyrics">गीत आयात करें</string>
+    <string name="save">बचाना</string>
+    <string name="import_lyrics_online">ऑनलाइन गीत आयात करें</string>
+    <string name="got_it">समझ गया</string>
+    <string name="play_next">अगला चलाएं</string>
+    <string name="add_to_queue">क़तार में जोड़ें</string>
+    <string name="set_as_ringtone">रिंगटोन के रूप में सेट करें</string>
+    <string name="allow">अनुमति दें</string>
+    <string name="details">विवरण</string>
+    <string name="title">शीर्षक</string>
+    <string name="album">एल्बम</string>
+    <string name="artist">कलाकार</string>
+    <string name="duration">अवधि</string>
+    <string name="size">आकार</string>
+    <string name="location">जगह</string>
+    <string name="delete_from_device">डिवाइस से हटाएं</string>
+    <string name="cancel_timer">टाइमर रद्द करें</string>
+    <string name="ok">ठीक है</string>
+    <string name="search_lyrics">गीत खोजें</string>
+    <string name="delete_history_item">इतिहास आइटम हटाएं</string>
+    <string name="pause_download">डाउनलोड रोकें</string>
+    <string name="resume_download">रिज्यूमे डाउनलोड करें</string>
+    <string-array name="random_notifications">
+        <item>Choose from hundreds of clothing templates and start designing today.</item>
+        <item>Create unique T-shirts, hoodies, shirts, jackets, and pants with ease.</item>
+        <item>Add text, stickers, emojis, and drawings to personalize your design.</item>
+        <item>Use brushes, shapes, and colors to bring your creative ideas to life.</item>
+        <item>Edit your design anytime with Undo and Redo for maximum flexibility.</item>
+        <item>Explore the latest clothing templates and customize them your way.</item>
+        <item>Save your finished design in high quality and share it with friends.</item>
+        <item>Start creating stylish outfits with powerful and easy-to-use design tools.</item>
+    </string-array>
+</resources>

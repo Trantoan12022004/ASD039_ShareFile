@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <!-- CHUYỂN ĐỔI: VUỐT LÊN ĐỂ MỞ, VUỐT XUỐNG ĐỂ ĐÓNG -->
+    <Transition
+        motion:constraintSetStart="@+id/collapsed"
+        motion:constraintSetEnd="@+id/expanded"
+        motion:duration="350">
+
+        <!-- Vuốt lên để mở rộng, vuốt xuống để thu nhỏ -->
+        <OnSwipe
+            motion:touchAnchorId="@+id/layout_player_expand"
+            motion:touchAnchorSide="top"
+            motion:dragDirection="dragUp"
+            motion:onTouchUp="autoComplete" />
+
+        <KeyFrameSet>
+            <!-- Mini player mờ dần và ẩn khi vuốt đến 30% -->
+            <KeyAttribute
+                motion:motionTarget="@+id/layout_mini_player"
+                motion:framePosition="30"
+                android:alpha="0.0" />
+
+            <!-- Expand player bắt đầu hiện từ 20% hành trình -->
+            <KeyAttribute
+                motion:motionTarget="@+id/layout_player_expand"
+                motion:framePosition="20"
+                android:alpha="0.0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/layout_player_expand"
+                motion:framePosition="70"
+                android:alpha="1.0" />
+        </KeyFrameSet>
+    </Transition>
+
+    <!-- =========================================== -->
+    <!-- TRẠNG THÁI 1: THU GỌN (COLLAPSED)          -->
+    <!-- Mini Player hiển thị, Expand Player ẩn dưới -->
+    <!-- =========================================== -->
+    <ConstraintSet android:id="@+id/collapsed">
+        <!-- Mini Player hiển thị ở đáy, cách đáy 60dp cho bottom nav -->
+        <Constraint
+            android:id="@+id/layout_mini_player"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="60dp"
+            android:alpha="1.0"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Expand Player ẩn dưới đáy màn hình -->
+        <Constraint
+            android:id="@+id/layout_player_expand"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:alpha="0.0"
+            android:translationY="300dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintHeight_percent="0.35" />
+    </ConstraintSet>
+
+    <!-- =========================================== -->
+    <!-- TRẠNG THÁI 2: MỞ RỘNG (EXPANDED)           -->
+    <!-- Mini Player ẩn, Expand Player chiếm 1/3     -->
+    <!-- =========================================== -->
+    <ConstraintSet android:id="@+id/expanded">
+        <!-- Mini Player mờ đi và ẩn -->
+        <Constraint
+            android:id="@+id/layout_mini_player"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="60dp"
+            android:alpha="0.0"
+            android:visibility="invisible"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Expand Player hiển thị 35% chiều cao màn hình từ đáy -->
+        <Constraint
+            android:id="@+id/layout_player_expand"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:alpha="1.0"
+            android:translationY="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintHeight_percent="0.35" />
+    </ConstraintSet>
+
+</MotionScene>

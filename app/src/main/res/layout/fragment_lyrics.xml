@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Header thông tin bài hát trong màn Lyric + Nút Sửa -->
+    <TextView
+        android:id="@+id/tv_lyric_song_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="STARsound"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:fontFamily="@font/outfit_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_lyric_artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ISOxo"
+        android:visibility="gone"
+        android:fontFamily="@font/plusjakartasans_regular"
+        android:textColor="#99FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_lyric_song_title" />
+
+    <ImageView
+        android:id="@+id/btn_edit_lyrics"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:padding="4dp"
+        android:visibility="gone"
+        android:src="@drawable/edit"
+        app:tint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Danh sách Lời Bài Hát (Có thể cuộn được) -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_lyrics_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        android:layout_marginTop="16dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/tv_lyric_artist_name"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tv_lyrics_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="8dp"
+            android:fontFamily="@font/plusjakartasans_medium"
+            android:textColor="#CCFFFFFF"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:text="Two worlds, two stars collide\nAt the thought of you and I\nI need you now, nothing feels right (Nothing feels right)\nThe way you say goodbye\nIt makes me want to die\nWithout you now, nothing feels right (Nothing feels right)\n\nDeep in, I hear you calling out to me\nAm I falling faster, falling in too deep?\nI hear the sound of you getting close to me\nYou've been the only one who's set me free\n\nYou're a glimmer, but you're brighter than the moonlight\nI can see it in your eyes lighting the night sky\nThe stars above belong to us\nLooking in the past to find the answers\nAm I the only one that I've been after?\nThe stars above belong to us (Belong to us)" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/lyrics_empty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:src="@drawable/playlits_empty" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_9sdp"
+            android:fontFamily="@font/plusjakartasans_bold"
+            android:text="@string/playlist_empty_title"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/plusjakartasans_medium"
+            android:text="@string/playlist_empty_desc"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/btn_search_online"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/search_lyrics"
+            android:background="@drawable/bg_search_online"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+            android:fontFamily="@font/plusjakartasans_bold"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"/>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

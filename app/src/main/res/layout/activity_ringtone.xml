@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main">
+
+    <!-- 1. Include Toolbar có sẵn của bạn -->
+    <include
+        android:id="@+id/layoutToolbar"
+        layout="@layout/toolbar_ringtone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/layoutToolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="16dp">
+        <!-- 2. Card thông tin bài hát -->
+        <include
+            android:id="@+id/cardSongInfo"
+            layout="@layout/item_song_card_ringtone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- 3. Card hiển thị Start Point & End Point -->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_radius_24">
+
+                <!-- Start Point -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start Point"
+                        android:textColor="@color/sub_title"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/outfit_medium"/>
+
+                    <TextView
+                        android:id="@+id/tvStartPoint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00:34"
+                        android:textColor="@color/primary_35"
+                        android:textSize="36sp"
+                        android:fontFamily="@font/anton_regular"/>
+                </LinearLayout>
+
+                <!-- Đường kẻ dọc phân cách -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#D5E0C7" />
+
+                <!-- End Point -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="End Point"
+                        android:textColor="@color/sub_title"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/outfit_medium"/>
+
+                    <TextView
+                        android:id="@+id/tvEndPoint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00:57"
+                        android:textColor="@color/primary_35"
+                        android:textSize="36sp"
+                        android:fontFamily="@font/anton_regular"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        <!-- 4. Dòng chữ hướng dẫn -->
+        <TextView
+            android:id="@+id/tvInstruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/drag_the_slider_to_select_the_audio_clip_range"
+            android:textColor="@color/sub_title"
+            android:textSize="12sp"
+            android:fontFamily="@font/outfit_medium"
+            android:layout_gravity="center"/>
+
+        <!-- 5. Thanh RangeSlider cắt nhạc -->
+
+
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/range_slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_radius_24"
+                android:padding="16dp"
+                android:layout_marginVertical="16dp"
+                android:valueFrom="0.0"
+                android:valueTo="100.0"
+                app:values="@array/initial_slider_values"
+                app:trackHeight="4dp"
+                app:trackColorActive="#4A7F00"
+                app:trackColorInactive="#D9D9D9"
+                app:haloRadius="0dp"
+                app:labelBehavior="gone"
+                app:tickVisible="false" />
+        <!-- 6. Nút bấm phía dưới -->
+        <LinearLayout
+            android:id="@+id/layoutActionButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/range_slider">
+
+            <!-- Nút Preview Ringtone (Viền xanh) -->
+            <LinearLayout
+                android:id="@+id/btnPreviewRingtone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_btn_cancel"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="12dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/play_circle_outline"
+                    android:layout_marginEnd="8dp"/>
+                <com.example.basekotlin.util.AlwaysMarqueeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preview_ringtone"
+                    android:fontFamily="@font/outfit_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnSaveRingtone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_btn_create"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="12dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_slot"
+                    android:layout_marginEnd="8dp"/>
+                <com.example.basekotlin.util.AlwaysMarqueeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_ringtone"
+                    android:fontFamily="@font/outfit_semibold"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

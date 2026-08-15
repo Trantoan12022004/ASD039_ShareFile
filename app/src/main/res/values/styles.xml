@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CircleImage">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Animation cho PopupMenuUtils khi popup hiện phía dưới anchor -->
+    <style name="PopupMenuAnimationTop">
+        <item name="android:windowEnterAnimation">@anim/popup_menu_enter_top</item>
+        <item name="android:windowExitAnimation">@anim/popup_menu_exit_top</item>
+    </style>
+
+    <!-- Animation cho PopupMenuUtils khi popup hiện phía trên anchor -->
+    <style name="PopupMenuAnimationBottom">
+        <item name="android:windowEnterAnimation">@anim/popup_menu_enter_bottom</item>
+        <item name="android:windowExitAnimation">@anim/popup_menu_exit_bottom</item>
+    </style>
+</resources>
