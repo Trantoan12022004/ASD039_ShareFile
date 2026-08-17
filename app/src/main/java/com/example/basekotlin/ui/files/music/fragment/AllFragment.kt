@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -23,7 +22,6 @@ import com.example.basekotlin.base.hideNavigation
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.base.visible
 import com.example.basekotlin.data.local.mediastore.MusicPlayerConnection
-import com.example.basekotlin.data.local.repository.MusicRepository
 import com.example.basekotlin.databinding.FragmentAllBinding
 import com.example.basekotlin.databinding.PopupMoreBinding
 import com.example.basekotlin.dialog.common.ConfirmActionDialog
@@ -37,7 +35,6 @@ import com.example.basekotlin.ui.files.music.MusicActivity
 import com.example.basekotlin.ui.files.music.MusicViewModel
 import com.example.basekotlin.ui.files.music.adapter.MusicTrackAdapter
 import com.example.basekotlin.ui.files.music.playing.SongPlayActivity
-import com.example.basekotlin.ui.files.music.playing.SongPlayViewModel
 import com.example.basekotlin.ui.files.music.ringtone.RingtoneActivity
 import com.example.basekotlin.util.PopupMenuUtils
 import kotlinx.coroutines.launch

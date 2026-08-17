@@ -2,11 +2,10 @@ package com.example.basekotlin.ui.files.music
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.basekotlin.data.local.music.MusicDatabase
-import com.example.basekotlin.data.local.repository.MusicRepository
-import com.example.basekotlin.data.local.repository.MusicRepositoryImpl
+import com.example.basekotlin.data.local.repository.music.MusicRepository
+import com.example.basekotlin.data.local.repository.music.MusicRepositoryImpl
 import com.example.basekotlin.model.DeleteResult
 import com.example.basekotlin.model.MusicFolder
 import com.example.basekotlin.model.MusicPlaylist

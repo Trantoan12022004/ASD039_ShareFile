@@ -1,4 +1,4 @@
-package com.example.basekotlin.data.local.repository
+package com.example.basekotlin.data.local.repository.docs
 
 import android.content.Context
 import com.example.basekotlin.data.local.documentstore.DocumentFileScanner

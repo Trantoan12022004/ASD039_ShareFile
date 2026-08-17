@@ -3,8 +3,8 @@ package com.example.basekotlin.ui.files.documents
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.basekotlin.data.local.repository.DocumentsRepository
-import com.example.basekotlin.data.local.repository.DocumentsRepositoryImpl
+import com.example.basekotlin.data.local.repository.docs.DocumentsRepository
+import com.example.basekotlin.data.local.repository.docs.DocumentsRepositoryImpl
 import com.example.basekotlin.model.DocumentInfo
 import com.example.basekotlin.model.DocumentType
 import kotlinx.coroutines.flow.MutableStateFlow

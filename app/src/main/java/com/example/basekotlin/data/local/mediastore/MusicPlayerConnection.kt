@@ -8,8 +8,8 @@ import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionToken
 import com.example.basekotlin.data.local.music.MusicDatabase
-import com.example.basekotlin.data.local.repository.MusicRepository
-import com.example.basekotlin.data.local.repository.MusicRepositoryImpl
+import com.example.basekotlin.data.local.repository.music.MusicRepository
+import com.example.basekotlin.data.local.repository.music.MusicRepositoryImpl
 import com.example.basekotlin.model.MusicTrack
 import com.example.basekotlin.service.MusicService
 import com.google.common.util.concurrent.MoreExecutors

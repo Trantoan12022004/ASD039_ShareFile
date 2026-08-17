@@ -7,8 +7,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.basekotlin.R
 import com.example.basekotlin.data.local.music.MusicDatabase
-import com.example.basekotlin.data.local.repository.MusicRepository
-import com.example.basekotlin.data.local.repository.MusicRepositoryImpl
+import com.example.basekotlin.data.local.repository.music.MusicRepository
+import com.example.basekotlin.data.local.repository.music.MusicRepositoryImpl
 import com.example.basekotlin.model.MusicTrack
 import com.example.basekotlin.util.AudioTrimmer
 import com.example.basekotlin.util.RingtoneHelper

@@ -19,6 +19,7 @@ import com.example.basekotlin.dialog.exit.ExitAppDialog
 import com.example.basekotlin.ui.files.apps.AppsActivity
 import com.example.basekotlin.ui.files.documents.DocumentsActivity
 import com.example.basekotlin.ui.files.music.MusicActivity
+import com.example.basekotlin.ui.files.photos.PhotosActivity
 import kotlinx.coroutines.launch
 import kotlin.getValue
 
@@ -60,5 +61,10 @@ class FilesActivity : BaseActivity<ActivityFilesBinding>(ActivityFilesBinding::i
             }
             startNextActivity(com.example.basekotlin.ui.files.documents.DocumentsActivity::class.java, bundle)
         }
+
+        binding.btnPhoto.tap {
+            startNextActivity(PhotosActivity::class.java, null)
+        }
+
     }
 }

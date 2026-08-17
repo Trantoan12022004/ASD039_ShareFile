@@ -3,8 +3,8 @@ package com.example.basekotlin.ui.files.apps
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.basekotlin.data.local.repository.AppsRepository
-import com.example.basekotlin.data.local.repository.AppsRepositoryImpl
+import com.example.basekotlin.data.local.repository.apps.AppsRepository
+import com.example.basekotlin.data.local.repository.apps.AppsRepositoryImpl
 import com.example.basekotlin.model.AppInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

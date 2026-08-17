@@ -221,6 +221,11 @@
     <string name="doc">DOC</string>
     <string name="wps">WPS</string>
     <string name="other">Other</string>
+    <string name="convert">Convert</string>
+    <string name="photos">Photos</string>
+    <string name="no_photos_found">No Photo Available</string>
+    <string name="no_photos_available_desc">There is no photo in this section. Please import some</string>
+    <string name="convert_pdf">Convert to PDF</string>
     <string-array name="random_notifications">
         <item>Choose from hundreds of clothing templates and start designing today.</item>
         <item>Create unique T-shirts, hoodies, shirts, jackets, and pants with ease.</item>

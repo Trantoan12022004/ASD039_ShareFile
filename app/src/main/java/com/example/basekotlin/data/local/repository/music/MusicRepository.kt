@@ -1,4 +1,4 @@
-package com.example.basekotlin.data.local.repository
+package com.example.basekotlin.data.local.repository.music
 
 import com.example.basekotlin.model.DeleteResult
 import com.example.basekotlin.model.MusicFolder

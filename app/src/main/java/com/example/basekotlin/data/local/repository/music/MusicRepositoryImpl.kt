@@ -1,14 +1,12 @@
-package com.example.basekotlin.data.local.repository
+package com.example.basekotlin.data.local.repository.music
 
 import android.app.RecoverableSecurityException
-import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
-import androidx.annotation.RequiresApi
 import com.example.basekotlin.data.local.mediastore.MediaStoreAudioSource
 import com.example.basekotlin.data.local.mediastore.MediaStoreObserver
 import com.example.basekotlin.data.local.music.MusicDatabase
@@ -36,6 +34,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.withContext
 import java.io.File
+import kotlin.collections.iterator
 
 class MusicRepositoryImpl(
     private val appContext: Context,

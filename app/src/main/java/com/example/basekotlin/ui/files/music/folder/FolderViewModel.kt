@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.basekotlin.data.local.music.MusicDatabase
-import com.example.basekotlin.data.local.repository.MusicRepository
-import com.example.basekotlin.data.local.repository.MusicRepositoryImpl
+import com.example.basekotlin.data.local.repository.music.MusicRepository
+import com.example.basekotlin.data.local.repository.music.MusicRepositoryImpl
 import com.example.basekotlin.model.DeleteResult
 import com.example.basekotlin.model.MusicPlaylist
 import com.example.basekotlin.model.MusicTrack
