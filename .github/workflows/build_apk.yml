@@ -1,0 +1,40 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - '**' # Tự động chạy khi push lên bất kỳ branch nào (hoặc đổi thành [ main, master ])
+  workflow_dispatch: # Cho phép bấm nút "Run workflow" thủ công trên giao diện GitHub
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # Project của bạn đọc JAMENDO_CLIENT_ID từ local.properties
+      - name: Create local.properties
+        run: |
+          echo "JAMENDO_CLIENT_ID=${{ secrets.JAMENDO_CLIENT_ID || 'f2d12b98' }}" > local.properties
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Upload Debug APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
+          retention-days: 7

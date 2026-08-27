@@ -41,7 +41,7 @@ class FilesActivity : BaseActivity<ActivityFilesBinding>(ActivityFilesBinding::i
         }
         binding.layoutScan.tap {
             viewModel.loadStorageInfo()
-            Toast.makeText(this, "Scanning local files...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Scanning files...", Toast.LENGTH_SHORT).show()
         }
         binding.btnMusic.tap {
             startNextActivity(MusicActivity::class.java, null)

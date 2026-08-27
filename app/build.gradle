@@ -13,7 +13,7 @@ android {
     compileSdk 36
 
     defaultConfig {
-        applicationId "com.example.basekotlin"
+        applicationId "com.ASD039"
         minSdk 29
         targetSdk 36
         versionCode 100
