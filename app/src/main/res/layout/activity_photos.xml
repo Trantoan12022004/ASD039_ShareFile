@@ -10,7 +10,7 @@
     <!-- 1. Toolbar -->
     <include
         android:id="@+id/layoutToolbar"
-        layout="@layout/toolbar_music"
+        layout="@layout/toolbar_photo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,24 +18,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- 2. TabLayout (nền trắng, bo góc dưới) -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:background="@drawable/bg_tool_bar"
-        app:tabMode="fixed"
-        app:tabGravity="fill"
-        app:tabPaddingStart="10dp"
-        app:tabPaddingEnd="10dp"
-        android:visibility="visible"
-        app:tabIndicatorColor="@color/primary_35"
-        app:tabIndicatorHeight="3dp"
-        app:tabSelectedTextColor="@color/primary_35"
-        app:tabTextColor="#99000E00"
-        app:tabTextAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutToolbar" />
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tabLayout"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:background="@drawable/bg_tool_bar"-->
+<!--        app:tabMode="fixed"-->
+<!--        app:tabGravity="fill"-->
+<!--        app:tabPaddingStart="10dp"-->
+<!--        app:tabPaddingEnd="10dp"-->
+<!--        android:visibility="visible"-->
+<!--        app:tabIndicatorColor="@color/primary_35"-->
+<!--        app:tabIndicatorHeight="3dp"-->
+<!--        app:tabSelectedTextColor="@color/primary_35"-->
+<!--        app:tabTextColor="#99000E00"-->
+<!--        app:tabTextAppearance="@style/TextAppearance.AppCompat.Body2"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/layoutToolbar" />-->
 
     <LinearLayout
         android:id="@+id/layoutSearch"
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="tabLayout,layoutSearch" />
+        app:constraint_referenced_ids="layoutToolbar,layoutSearch" />
 
     <!-- 3. ViewPager2 -->
     <androidx.viewpager2.widget.ViewPager2

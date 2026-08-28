@@ -19,6 +19,7 @@ import com.example.basekotlin.base.gone
 import com.example.basekotlin.base.visible
 import com.example.basekotlin.databinding.FragmentAllPhotosBinding
 import com.example.basekotlin.model.PhotoInfo
+import com.example.basekotlin.ui.files.photos.PhotoDetailActivity
 import com.example.basekotlin.ui.files.photos.PhotosViewModel
 import com.example.basekotlin.ui.files.photos.adapter.PhotoAdapter
 import com.example.basekotlin.ui.files.photos.adapter.PhotoListItem
@@ -205,21 +206,21 @@ class AllPhotosFragment : BaseFragment<FragmentAllPhotosBinding>() {
 
     // Mở xem ảnh qua Intent hệ thống
     private fun openPhoto(photo: PhotoInfo) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        val mimeType = if (photo.mimeType.isNotEmpty()) {
-            photo.mimeType
-        } else {
-            "image/*"
+        val currentList = viewModel.allPhotosUi.value
+        var targetPosition = 0
+        // 1. Tìm vị trí (index) của ảnh được chọn trong danh sách ViewModel
+        for (i in currentList.indices) {
+            val item = currentList[i]
+            if (item.filePath == photo.filePath) {
+                targetPosition = i
+                break
+            }
         }
-        intent.setDataAndType(photo.contentUri, mimeType)
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-        try {
-            startActivity(intent)
-        } catch (e: Exception) {
-            Toast.makeText(requireContext(), "No application found to view this image", Toast.LENGTH_SHORT).show()
-        }
+        // 2. Chỉ đóng gói vị trí đã chọn
+        val bundle = Bundle()
+        bundle.putInt("EXTRA_CURRENT_POSITION", targetPosition)
+        // 3. Chuyển sang màn hình PhotoDetailActivity
+        startNextActivity(PhotoDetailActivity::class.java, bundle)
     }
 
     private fun hasManageStoragePermission(): Boolean {

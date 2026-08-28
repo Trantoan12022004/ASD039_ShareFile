@@ -61,7 +61,7 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
         )
 
         TabLayoutMediator(
-            binding.tabLayout,
+            binding.layoutToolbar.tabLayout,
             binding.viewPager,
         ) { tab, position ->
             tab.text = tabTitles[position]
@@ -132,7 +132,7 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
             viewModel.exitSelectionMode()
         }
 
-        binding.tabLayout.gone()
+        binding.layoutToolbar.tabLayout.gone()
         binding.layoutSearch.visible()
         binding.edtSearch.requestFocus()
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -150,7 +150,7 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
         Utils.hideKeyboard(this)
 
         binding.layoutSearch.gone()
-        binding.tabLayout.visible()
+        binding.layoutToolbar.tabLayout.visible()
     }
     private fun bindSelectionActions() {
         val actions = binding.layoutSelectionActions

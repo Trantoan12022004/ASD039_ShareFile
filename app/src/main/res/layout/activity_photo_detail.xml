@@ -8,20 +8,52 @@
     android:background="@color/black"
     tools:context=".ui.files.photos.PhotoDetailActivity">
 
+    <!-- Toolbar trên cùng -->
     <LinearLayout
+        android:id="@+id/layoutToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_vertical"
+        android:padding="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/btnBack"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/btnback"/>
+            android:src="@drawable/btn_back" />
 
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_weight="1"
+            android:ellipsize="middle"
+            android:fontFamily="@font/anton_regular"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            tools:text="image_photo.png" />
+
+        <ImageView
+            android:id="@+id/btnMore"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/btn_more" />
     </LinearLayout>
 
+    <!-- ViewPager2 cho phép vuốt chuyển ảnh toàn màn hình -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerPhotos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutToolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
