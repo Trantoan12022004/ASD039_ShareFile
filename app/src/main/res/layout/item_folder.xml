@@ -15,7 +15,7 @@
         android:id="@+id/imgThumbnail"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        android:src="@drawable/ic_folder"
+        android:src="@drawable/ic_no_folder"
         android:clipToOutline="true"
         app:riv_corner_radius="16dp"
         app:riv_border_width="1dp"

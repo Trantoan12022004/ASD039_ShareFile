@@ -23,6 +23,7 @@ import com.example.basekotlin.ui.files.photos.PhotoDetailActivity
 import com.example.basekotlin.ui.files.photos.PhotosViewModel
 import com.example.basekotlin.ui.files.photos.adapter.PhotoAdapter
 import com.example.basekotlin.ui.files.photos.adapter.PhotoListItem
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -30,8 +31,27 @@ import java.util.Locale
 
 class AllPhotosFragment : BaseFragment<FragmentAllPhotosBinding>() {
 
+
+    companion object {
+        const val ARG_PHOTO_TYPE = "ARG_PHOTO_TYPE"
+        const val TYPE_ALL = 0
+        const val TYPE_FOLDER = 1
+        fun newInstance(type: Int = TYPE_ALL): AllPhotosFragment {
+            val fragment = AllPhotosFragment()
+            val bundle = Bundle()
+            bundle.putInt(ARG_PHOTO_TYPE, type)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
+
     private val viewModel: PhotosViewModel by activityViewModels()
     private val adapter = PhotoAdapter()
+    private var photoType: Int = TYPE_ALL
+
+
+
 
     override fun setBinding(
         inflater: LayoutInflater?,
@@ -39,6 +59,15 @@ class AllPhotosFragment : BaseFragment<FragmentAllPhotosBinding>() {
         saveInstanceState: Bundle?
     ): FragmentAllPhotosBinding {
         return FragmentAllPhotosBinding.inflate(inflater!!, container, false)
+    }
+
+    override fun getData() {
+        super.getData()
+
+        val args = arguments
+        if (args != null){
+            photoType = args.getInt(ARG_PHOTO_TYPE, TYPE_ALL)
+        }
     }
 
     override fun initView() {
@@ -88,32 +117,35 @@ class AllPhotosFragment : BaseFragment<FragmentAllPhotosBinding>() {
         // Lắng nghe các Flow từ ViewModel
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // 1. Quan sát danh sách ảnh (sau khi tìm kiếm / tải lại)
+                // 4.1. Lấy Flow tương ứng: TYPE_FOLDER lấy photosInCurrentFolderUi, TYPE_ALL lấy allPhotosUi
+                val targetFlow: StateFlow<List<PhotoInfo>> = if (photoType == TYPE_FOLDER) {
+                    viewModel.photosInCurrentFolderUi
+                } else {
+                    viewModel.allPhotosUi
+                }
+                // 4.2. Quan sát danh sách ảnh (sau khi tìm kiếm / lọc / làm mới)
                 launch {
-                    viewModel.allPhotosUi.collect { photoList ->
+                    targetFlow.collect { photoList ->
                         val groupedItems = groupPhotosByDate(photoList)
                         adapter.submitList(groupedItems)
                         updateEmptyState()
                     }
                 }
-
-                // 2. Quan sát chế độ Selection Mode
+                // 4.3. Quan sát chế độ Selection Mode
                 launch {
                     viewModel.isSelectionMode.collect { isSelectionMode ->
                         adapter.isSelectionMode = isSelectionMode
                         adapter.notifyDataSetChanged()
                     }
                 }
-
-                // 3. Quan sát danh sách ảnh đã chọn
+                // 4.4. Quan sát danh sách ảnh đã chọn
                 launch {
                     viewModel.selectedPhotoPaths.collect { selectedPaths ->
                         adapter.selectedPhotos = selectedPaths
                         adapter.notifyDataSetChanged()
                     }
                 }
-
-                // 4. Quan sát trạng thái Loading
+                // 4.5. Quan sát trạng thái Loading
                 launch {
                     viewModel.isLoading.collect { isLoading ->
                         if (isLoading) {

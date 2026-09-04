@@ -155,9 +155,7 @@
     <string name="rename_song_success">Song renamed successfully</string>
     <string name="rename_song_failed">Failed to rename song</string>
 
-    <string name="save_ringtone_confirm_message">
-    Do you want to trim segment from %1$s to %2$s and save to Ringtones folder?
-</string>
+    <string name="save_ringtone_confirm_message">Do you want to trim segment from %1$s to %2$s and save to Ringtones folder?</string>
     <string name="ringtone_save_success">Ringtone saved to Ringtones folder</string>
     <string name="ringtone_save_failed">Failed to save ringtone</string>
     <string name="ringtones_folder">Ringtones</string>
@@ -179,8 +177,8 @@
     <string name="select_only_one_song_to_rename">Please select only one song to rename</string>
     <string name="select_only_one_item_to_rename">Please select only one item to rename</string>
     <string name="delete_folder">Delete folder?</string>
-    <string name="delete_folder_desc">Are you sure you want to delete “%1$s” and all songs inside from your device?</string>
-    <string name="delete_folders_desc">Do you want to delete %1$d selected folders and all songs inside from this device?</string>
+    <string name="delete_folder_desc">Are you sure you want to delete “%1$s” from your device?</string>
+    <string name="delete_folders_desc">Do you want to delete %1$d selected folders from this device?</string>
     <string name="delete_playlist">Delete playlist?</string>
     <string name="delete_playlist_desc">Are you sure you want to delete “%1$s”?</string>
     <string name="delete_playlists_desc">Do you want to delete %1$d selected playlists?</string>
@@ -211,6 +209,7 @@
     <string name="deselect_all">Deselect All</string>
     <string name="apk_residual_for_days">%1$s - Residual for %2$d days</string>
     <string name="search_apps">Search apps...</string>
+    <string name="search_files">Search files...</string>
     <string name="cannot_uninstall_system_app">Cannot uninstall system apps.</string>
     <string name="documents">Documents</string>
     <string name="recent">Recent</string>
@@ -226,6 +225,59 @@
     <string name="no_photos_found">No Photo Available</string>
     <string name="no_photos_available_desc">There is no photo in this section. Please import some</string>
     <string name="convert_pdf">Convert to PDF</string>
+    <string name="pdf_converter">PDF Converter</string>
+    <string name="pdf_to_image">PDF to Image</string>
+    <string name="image_to_pdf">Image to PDF</string>
+    <string name="converting_pdf">Converting...</string>
+    <string name="convert_pdf_success">Successfully converted %1$d images</string>
+    <string name="convert_pdf_success1">Successfully converted</string>
+    <string name="convert_pdf_failed">Conversion failed. Please try again</string>
+    <string name="back_to_main_folder">Back to main folder</string>
+    <string name="zip">Zip</string>
+    <string name="zipped">Zipped Files</string>
+    <string name="unzipped">Unzipped Files</string>
+    <string name="delete_zip">Delete Zip?</string>
+    <string name="delete_zip_desc">Are you sure you want to delete “%1$s” from your device?</string>
+    <string name="delete_zips_desc">Do you want to delete %1$d selected zip files from this device?</string>
+    <string name="delete_zip_success">Zip deleted successfully</string>
+    <string name="delete_zip_failed">Failed to delete zip file</string>
+    <string name="extract">Extract</string>
+    <string name="extracting">Extracting...</string>
+    <string name="extract_success">Extracted to %1$s</string>
+    <string name="extract_failed">Failed to extract file</string>
+    <string name="unzipped_empty_title">No Extracted Files</string>
+    <string name="unzipped_empty_desc">Extracted folders and files will appear here</string>
+    <string name="folder_item_count">%1$d items</string>
+    <string name="folder_item_count_single">1 item</string>
+    <string name="cannot_open_file">No app found to open this file</string>
+    <string name="used_storage">Used storage</string>
+    <string name="internal_share_storage">Internal Share Storage</string>
+    <string name="sort">Sort</string>
+    <string name="create_folder">Create Folder</string>
+    <string name="arrange">Arrange</string>
+    <string name="sort_name_a_z">Name: A→ Z</string>
+    <string name="sort_name_z_a">"Name: Z→A "</string>
+    <string name="sort_date_newest">Date: New→Old</string>
+    <string name="sort_date_oldest">Date: Old→New</string>
+    <string name="sort_size_big_small">Size: Big→Small</string>
+    <string name="sort_size_small_big">Size: Small→Big</string>
+    <string name="no_app_to_open_file">No app found to open this file</string>
+    <string name="internal_shared_storage">Internal shared storage</string>
+    <string name="ellipsis">...</string>
+    <string name="no_folder_desc">There is no folder in this section. Please import some</string>
+    <string name="no_folder">No Folder Available</string>
+    <string name="enter_folder_name">Enter folder name</string>
+    <string name="folder_name_cannot_empty">Folder name cannot be blank</string>
+    <string name="name_cannot_empty">Name cannot be blank</string>
+    <string name="delete_file">Delete file?</string>
+    <string name="delete_file_desc">Are you sure you want to delete “%1$s” from your device?</string>
+    <string name="action_success">Operation successful</string>
+    <string name="action_failed">Operation failed</string>
+    <string name="create_folder_desc">Enter name for new folder</string>
+    <string name="file_name_invalid_chars">Name cannot contain \\ / : * ? \" &lt; &gt; |</string>
+    <string name="no_file">No Files Available</string>
+    <string name="no_file_desc">There is no file in this section. Please import some</string>
+
     <string-array name="random_notifications">
         <item>Choose from hundreds of clothing templates and start designing today.</item>
         <item>Create unique T-shirts, hoodies, shirts, jackets, and pants with ease.</item>

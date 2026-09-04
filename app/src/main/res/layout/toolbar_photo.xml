@@ -101,9 +101,9 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        app:tabMode="fixed"
+        app:tabMode="scrollable"
         android:background="@null"
-        app:tabGravity="fill"
+        app:tabGravity="start"
         app:tabPaddingStart="10dp"
         app:tabPaddingEnd="10dp"
         android:visibility="visible"
@@ -115,6 +115,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutToolbar" />
+
+    <LinearLayout
+        android:id="@+id/layoutSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_12sdp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutToolbar">
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_search_bar"
+            android:drawableEnd="@drawable/search"
+            android:hint="@string/search_apps"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingHorizontal="16dp"
+            android:textColor="#000000"
+            android:fontFamily="@font/outfit_medium"
+            android:textColorHint="#66000E00"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 
 </LinearLayout>

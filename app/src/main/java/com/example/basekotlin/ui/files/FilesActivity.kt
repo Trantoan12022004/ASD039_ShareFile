@@ -19,7 +19,10 @@ import com.example.basekotlin.dialog.exit.ExitAppDialog
 import com.example.basekotlin.ui.files.apps.AppsActivity
 import com.example.basekotlin.ui.files.documents.DocumentsActivity
 import com.example.basekotlin.ui.files.music.MusicActivity
+import com.example.basekotlin.ui.files.pdfconverter.PdfConverterActivity
 import com.example.basekotlin.ui.files.photos.PhotosActivity
+import com.example.basekotlin.ui.files.zips.ZipsActivity
+import com.example.basekotlin.ui.storage.StorageActivity
 import kotlinx.coroutines.launch
 import kotlin.getValue
 
@@ -56,14 +59,19 @@ class FilesActivity : BaseActivity<ActivityFilesBinding>(ActivityFilesBinding::i
             startNextActivity(com.example.basekotlin.ui.files.documents.DocumentsActivity::class.java, bundle)
         }
         binding.btnPdf.tap {
-            val bundle = Bundle().apply {
-                putInt(DocumentsActivity.EXTRA_TAB_INDEX, 2) // Tab PDF
-            }
-            startNextActivity(com.example.basekotlin.ui.files.documents.DocumentsActivity::class.java, bundle)
+            startNextActivity(PdfConverterActivity::class.java, null)
         }
 
         binding.btnPhoto.tap {
             startNextActivity(PhotosActivity::class.java, null)
+        }
+
+        binding.btnZip.tap {
+            startNextActivity(ZipsActivity::class.java, null)
+        }
+
+        binding.layoutStorage.tap {
+            startNextActivity(StorageActivity::class.java, null)
         }
 
     }

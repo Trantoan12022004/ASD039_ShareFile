@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_radius_16"
+    android:layout_marginHorizontal="22sp"
+    android:padding="@dimen/_12sdp"
+    android:orientation="vertical">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/anton_regular"
+        android:paddingVertical="4dp"
+        android:text="@string/arrange"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="22sp" />
+
+    <!-- Name A→Z -->
+    <LinearLayout
+        android:id="@+id/optionNameAZ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingVertical="@dimen/_6sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/outfit_medium"
+            android:text="@string/sort_name_a_z"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/icNameAZ"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_radio_uncheck" />
+    </LinearLayout>
+
+    <!-- Name Z→A -->
+    <LinearLayout
+        android:id="@+id/optionNameZA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingVertical="@dimen/_6sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/outfit_medium"
+            android:text="@string/sort_name_z_a"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/icNameZA"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_radio_uncheck" />
+    </LinearLayout>
+
+    <!-- Date Newest -->
+    <LinearLayout
+        android:id="@+id/optionDateNewest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/outfit_medium"
+            android:paddingVertical="@dimen/_6sdp"
+            android:text="@string/sort_date_newest"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/icDateNewest"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_radio_uncheck" />
+    </LinearLayout>
+
+    <!-- Date Oldest -->
+    <LinearLayout
+        android:id="@+id/optionDateOldest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingVertical="@dimen/_6sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/outfit_medium"
+            android:text="@string/sort_date_oldest"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/icDateOldest"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_radio_uncheck" />
+    </LinearLayout>
+
+    <!-- Size Big→Small -->
+    <LinearLayout
+        android:id="@+id/optionSizeBigSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/outfit_medium"
+            android:text="@string/sort_size_big_small"
+            android:textColor="@color/black"
+            android:paddingVertical="@dimen/_6sdp"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/icSizeBigSmall"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_radio_uncheck" />
+    </LinearLayout>
+
+    <!-- Size Small→Big -->
+    <LinearLayout
+        android:id="@+id/optionSizeSmallBig"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/_6sdp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/outfit_medium"
+            android:text="@string/sort_size_small_big"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/icSizeSmallBig"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_radio_uncheck" />
+    </LinearLayout>
+
+</LinearLayout>

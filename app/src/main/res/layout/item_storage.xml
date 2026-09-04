@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_radius_24"
+    android:padding="8dp">
+        <ImageView
+            android:id="@+id/imgStorageIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_storage_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvStorageTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/used_storage"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:fontFamily="@font/outfit_semibold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgStorageIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressStorage"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            android:max="100"
+            android:progress="42"
+            android:layout_marginEnd="16dp"
+            android:progressDrawable="@drawable/bg_progress_storage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgStorageIcon"
+            app:layout_constraintTop_toBottomOf="@id/tvStorageTitle" />
+
+        <TextView
+            android:id="@+id/tvStorageInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:text="21,95 GB/51,48 GB"
+            android:textColor="#99000E00"
+            android:textSize="14sp"
+            android:fontFamily="@font/outfit_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgStorageIcon"
+            app:layout_constraintTop_toBottomOf="@id/progressStorage" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,11 @@
 package com.example.basekotlin.ui.files
 
-import android.os.Environment
-import android.os.StatFs
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import android.text.format.Formatter
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.basekotlin.data.local.repository.storage.StorageRepository
+import com.example.basekotlin.data.local.repository.storage.StorageRepositoryImpl
 import com.example.basekotlin.model.StorageModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,10 +13,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.File
-import java.util.Locale
 
-class FilesViewModel : ViewModel() {
+class FilesViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val repository: StorageRepository
 
     // Quản lý riêng trạng thái Loading
     private val _isLoading = MutableStateFlow(true)
@@ -24,6 +26,8 @@ class FilesViewModel : ViewModel() {
     val storageInfo: StateFlow<StorageModel> = _storageInfo.asStateFlow()
 
     init {
+        val appContext = application.applicationContext
+        repository = StorageRepositoryImpl(appContext)
         loadStorageInfo()
     }
 
@@ -32,45 +36,30 @@ class FilesViewModel : ViewModel() {
             _isLoading.value = true
 
             val info = withContext(Dispatchers.IO) {
-                getInternalStorageInfo()
+                try {
+                    val rootDirectory = repository.getRootDirectory()
+                    val storageScannerInfo = repository.getStorageInfo(rootDirectory)
+                    val context = getApplication<Application>().applicationContext
+
+                    val formattedUsed = Formatter.formatShortFileSize(context, storageScannerInfo.usedBytes)
+                    val formattedTotal = Formatter.formatShortFileSize(context, storageScannerInfo.totalBytes)
+
+                    StorageModel(
+                        totalBytes = storageScannerInfo.totalBytes,
+                        usedBytes = storageScannerInfo.usedBytes,
+                        freeBytes = storageScannerInfo.freeBytes,
+                        usedPercentage = storageScannerInfo.usedPercentage,
+                        formattedUsed = formattedUsed,
+                        formattedTotal = formattedTotal
+                    )
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    StorageModel()
+                }
             }
 
             _storageInfo.value = info
             _isLoading.value = false
-        }
-    }
-
-    private fun getInternalStorageInfo(): StorageModel {
-        return try {
-            val path: File = Environment.getExternalStorageDirectory()
-            val stat = StatFs(path.path)
-
-            val blockSize = stat.blockSizeLong
-            val totalBlocks = stat.blockCountLong
-            val availableBlocks = stat.availableBlocksLong
-
-            val totalBytes = totalBlocks * blockSize
-            val freeBytes = availableBlocks * blockSize
-            val usedBytes = totalBytes - freeBytes
-
-            val percentage = if (totalBytes > 0) {
-                ((usedBytes.toDouble() / totalBytes.toDouble()) * 100).toInt()
-            } else 0
-
-            val totalGB = totalBytes.toDouble() / (1024 * 1024 * 1024)
-            val usedGB = usedBytes.toDouble() / (1024 * 1024 * 1024)
-
-            StorageModel(
-                totalBytes = totalBytes,
-                usedBytes = usedBytes,
-                freeBytes = freeBytes,
-                usedPercentage = percentage,
-                formattedUsed = String.format(Locale.getDefault(), "%.2f GB", usedGB),
-                formattedTotal = String.format(Locale.getDefault(), "%.2f GB", totalGB)
-            )
-        } catch (e: Exception) {
-            e.printStackTrace()
-            StorageModel()
         }
     }
 }

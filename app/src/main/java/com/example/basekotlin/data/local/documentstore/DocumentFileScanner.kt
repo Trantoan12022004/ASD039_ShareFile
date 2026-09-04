@@ -10,6 +10,7 @@ import java.io.File
 object DocumentFileScanner {
 
     // Map extension -> DocumentType, dùng để phân loại ngay khi quét
+
     private val PDF_EXTENSIONS = setOf("pdf")
     private val EXCEL_EXTENSIONS = setOf("xls", "xlsx", "xlsm", "csv")
     private val PPT_EXTENSIONS = setOf("ppt", "pptx", "pps", "ppsx")

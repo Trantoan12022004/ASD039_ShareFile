@@ -262,6 +262,7 @@
 
                     <!-- Item 9: Zip -->
                     <LinearLayout
+                        android:id="@+id/btnZip"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -290,6 +291,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_storage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"

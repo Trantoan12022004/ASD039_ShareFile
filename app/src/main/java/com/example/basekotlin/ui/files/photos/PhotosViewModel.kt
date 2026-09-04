@@ -204,4 +204,66 @@ class PhotosViewModel(application: Application) : AndroidViewModel(application) 
         }
         return filtered
     }
+
+    // Lấy toàn bộ danh sách PhotoInfo thuộc về một folder cụ thể
+
+    fun getPhotosInFolder(folderPath: String): List<PhotoInfo> {
+        val allPhotos = allPhotosRepository.value
+        val result = mutableListOf<PhotoInfo>()
+        for (photo in allPhotos) {
+            if (photo.relativeFolderPath == folderPath)
+                result.add(photo)
+        }
+        return result
+    }
+
+    // Kiểm tra xem toàn bộ các file ảnh trong folder có đang được chọn hay không
+    fun isFolderFullySelected(folderPath: String): Boolean {
+        val photosInFolder = getPhotosInFolder(folderPath)
+        if (photosInFolder.isEmpty()) {
+            return false
+        }
+        val selectedSet = _selectedPhotoPaths.value
+        for (photo in photosInFolder) {
+            val isContained = selectedSet.contains(photo.filePath)
+            if (!isContained) {
+                return false
+            }
+        }
+        return true
+    }
+
+    // Kích hoạt Selection Mode và chọn toàn bộ file trong folder ban đầu
+    fun enterFolderSelectionMode(folderPath: String) {
+        _isSelectionMode.value = true
+        val photosInFolder = getPhotosInFolder(folderPath)
+        val selectedSet = mutableSetOf<String>()
+        for (photo in photosInFolder) {
+            selectedSet.add(photo.filePath)
+        }
+        _selectedPhotoPaths.value = selectedSet
+    }
+
+    // Toggle chọn hoặc bỏ chọn toàn bộ file trong folder
+    fun toggleFolderSelection(folderPath: String) {
+        val photosInFolder = getPhotosInFolder(folderPath)
+        if (photosInFolder.isEmpty()) {
+            return
+        }
+        val currentSet = _selectedPhotoPaths.value.toMutableSet()
+        val isAllSelected = isFolderFullySelected(folderPath)
+        if (isAllSelected) {
+            // Đã chọn toàn bộ -> Bỏ chọn tất cả file trong folder
+            for (photo in photosInFolder) {
+                currentSet.remove(photo.filePath)
+            }
+        } else {
+            // Chưa chọn đủ -> Thêm tất cả file trong folder vào danh sách chọn
+            for (photo in photosInFolder) {
+                currentSet.add(photo.filePath)
+            }
+        }
+        _selectedPhotoPaths.value = currentSet
+    }
+
 }

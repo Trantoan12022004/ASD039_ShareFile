@@ -25,6 +25,7 @@ import com.example.basekotlin.dialog.common.SelectMore2Dialog
 import com.example.basekotlin.dialog.common.TextInputDialog
 import com.example.basekotlin.model.PhotoInfo
 import com.example.basekotlin.ui.files.pdfconverter.PdfConverterActivity
+import com.example.basekotlin.ui.files.pdfconverter.PdfViewModel
 import com.example.basekotlin.ui.files.photos.adapter.PhotoDetailAdapter
 import kotlinx.coroutines.launch
 import java.io.File
@@ -32,6 +33,8 @@ import java.io.File
 class PhotoDetailActivity : BaseActivity<ActivityPhotoDetailBinding>(ActivityPhotoDetailBinding::inflate) {
 
     private val viewModel: PhotosViewModel by viewModels()
+    private val pdfViewModel: PdfViewModel by viewModels()
+
     private val photoDetailAdapter = PhotoDetailAdapter()
     private var currentPosition: Int = 0
     private var isFirstLoad: Boolean = true
@@ -70,19 +73,45 @@ class PhotoDetailActivity : BaseActivity<ActivityPhotoDetailBinding>(ActivityPho
         // 4. Quan sát danh sách ảnh từ ViewModel
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.allPhotosUi.collect { photos ->
-                    if (photos.isNotEmpty()) {
-                        photoDetailAdapter.addListData(photos.toMutableList())
-                        // Lần đầu tải: di chuyển đến đúng ảnh được click ban đầu
-                        if (isFirstLoad) {
-                            isFirstLoad = false
-                            if (currentPosition >= 0 && currentPosition < photos.size) {
-                                binding.viewPagerPhotos.setCurrentItem(currentPosition, false)
-                                updateHeaderTitle(currentPosition)
+                launch {
+                    viewModel.allPhotosUi.collect { photos ->
+                        if (photos.isNotEmpty()) {
+                            photoDetailAdapter.addListData(photos.toMutableList())
+                            // Lần đầu tải: di chuyển đến đúng ảnh được click ban đầu
+                            if (isFirstLoad) {
+                                isFirstLoad = false
+                                if (currentPosition >= 0 && currentPosition < photos.size) {
+                                    binding.viewPagerPhotos.setCurrentItem(currentPosition, false)
+                                    updateHeaderTitle(currentPosition)
+                                }
                             }
                         }
                     }
                 }
+
+                launch {
+                    pdfViewModel.isConverting.collect { isConverting ->
+                        if (isConverting) {
+                            Toast.makeText(
+                                this@PhotoDetailActivity,
+                                getString(R.string.converting_pdf),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+
+                launch {
+                    pdfViewModel.convertedPdfPath.collect { path ->
+                        if (path != null) {
+                            val message = getString(R.string.convert_pdf_success1)
+                            Toast.makeText(this@PhotoDetailActivity, message, Toast.LENGTH_SHORT).show()
+                            viewModel  .clearPhotoSelection()
+                            pdfViewModel.resetConvertedPdfPath()
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -204,9 +233,8 @@ class PhotoDetailActivity : BaseActivity<ActivityPhotoDetailBinding>(ActivityPho
     // 4. Chuyển sang PDF Converter
     private fun openPdfConverter(photo: PhotoInfo) {
         val filePaths = arrayListOf(photo.filePath)
-        val bundle = Bundle()
-        bundle.putStringArrayList("EXTRA_PHOTO_PATHS", filePaths)
-        startNextActivity(PdfConverterActivity::class.java, bundle)
+
+        pdfViewModel.convertSelectedImagesToPdf(filePaths)
     }
     // 5. Hiển thị thông tin chi tiết ảnh
     private fun showPhotoInformationDialog(photo: PhotoInfo) {

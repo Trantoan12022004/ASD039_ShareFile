@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="8dp"
+    android:layout_height="wrap_content">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imgThumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="16dp"
+        app:layout_constraintDimensionRatio="182:143"
+        android:src="@drawable/ic_no_folder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:id="@+id/ivCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/check_box_outline_blank"
+        app:layout_constraintEnd_toEndOf="@id/imgThumbnail"
+        app:layout_constraintTop_toTopOf="@id/imgThumbnail"/>
+
+    <TextView
+        android:id="@+id/tvFolderName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:fontFamily="@font/outfit_semibold"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/imgThumbnail"
+        app:layout_constraintStart_toStartOf="@id/imgThumbnail"
+        app:layout_constraintTop_toBottomOf="@id/imgThumbnail"
+        tools:text="Camera" />
+
+    <TextView
+        android:id="@+id/tvCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:fontFamily="@font/outfit_medium"
+        android:textColor="#99000E00"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/imgThumbnail"
+        app:layout_constraintStart_toStartOf="@id/imgThumbnail"
+        app:layout_constraintTop_toBottomOf="@id/tvFolderName"
+        tools:text="124 files" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,6 +21,7 @@ import com.example.basekotlin.databinding.ActivityDocumentsBinding
 import com.example.basekotlin.dialog.common.ConfirmActionDialog
 import com.example.basekotlin.model.DocumentInfo
 import com.example.basekotlin.util.Utils
+import com.example.basekotlin.util.reduceDragSensitivity
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 import java.io.File
@@ -37,6 +38,7 @@ class DocumentsActivity : BaseActivity<ActivityDocumentsBinding>(ActivityDocumen
         pagerAdapter = DocumentsPagerAdapter(this)
         binding.viewPager.adapter = pagerAdapter
         binding.viewPager.offscreenPageLimit = 1
+        binding.viewPager.reduceDragSensitivity(multiplier = 4)
 
         val tabTitles = arrayOf(
             getString(R.string.recent),

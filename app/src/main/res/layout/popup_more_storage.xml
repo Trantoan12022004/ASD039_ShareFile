@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_popup_menu"
+    android:orientation="vertical"
+    android:layout_marginEnd="@dimen/_12sdp"
+    android:paddingVertical="4dp">
+
+    <!-- 1. Sort -->
+    <TextView
+        android:id="@+id/tv_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_medium"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/_12sdp"
+        android:text="@string/sort"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <View
+        android:id="@+id/view_divider_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="12dp"
+        android:background="#E5E5E5" />
+
+    <!-- 2. Create Folder -->
+    <TextView
+        android:id="@+id/tv_create_folder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_medium"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/_12sdp"
+        android:text="@string/create_folder"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+</LinearLayout>

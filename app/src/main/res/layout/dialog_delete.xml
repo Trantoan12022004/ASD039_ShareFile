@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:background="@drawable/bg_radius_16"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_12sdp"
+        android:paddingTop="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_14sdp"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/tvTitleConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/anton_regular"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:text="@string/delete_folder" />
+
+        <TextView
+            android:id="@+id/tvMessageConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/outfit_medium"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="@string/delete_folders_desc" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp">
+
+            <View
+                android:id="@+id/viewCenterConfirm"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_centerInParent="true"
+                android:layout_marginHorizontal="@dimen/_6sdp" />
+
+            <RelativeLayout
+                android:id="@+id/btnCancelConfirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/viewCenterConfirm"
+                android:background="@drawable/bg_btn_cancel">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:fontFamily="@font/outfit_semibold"
+                    android:text="@string/cancel"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btnPositiveConfirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/viewCenterConfirm"
+                android:background="@drawable/bg_btn_delete">
+
+                <TextView
+                    android:id="@+id/tvPositiveConfirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:fontFamily="@font/outfit_semibold"
+                    android:text="@string/delete"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

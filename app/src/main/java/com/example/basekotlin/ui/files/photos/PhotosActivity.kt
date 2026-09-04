@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -36,6 +37,9 @@ import com.example.basekotlin.model.PhotoInfo
 import com.example.basekotlin.model.RenameResult
 import com.example.basekotlin.ui.files.music.ringtone.RingtoneActivity
 import com.example.basekotlin.ui.files.pdfconverter.PdfConverterActivity
+import com.example.basekotlin.ui.files.pdfconverter.PdfViewModel
+import com.example.basekotlin.ui.files.photos.fragment.AllPhotosFragment
+import com.example.basekotlin.util.ImageToPdfConverter
 import com.example.basekotlin.util.Utils
 import com.example.basekotlin.util.reduceDragSensitivity
 import com.google.android.material.tabs.TabLayoutMediator
@@ -46,7 +50,9 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
     private lateinit var pagerAdapter: PhotosPagerAdapter
 
     private val viewModel: PhotosViewModel by viewModels()
+    private val pdfViewModel: PdfViewModel by viewModels()
     private var isSearchMode = false
+    private var isFolderDetailMode = false
 
     override fun initView() {
         binding.layoutToolbar.tvTitle.text = getString(R.string.photos)
@@ -82,7 +88,7 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
 
         bindSelectionActions()
 
-        binding.edtSearch.addTextChangedListener(object : TextWatcher {
+        binding.layoutToolbar.edtSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val query = s?.toString() ?: ""
@@ -118,8 +124,93 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
                         updateSelectionCount()
                     }
                 }
+
+                launch {
+                    pdfViewModel.isConverting.collect { isConverting ->
+                        if (isConverting) {
+                            Toast.makeText(
+                                this@PhotosActivity,
+                                getString(R.string.converting_pdf),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+
+                launch {
+                    pdfViewModel.convertedPdfPath.collect { path ->
+                        if (path != null) {
+                            val message = getString(R.string.convert_pdf_success1)
+                            Toast.makeText(this@PhotosActivity, message, Toast.LENGTH_SHORT).show()
+                            viewModel  .clearPhotoSelection()
+                            pdfViewModel.resetConvertedPdfPath()
+                        }
+                    }
+                }
             }
         }
+    }
+
+    private fun setTabLayoutClickable(clickable: Boolean) {
+        val tabLayout = binding.layoutToolbar.tabLayout
+        tabLayout.isEnabled = clickable
+        val tabStrip = tabLayout.getChildAt(0) as? ViewGroup
+        tabStrip?.let { strip ->
+            strip.isEnabled = clickable
+            for (i in 0 until strip.childCount) {
+                val tabView = strip.getChildAt(i)
+                tabView.isEnabled = clickable
+                tabView.isClickable = clickable
+                if (!clickable) {
+                    // Chặn toàn bộ tương tác chạm vào từng tab
+                    tabView.setOnTouchListener { _, _ -> true }
+                } else {
+                    tabView.setOnTouchListener(null)
+                }
+            }
+        }
+        if (!clickable) {
+            tabLayout.setOnTouchListener { _, _ -> true }
+        } else {
+            tabLayout.setOnTouchListener(null)
+        }
+    }
+
+
+    // Mở màn hình danh sách ảnh của 1 folder
+    fun openFolderPhotos(folderName: String) {
+        isFolderDetailMode = true
+        // 1. Cập nhật Toolbar: Ẩn TabLayout, hiển thị tvTitle bằng tên folder
+//        binding.layoutToolbar.tabLayout.gone()
+        setTabLayoutClickable(false)
+        binding.layoutToolbar.tvTitle.visible()
+        binding.layoutToolbar.tvTitle.text = folderName
+        // 2. Hiển thị AllPhotosFragment với TYPE_FOLDER
+        val folderFragment = AllPhotosFragment.newInstance(AllPhotosFragment.TYPE_FOLDER)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, folderFragment)
+            .commit()
+        // 3. Ẩn ViewPager, hiển thị Container
+        binding.viewPager.gone()
+        binding.fragmentContainer.visible()
+    }
+    // Đóng màn hình danh sách ảnh của folder và quay lại tab Folders
+    private fun closeFolderPhotos() {
+        isFolderDetailMode = false
+        viewModel.setCurrentFolder("")
+        // 1. Khôi phục Toolbar
+        binding.layoutToolbar.tvTitle.visible()
+        binding.layoutToolbar.tvTitle.text = getString(R.string.photos)
+        setTabLayoutClickable(true)
+        // 2. Gỡ bỏ Fragment và hiển thị lại ViewPager
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
+        if (currentFragment != null) {
+            supportFragmentManager.beginTransaction()
+                .remove(currentFragment)
+                .commit()
+        }
+        binding.fragmentContainer.gone()
+        binding.viewPager.visible()
     }
 
     private fun openSearch() {
@@ -133,10 +224,10 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
         }
 
         binding.layoutToolbar.tabLayout.gone()
-        binding.layoutSearch.visible()
-        binding.edtSearch.requestFocus()
+        binding.layoutToolbar.layoutSearch.visible()
+        binding.layoutToolbar.edtSearch.requestFocus()
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.showSoftInput(binding.edtSearch, InputMethodManager.SHOW_IMPLICIT)
+        inputMethodManager.showSoftInput(binding.layoutToolbar.edtSearch, InputMethodManager.SHOW_IMPLICIT)
     }
 
     private fun closeSearch() {
@@ -146,11 +237,14 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
         isSearchMode = false
 
         viewModel.updateSearchQuery("")
-        binding.edtSearch.setText("")
+        binding.layoutToolbar.edtSearch.setText("")
         Utils.hideKeyboard(this)
 
-        binding.layoutSearch.gone()
+        binding.layoutToolbar.layoutSearch.gone()
         binding.layoutToolbar.tabLayout.visible()
+        if (isFolderDetailMode) {
+            setTabLayoutClickable(false)
+        }
     }
     private fun bindSelectionActions() {
         val actions = binding.layoutSelectionActions
@@ -204,9 +298,14 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
             Toast.makeText(this, getString(R.string.please_select_at_least_one_item), Toast.LENGTH_SHORT).show()
             return
         }
+
+        // Kiểm tra xem có đang ở tab Folder hay không
+        val isFolderTab = binding.viewPager.currentItem == 1 && !isFolderDetailMode
+
         SelectMore1Dialog(
             context = this,
             selectedPhotos = selectedPhotos,
+            isFolderTab = isFolderTab,
             onRename = { photo ->
                 showRenameDialog(photo)
             },
@@ -240,11 +339,11 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
             }
             val targetFile = File(file.parentFile, newFileName)
             if (file.renameTo(targetFile)) {
-                Toast.makeText(this, getString(R.string.delete_song_success), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.rename_song_success), Toast.LENGTH_SHORT).show()
                 viewModel.refreshAllPhotos()
                 viewModel.exitSelectionMode()
             } else {
-                Toast.makeText(this, getString(R.string.delete_song_failed), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.rename_song_failed), Toast.LENGTH_SHORT).show()
             }
         }.show()
     }
@@ -254,9 +353,7 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
         for (p in photos) {
             filePaths.add(p.filePath)
         }
-        val bundle = Bundle()
-        bundle.putStringArrayList("EXTRA_PHOTO_PATHS", filePaths)
-        startNextActivity(PdfConverterActivity::class.java, bundle)
+        pdfViewModel.convertSelectedImagesToPdf(filePaths)
     }
     // 3. Hiển thị Dialog thông tin ảnh
     private fun showPhotoInformationDialog(photo: PhotoInfo) {
@@ -339,12 +436,19 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
         viewModel.refreshAllPhotos()
     }
 
+    // 3. Xử lý logic Back toàn diện (Nút Back Toolbar & Phím Back thiết bị)
     override fun onBack() {
         if (viewModel.isSelectionMode.value) {
+            // Nếu đang chọn nhiều ảnh -> thoát chế độ chọn
             viewModel.exitSelectionMode()
         } else if (isSearchMode) {
+            // Nếu đang tìm kiếm -> đóng tìm kiếm
             closeSearch()
+        } else if (isFolderDetailMode) {
+            // NẾU ĐANG Ở TYPE FOLDER -> Quay về AllFolderPhotoFragment (Tab Folders)
+            closeFolderPhotos()
         } else {
+            // Màn hình bình thường -> thoát Activity
             finish()
         }
     }

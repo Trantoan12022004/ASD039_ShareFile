@@ -8,7 +8,7 @@ enum class DocumentType {
     TXT,
     DOC,
     WPS,
-    OTHER
+    OTHER,
 }
 
 // domain model cho 1 file document trên máy

@@ -6,7 +6,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.basekotlin.ui.files.apps.fragment.APKFragment
 import com.example.basekotlin.ui.files.apps.fragment.InstalledFragment
 import com.example.basekotlin.ui.files.apps.fragment.ReceivedFragment
+import com.example.basekotlin.ui.files.photos.fragment.AllFolderPhotoFragment
 import com.example.basekotlin.ui.files.photos.fragment.AllPhotosFragment
+import com.example.basekotlin.ui.files.photos.fragment.PhotoReceiveFragment
 
 class PhotosPagerAdapter(activity: FragmentActivity) :
     FragmentStateAdapter(activity) {
@@ -19,9 +21,9 @@ class PhotosPagerAdapter(activity: FragmentActivity) :
         if (position == 0) {
             return AllPhotosFragment()
         } else if (position == 1) {
-            return AllPhotosFragment()
+            return AllFolderPhotoFragment()
         } else {
-            return AllPhotosFragment()
+            return PhotoReceiveFragment()
         }
     }
 }

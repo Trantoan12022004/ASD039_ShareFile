@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_popup_menu"
+    android:orientation="vertical"
+    android:layout_marginEnd="@dimen/_12sdp"
+    android:paddingVertical="4dp">
+    <!-- 2. Share -->
+    <TextView
+        android:id="@+id/tv_share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_medium"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/_12sdp"
+        android:text="@string/share"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <View
+        android:id="@+id/view_divider_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="12dp"
+        android:background="#E5E5E5" />
+
+    <!-- 3. Send -->
+    <TextView
+        android:id="@+id/tv_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_medium"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/_12sdp"
+        android:text="@string/send"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <View
+        android:id="@+id/view_divider_3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="12dp"
+        android:background="#E5E5E5" />
+
+    <!-- 4. Move to SafeBox -->
+    <TextView
+        android:id="@+id/tv_move_to_safebox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_medium"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/_12sdp"
+        android:text="@string/move_to_safebox"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <View
+        android:id="@+id/view_divider_4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="12dp"
+        android:background="#E5E5E5" />
+
+    <!-- 5. Rename -->
+    <TextView
+        android:id="@+id/tv_rename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_medium"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/_12sdp"
+        android:text="@string/rename"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <View
+        android:id="@+id/view_divider_5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="12dp"
+        android:background="#E5E5E5" />
+
+    <!-- 6. Delete -->
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_medium"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/_12sdp"
+        android:text="@string/delete"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <View
+        android:id="@+id/view_divider_6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="12dp"
+        android:background="#E5E5E5" />
+
+    <!-- 7. Information -->
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_medium"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/_12sdp"
+        android:text="@string/information"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+</LinearLayout>

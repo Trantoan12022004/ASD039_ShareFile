@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_radius_24"
+    android:padding="10dp"
+    android:layout_margin="4dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Thumbnail dạng vuông ở nửa trên của Grid Item -->
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imgThumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_pdf"
+        app:riv_corner_radius="16dp"
+        app:riv_border_width="1dp"
+        app:riv_border_color="#F0F0F0"
+        app:layout_constraintDimensionRatio="4:3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Tên File -->
+    <com.example.basekotlin.util.AlwaysMarqueeTextView
+        android:id="@+id/tvFileName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="6dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/outfit_semibold"
+        android:maxLines="1"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@id/tvFileInfo"
+        app:layout_constraintEnd_toStartOf="@id/ll_action"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgThumbnail"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="HRHRHEHE" />
+
+    <!-- Thông tin dung lượng và ngày tháng -->
+    <TextView
+        android:id="@+id/tvFileInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="6dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/outfit_medium"
+        android:maxLines="1"
+        android:textColor="#6E7569"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ll_action"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFileName"
+        tools:text="13,2 MB - Sep 27, 2026" />
+
+    <!-- Cụm nút hành động (More / Checkbox) ở góc phải dưới -->
+    <LinearLayout
+        android:id="@+id/ll_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/tvFileName"
+        app:layout_constraintBottom_toBottomOf="@id/tvFileInfo"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_more"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_more"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitCenter"
+            android:visibility="visible"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:id="@+id/imgCheckbox"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_checkbox_unchecked"
+            android:visibility="gone"
+            android:contentDescription="@null" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

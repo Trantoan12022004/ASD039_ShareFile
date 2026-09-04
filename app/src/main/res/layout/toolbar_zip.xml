@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_tool_bar"
+    android:orientation="vertical"
+    android:elevation="6dp"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_left" />
+
+        <!-- Tiêu đề "Files" -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/anton_regular"
+            android:text="@string/zip"
+            android:textColor="#0A1207"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:id="@+id/tvTitle1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/selected"
+                android:textSize="22sp"
+                android:layout_marginEnd="2dp"
+                android:fontFamily="@font/outfit_semibold"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tv_count_song"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 0 "
+                android:textSize="22sp"
+                android:layout_marginEnd="2dp"
+                android:fontFamily="@font/outfit_semibold"
+                android:textColor="@color/primary_35"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/files1"
+                android:textSize="22sp"
+                android:fontFamily="@font/outfit_semibold"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/btnSelect"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Action"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_select"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:tabMode="scrollable"
+        android:background="@null"
+        app:tabGravity="start"
+        app:tabPaddingStart="10dp"
+        app:tabPaddingEnd="10dp"
+        android:visibility="visible"
+        app:tabIndicatorColor="@color/primary_35"
+        app:tabIndicatorHeight="3dp"
+        app:tabSelectedTextColor="@color/primary_35"
+        app:tabTextColor="#99000E00"
+        app:tabTextAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutToolbar" />
+</LinearLayout>

@@ -8,6 +8,7 @@ import com.example.basekotlin.R
 import com.example.basekotlin.base.BaseDialog
 import com.example.basekotlin.base.gone
 import com.example.basekotlin.base.tap
+import com.example.basekotlin.base.visible
 import com.example.basekotlin.databinding.PopupSelectionMore1Binding
 import com.example.basekotlin.model.MusicTrack
 import com.example.basekotlin.model.PhotoInfo
@@ -15,6 +16,7 @@ import com.example.basekotlin.model.PhotoInfo
 class SelectMore1Dialog(
     context: Context,
     private val selectedPhotos: List<PhotoInfo>,
+    private val isFolderTab: Boolean = false,
     private val onRename: (PhotoInfo) -> Unit,
     private val onConvertPdf: (List<PhotoInfo>) -> Unit,
     private val onInformation: (PhotoInfo) -> Unit,
@@ -32,6 +34,18 @@ class SelectMore1Dialog(
             win.setBackgroundDrawableResource(android.R.color.transparent)
         }
 
+        // Nếu ở tab Folder: ẩn chức năng Đổi tên và Thông tin chi tiết cùng divider tương ứng
+        if (isFolderTab) {
+            binding.tvRename.gone()
+            binding.dividerRename.gone()
+            binding.dividerInformation.gone()
+            binding.tvInformation.gone()
+        } else {
+            binding.tvRename.visible()
+            binding.dividerRename.visible()
+            binding.dividerInformation.visible()
+            binding.tvInformation.visible()
+        }
     }
 
     override fun bindView() {
