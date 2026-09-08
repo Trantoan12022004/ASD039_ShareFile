@@ -31,4 +31,9 @@
         <item name="android:windowEnterAnimation">@anim/dialog_slide_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/dialog_slide_out_bottom</item>
     </style>
+
+    <style name="RightDialogAnimation" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/in_right</item>
+        <item name="android:windowExitAnimation">@anim/out_right</item>
+    </style>
 </resources>

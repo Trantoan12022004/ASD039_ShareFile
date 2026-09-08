@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_music_play"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="24dp">
+
+    <!-- Thanh kéo (Drag Handle) -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_btn_16"
+        android:backgroundTint="#DCE3D6" />
+
+    <!-- 1. Hàng 4 nút hành động tròn: Send, Share, Delete, More -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp">
+
+        <!-- Nút Send -->
+        <LinearLayout
+            android:id="@+id/btnSend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_send1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/outfit_semibold"
+                android:text="@string/send"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Nút Share -->
+        <LinearLayout
+            android:id="@+id/btnShare"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_share2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/outfit_semibold"
+                android:text="@string/share"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Nút Delete -->
+        <LinearLayout
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_delete" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/outfit_semibold"
+                android:text="@string/delete"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Nút More -->
+        <LinearLayout
+            android:id="@+id/btnMore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_more" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/outfit_semibold"
+                android:text="@string/more"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 2. Thẻ trắng bo góc chứa Volume, Brightness, Aspect Ratio, Playing Mode -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_radius_24"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="20dp">
+
+        <!-- Volume Slider Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivVolume"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_volume_up"
+                app:tint="@color/black" />
+
+            <SeekBar
+                android:id="@+id/sbVolume"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:max="100"
+                android:maxHeight="6dp"
+                android:minHeight="6dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:progress="70"
+                android:progressDrawable="@drawable/seekbar_track_green"
+                android:splitTrack="false"
+                android:thumb="@drawable/seekbar_thumb_white" />
+        </LinearLayout>
+
+        <!-- Brightness Slider Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivBrightness"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_brightness_low" />
+
+            <SeekBar
+                android:id="@+id/sbBrightness"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:max="100"
+                android:maxHeight="6dp"
+                android:minHeight="6dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:progress="58"
+                android:progressDrawable="@drawable/seekbar_track_green"
+                android:splitTrack="false"
+                android:thumb="@drawable/seekbar_thumb_white" />
+        </LinearLayout>
+
+        <!-- Aspect Ratio Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvLabelAspectRatio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/outfit_semibold"
+                android:text="@string/aspect_ratio_label"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <HorizontalScrollView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Best Fit (Selected) -->
+                    <TextView
+                        android:id="@+id/btnRatioBestFit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_chip_selected"
+                        android:fontFamily="@font/outfit_semibold"
+                        android:gravity="center"
+                        android:paddingHorizontal="14dp"
+                        android:text="@string/aspect_ratio_best_fit"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+
+                    <!-- Fill -->
+                    <TextView
+                        android:id="@+id/btnRatioFill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:fontFamily="@font/outfit_semibold"
+                        android:gravity="center"
+                        android:paddingHorizontal="14dp"
+                        android:text="@string/aspect_ratio_fill"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+
+                    <!-- 1:1 -->
+                    <TextView
+                        android:id="@+id/btnRatio11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:fontFamily="@font/outfit_semibold"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:text="@string/aspect_ratio_1_1"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+
+                    <!-- 4:3 -->
+                    <TextView
+                        android:id="@+id/btnRatio43"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:fontFamily="@font/outfit_semibold"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:text="@string/aspect_ratio_4_3"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+
+                    <!-- 16:9 -->
+                    <TextView
+                        android:id="@+id/btnRatio169"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:fontFamily="@font/outfit_semibold"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:text="@string/aspect_ratio_16_9"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- Playing Mode Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvLabelPlayingMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/outfit_semibold"
+                android:text="@string/playing_mode_label"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <!-- Auto Play (Selected) -->
+            <TextView
+                android:id="@+id/btnModeAutoPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_chip_selected"
+                android:fontFamily="@font/outfit_semibold"
+                android:gravity="center"
+                android:paddingHorizontal="16dp"
+                android:text="@string/auto_play"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+
+            <!-- Loop -->
+            <TextView
+                android:id="@+id/btnModeLoop"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_chip_unselected"
+                android:fontFamily="@font/outfit_semibold"
+                android:gravity="center"
+                android:paddingHorizontal="16dp"
+                android:text="@string/loop"
+                android:textColor="@color/black"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

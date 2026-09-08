@@ -27,5 +27,8 @@
     <color name="primary_10">#0B1830</color>
     <color name="primary_5">#050C1A</color>
     <color name="primary_0">#000000</color>
+    <color name="glass_bg_clear">#5CFAFAFA</color>
+    <color name="glass_bg_regular">#66000000</color>
+    <color name="glass_stroke">#33FFFFFF</color>
 
 </resources>

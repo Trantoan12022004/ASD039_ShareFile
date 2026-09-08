@@ -1,7 +1,5 @@
 package com.example.basekotlin.data.local.repository.video
 
-import com.example.basekotlin.model.PhotoFolder
-import com.example.basekotlin.model.VideoInfo
 import com.example.basekotlin.ui.files.video.model.VideoFolder
 import com.example.basekotlin.ui.files.video.model.VideoInfo
 import kotlinx.coroutines.flow.Flow

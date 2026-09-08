@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/_12sdp"
             android:background="@drawable/bg_search_bar"
             android:fontFamily="@font/outfit_semibold"
-            android:hint="@string/enter_playlist_s_name"
+            android:hint="@string/new_name"
             android:maxLines="1"
             android:padding="14dp"
             android:textColor="@color/black"

@@ -163,7 +163,9 @@
     <string name="end_point">End Point</string>
     <string name="duration_label">Duration: %1$s</string>
     <string name="detail_information">Detail Information</string>
+    <string name="label_duration">Duration :</string>
     <string name="label_name">Name :</string>
+    <string name="label_package">Package :</string>
     <string name="label_artist">Artist :</string>
     <string name="label_path">Path :</string>
     <string name="label_size">Size :</string>
@@ -174,6 +176,7 @@
     <string name="delete_songs_desc">Do you want to delete %1$d selected songs from this device?</string>
     <string name="please_select_at_least_one_song">Please select at least one song</string>
     <string name="please_select_at_least_one_item">Please select at least one item</string>
+    <string name="please_select_one_item">Please select one item</string>
     <string name="select_only_one_song_to_rename">Please select only one song to rename</string>
     <string name="select_only_one_item_to_rename">Please select only one item to rename</string>
     <string name="delete_folder">Delete folder?</string>
@@ -277,6 +280,49 @@
     <string name="file_name_invalid_chars">Name cannot contain \\ / : * ? \" &lt; &gt; |</string>
     <string name="no_file">No Files Available</string>
     <string name="no_file_desc">There is no file in this section. Please import some</string>
+    <string name="videos">Videos</string>
+    <string name="to_mp3">To MP3</string>
+    <string name="select_only_one_video_for_mp3">Please select only 1 video to convert to MP3</string>
+    <string name="delete_video">Delete Video</string>
+    <string name="delete_video_desc">Do you want to delete %1$d selected videos from this device?</string>
+    <string name="new_name">New name...</string>
+    <string name="no_videos_found">No Video Available</string>
+    <string name="no_videos_available_desc">There is no video in this section. Please import some</string>
+    <string name="rename_video_success">Video renamed successfully</string>
+    <string name="rename_video_failed">Failed to rename video</string>
+    <string name="enter_file_name">Enter File Name</string>
+    <string name="convert_to_mp3">Convert to MP3</string>
+    <string name="converting_to_mp3">Converting to MP3...</string>
+    <string name="convert_to_mp3_success">Converted to MP3 successfully</string>
+    <string name="convert_to_mp3_failed">Failed to convert to MP3</string>
+    <string name="delete_video_success">Video deleted successfully</string>
+    <string name="delete_video_failed">Failed to delete video</string>
+    <string name="no_previous_video">No previous video</string>
+    <string name="no_next_video">No next video</string>
+    <string name="screen_locked">Screen controls locked</string>
+    <string name="screen_unlocked">Screen controls unlocked</string>
+    <string name="lock">Lock</string>
+    <string name="speed">Speed</string>
+    <string name="volume">Volume</string>
+    <string name="ratio">Ratio</string>
+    <string name="rotate">Rotate</string>
+    <string name="pip">PiP</string>
+    <string name="queue">Queue</string>
+    <string name="ratio_fit">Aspect Ratio: Fit</string>
+    <string name="ratio_fill">Aspect Ratio: Fill</string>
+    <string name="ratio_stretch">Aspect Ratio: Stretch</string>
+    <string name="pip_not_supported">Picture-in-Picture is not supported on this device</string>
+    <string name="playing_queue_count">Playing Queue (%1$d)</string>
+    <string name="aspect_ratio_label">Aspect Ratio:</string>
+    <string name="aspect_ratio_best_fit">Best Fit</string>
+    <string name="aspect_ratio_fill">Fill</string>
+    <string name="aspect_ratio_1_1">1:1</string>
+    <string name="aspect_ratio_4_3">4:3</string>
+    <string name="aspect_ratio_16_9">16:9</string>
+    <string name="playing_mode_label">Playing Mode:</string>
+    <string name="auto_play">Auto Play</string>
+    <string name="loop">Loop</string>
+
 
     <string-array name="random_notifications">
         <item>Choose from hundreds of clothing templates and start designing today.</item>

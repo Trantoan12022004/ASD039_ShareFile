@@ -175,18 +175,651 @@ Chức năng:
 - Show video info dialog
 - Move to SafeBox (TODO)
 
-**Khác biệt so với Photo**: Không có Convert PDF, thay bằng các action phù hợp video.
+**Khác biệt so với Photo**: Không có Convert PDF, thay bằng các action To MP3(convert video sang Mp3), hiện lên 1 dialog để đặt tên file mp3.(mặc định là tên video + .mp3)
 
-#### [NEW] [VideoDetailActivity.kt](file:///d:/mobile/ASD039/app/src/main/java/com/example/basekotlin/ui/files/videos/VideoDetailActivity.kt)
+Dựa trên các ảnh thiết kế bạn gửi, có thể mô tả lại đầy đủ `VideoDetailActivity.kt` như sau:
 
-**Đây là Video Player Activity** - khác hoàn toàn với PhotoDetailActivity.
+---
 
-Chức năng:
-- ExoPlayer (Media3) để phát video
-- Controls: Play/Pause, Seekbar, Rewind/Forward
-- Header: Tên video + Back + More menu
-- More menu: Send, Share, Delete, Rename, Information
-- Swipe left/right để chuyển video (ViewPager2)
+Mình đã sắp xếp lại **đúng thứ tự chức năng và đánh lại số thứ tự** để tài liệu `VideoDetailActivity.kt` logic hơn, tránh bị nhảy từ `#4` → `#14` → `#11`.
+
+# [NEW] `VideoDetailActivity.kt`
+
+## Tổng quan
+
+`VideoDetailActivity` là màn hình **Video Player** dùng để xem và quản lý video.
+
+Màn hình này khác hoàn toàn với `PhotoDetailActivity` vì được thiết kế theo dạng **trình phát video toàn màn hình**, bao gồm các chức năng:
+
+* Phát và tạm dừng video.
+* Chuyển video trước/sau.
+* Tua video.
+* Điều chỉnh tốc độ phát.
+* Điều chỉnh âm lượng.
+* Thay đổi tỷ lệ hiển thị video.
+* Chuyển đổi xoay màn hình.
+* Quản lý Playing Queue.
+* Picture-in-Picture (PiP).
+* Khóa controls.
+* Thao tác với file video.
+* Swipe để chuyển giữa các video.
+
+---
+
+# 1. Video Playback
+
+* Sử dụng **Media3 ExoPlayer** để phát video.
+* Video được hiển thị gần như toàn màn hình.
+* Giữ đúng tỷ lệ video và hỗ trợ thay đổi chế độ hiển thị.
+* Có thể phát/dừng video bằng nút **Play/Pause**.
+* Có thể Play/Pause video bằng cách chạm vào video.
+
+### Trạng thái icon
+
+Khi video đang phát:
+
+```text
+Pause
+```
+
+Sử dụng icon:
+
+```text
+ic_pause
+```
+
+Khi video đang tạm dừng:
+
+```text
+Play
+```
+
+Sử dụng icon:
+
+```text
+ic_play
+```
+
+Khi video phát kết thúc:
+
+```text
+Play
+```
+
+Sử dụng icon:
+
+```text
+ic_play
+```
+
+---
+
+# 2. Header
+
+Phía trên màn hình hiển thị Header gồm:
+
+## 2.1. Back Button
+
+* Quay lại màn hình trước.
+
+## 2.2. Video Name
+
+* Hiển thị tên file video hiện tại.
+
+Ví dụ:
+
+```text
+VID_20200402_12194_A
+```
+
+## 2.3. Send Button
+
+* Thực hiện thao tác gửi video.
+
+## 2.4. More Menu
+
+* Mở menu chứa các thao tác bổ sung với video.
+
+### Hiển thị Header
+
+Header sẽ:
+
+* Hiển thị cùng với Player Controls.
+* Tự động ẩn sau một khoảng thời gian không thao tác.
+
+Điều này giúp tạo trải nghiệm xem video fullscreen.
+
+---
+
+# 3. Main Playback Controls
+
+Ở chính giữa màn hình video có cụm điều khiển chính gồm 3 nút:
+
+```text
+⏮        ▶ / ❚❚        ⏭
+Previous   Play/Pause    Next
+```
+
+## 3.1. Previous
+
+```text
+⏮
+```
+
+* Chuyển sang video trước đó.
+
+## 3.2. Play / Pause
+
+```text
+▶ / ❚❚
+```
+
+* Phát video.
+* Tạm dừng video.
+
+## 3.3. Next
+
+```text
+⏭
+```
+
+* Chuyển sang video tiếp theo.
+
+---
+
+# 4. Bottom Playback Control Bar
+
+Phía dưới video hiển thị thanh điều khiển playback.
+
+Bao gồm:
+
+1. Video Progress / SeekBar.
+2. Playback Speed.
+3. Volume Control.
+4. Aspect Ratio.
+5. Screen Orientation.
+6. Play Queue.
+7. Picture-in-Picture.
+8. Lock Controls.
+
+---
+
+## 4.1. SeekBar / Video Progress
+
+Hiển thị:
+
+* Thời gian phát hiện tại.
+* Tiến trình video.
+* Tổng thời lượng video.
+
+Ví dụ:
+
+```text
+00:54 ─────────────────────── 00:55
+```
+
+Người dùng có thể:
+
+* Kéo SeekBar để tua đến vị trí bất kỳ.
+* Theo dõi tiến trình phát video hiện tại.
+
+---
+
+## 4.2. Playback Speed
+
+Cho phép người dùng thay đổi tốc độ phát video.
+
+Các tốc độ hỗ trợ:
+
+```text
+0.5x
+1.0x
+1.5x
+2.0x
+```
+
+Khi người dùng chọn tốc độ mới:
+
+* Cập nhật playback speed của ExoPlayer.
+* Video tiếp tục phát tại vị trí hiện tại.
+
+---
+
+## 4.3. Volume Control
+
+Có nút điều khiển âm thanh:
+
+### Volume On
+
+```text
+🔊
+```
+
+* Bật âm thanh video.
+
+### Volume Off
+
+```text
+🔇
+```
+
+* Tắt âm thanh video.
+
+---
+
+## 4.4. Aspect Ratio
+
+Cho phép thay đổi tỷ lệ hiển thị video.
+
+Các chế độ hỗ trợ:
+
+* **Fill**
+* **1:1**
+* **4:3**
+* **16:9**
+
+Ví dụ:
+
+```text
+Fill
+```
+
+Video được hiển thị phù hợp với màn hình.
+
+```text
+16:9
+```
+
+Hiển thị video với tỷ lệ 16:9.
+
+```text
+4:3
+```
+
+Hiển thị video với tỷ lệ 4:3.
+
+```text
+1:1
+```
+
+Hiển thị video với tỷ lệ vuông.
+
+---
+
+## 4.5. Screen Orientation
+
+Cho phép chuyển đổi giữa:
+
+* Portrait.
+* Landscape.
+
+Cả hai chế độ đều được sử dụng trong trải nghiệm xem video toàn màn hình.
+
+---
+
+## 4.6. Play Queue
+
+Nhấn vào nút Play Queue để mở **Bottom Sheet Playing Queue**.
+
+Bottom Sheet hiển thị danh sách các video đang nằm trong hàng đợi phát.
+
+---
+
+## 4.7. Picture-in-Picture Mode
+
+Nhấn vào nút PiP để chuyển video sang chế độ:
+
+```text
+Picture-in-Picture
+```
+
+Video sẽ:
+
+* Thu nhỏ thành một cửa sổ nhỏ.
+* Hiển thị ở góc màn hình.
+* Người dùng có thể tiếp tục xem video trong khi sử dụng ứng dụng khác.
+
+---
+
+## 4.8. Lock Controls
+
+Có nút:
+
+```text
+🔒 Lock
+```
+
+Khi bật Lock:
+
+* Khóa các thao tác điều khiển.
+* Tránh người dùng vô tình chạm vào controls.
+* Phù hợp khi xem video fullscreen.
+
+Khi Unlock:
+
+* Các controls hoạt động bình thường trở lại.
+
+---
+
+# 5. Playing Queue Bottom Sheet
+
+Hiển thị khi người dùng nhấn nút **Play Queue**.
+
+Header của Bottom Sheet:
+
+```text
+Playing Queue (12)
+```
+
+Hiển thị danh sách các video trong hàng đợi phát.
+
+Mỗi item bao gồm:
+
+* Thumbnail video.
+* Video name.
+* Duration.
+* Nút thao tác/menu.
+* Drag handle để thay đổi vị trí.
+
+Ví dụ:
+
+```text
+[Thumbnail]  Redemption
+             00:45
+
+                         ☰
+```
+
+Người dùng có thể:
+
+* Chọn video để phát.
+* Xem video tiếp theo.
+* Thay đổi thứ tự video bằng cách kéo item.
+* Quản lý danh sách phát.
+
+Khi thay đổi thứ tự:
+
+* Playing Queue được cập nhật.
+* Thứ tự Previous/Next cũng được cập nhật.
+
+---
+
+# 6. Swipe Left / Right để chuyển Video
+
+Sử dụng **ViewPager2** để chuyển giữa các video.
+
+Người dùng có thể:
+
+```text
+← Swipe        Video hiện tại        Swipe →
+```
+
+### Swipe Left / Right
+
+* Swipe để chuyển sang video trước hoặc video tiếp theo.
+
+Khi chuyển sang video mới:
+
+* Cập nhật ExoPlayer.
+* Cập nhật Video Name.
+* Cập nhật Duration.
+* Reset Playback Progress.
+* Cập nhật trạng thái Play/Pause.
+* Cập nhật Playing Queue.
+
+---
+
+# 7. Rewind / Forward Video
+
+Hỗ trợ tua nhanh video bằng thao tác Double Tap.
+
+```text
+← 10s          Video hiện tại          10s →
+```
+
+## 7.1. Double Tap bên trái
+
+* Tua lại 10 giây.
+
+## 7.2. Double Tap bên phải
+
+* Tua tới 10 giây.
+
+---
+
+# 8. Interaction với Player Controls
+
+Khi người dùng chạm vào màn hình video:
+
+Hiển thị:
+
+* Header.
+* Main Playback Controls.
+* Bottom Playback Controls.
+
+Sau một khoảng thời gian không có thao tác:
+
+* Tự động ẩn Header.
+* Tự động ẩn Main Controls.
+* Tự động ẩn Bottom Controls.
+* Chỉ hiển thị video.
+
+Điều này tạo trải nghiệm fullscreen tương tự các ứng dụng Video Player.
+
+---
+
+# 9. UI States
+
+`VideoDetailActivity` cần xử lý các trạng thái sau:
+
+## 9.1. Loading
+
+Khi ExoPlayer đang chuẩn bị video:
+
+```text
+Loading video...
+```
+
+Hiển thị Loading Indicator.
+
+---
+
+## 9.2. Playing
+
+Khi video đang phát:
+
+```text
+▶ Video đang phát
+```
+
+* Icon Play/Pause hiển thị `Pause`.
+* Progress liên tục được cập nhật.
+
+---
+
+## 9.3. Paused
+
+Khi video đang tạm dừng:
+
+```text
+❚❚ Video đang tạm dừng
+```
+
+* Icon Play/Pause hiển thị `Play`.
+* Progress dừng cập nhật theo playback.
+
+---
+
+## 9.4. Ended
+
+Khi video phát hết:
+
+* Hiển thị icon `Play`.
+* Playback dừng ở cuối video.
+* Người dùng có thể nhấn Play để phát lại.
+
+---
+
+# 10. More Menu
+
+Khi người dùng nhấn nút **More** (`⋮`) trên Header, hiển thị Bottom Sheet.
+
+Các chức năng chính gồm:
+
+* Send.
+* Share.
+* Delete.
+* More.
+
+---
+
+## 10.1. Send
+
+```text
+Send
+```
+
+Thực hiện thao tác gửi video sang ứng dụng hoặc dịch vụ khác.
+
+---
+
+## 10.2. Share
+
+```text
+Share
+```
+
+Chia sẻ video thông qua Android Share Sheet.
+
+---
+
+## 10.3. Delete
+
+```text
+Delete
+```
+
+Xóa video khỏi thiết bị.
+
+Trước khi xóa cần hiển thị Dialog xác nhận.
+
+### Delete Video Dialog
+
+```text
+Delete Video
+
+Do you want to delete this video
+from this device?
+
+Cancel              Delete
+```
+
+### Cancel
+
+* Hủy thao tác xóa.
+
+### Delete
+
+* Xác nhận xóa video.
+
+Nút `Delete` cần sử dụng màu đỏ để cảnh báo thao tác nguy hiểm.
+
+Sau khi xóa thành công:
+
+* Xóa video khỏi danh sách.
+* Cập nhật Playing Queue.
+* Chuyển sang video tiếp theo hoặc quay lại màn hình trước nếu không còn video.
+
+---
+
+## 10.4. More Actions
+
+Mở Dialog hoặc Bottom Sheet chứa các chức năng tương tự `VideoActivity`.
+
+Bao gồm:
+
+* Rename.
+* Convert to MP3.
+* Move to Safe Box.
+* Information.
+
+---
+
+# 11. Video Lifecycle
+
+Khi `VideoDetailActivity` được mở:
+
+1. Nhận danh sách video.
+2. Xác định video hiện tại.
+3. Khởi tạo ExoPlayer.
+4. Load video vào Player.
+5. Chuẩn bị video.
+6. Hiển thị Loading.
+7. Video sẵn sàng để phát.
+
+Khi Activity bị Pause hoặc Stop:
+
+* Lưu trạng thái playback nếu cần.
+* Pause video tùy theo lifecycle requirement.
+
+Khi Activity bị Destroy:
+
+* Release ExoPlayer.
+* Hủy các Handler/Runnable.
+* Hủy các callback liên quan đến Player.
+
+---
+
+# 12. Tổng kết chức năng
+
+`VideoDetailActivity` bao gồm các nhóm chức năng chính:
+
+### Video Playback
+
+* Play/Pause.
+* Previous/Next.
+* Seek.
+* Rewind 10s.
+* Forward 10s.
+
+### Video Display
+
+* Aspect Ratio.
+* Portrait/Landscape.
+* Fullscreen experience.
+* Picture-in-Picture.
+
+### Player Controls
+
+* Auto show/hide controls.
+* Lock/Unlock controls.
+* Volume On/Off.
+* Playback Speed.
+
+### Video Navigation
+
+* ViewPager2.
+* Swipe Left/Right.
+* Previous/Next video.
+
+### Queue Management
+
+* Playing Queue.
+* Chọn video.
+* Sắp xếp video.
+* Quản lý danh sách.
+
+### File Actions
+
+* Send.
+* Share.
+* Delete.
+* Rename.
+* Convert to MP3.
+* Move to Safe Box.
+* Information.
+
+
 
 #### [NEW] [VideosPagerAdapter.kt](file:///d:/mobile/ASD039/app/src/main/java/com/example/basekotlin/ui/files/videos/VideosPagerAdapter.kt)
 
@@ -200,12 +833,22 @@ Tương tự [PhotosPagerAdapter.kt](file:///d:/mobile/ASD039/app/src/main/java/
 
 Tương tự [AllPhotosFragment.kt](file:///d:/mobile/ASD039/app/src/main/java/com/example/basekotlin/ui/files/photos/fragment/AllPhotosFragment.kt).
 
-- Grid 3 cột với header ngày tháng
-- Group video theo ngày (groupVideosByDate)
+- Grid 3 cột 
 - Selection mode support
 - SwipeRefresh
+- Long click → selection mode
 - Empty state
-- TYPE_ALL / TYPE_FOLDER (khi xem video trong folder)
+
+#### [NEW] [FolderDetailVideosFragment.kt](file:///d:/mobile/ASD039/app/src/main/java/com/example/basekotlin/ui/files/videos/fragment/FolderDetailVideosFragment.kt)
+
+Tương tự [AllPhotosFragment.kt](file:///d:/mobile/ASD039/app/src/main/java/com/example/basekotlin/ui/files/photos/fragment/AllPhotosFragment.kt).
+
+- Grid 3 cột 
+- Selection mode support
+- Long click → selection mode
+- SwipeRefresh
+- Empty state
+dùng để hiển thị các video trong một folder, khi nhấn mở 1 folder, hiện ở fragmentContainer
 
 #### [NEW] [AllFolderVideoFragment.kt](file:///d:/mobile/ASD039/app/src/main/java/com/example/basekotlin/ui/files/videos/fragment/AllFolderVideoFragment.kt)
 
@@ -215,6 +858,7 @@ Tương tự [AllFolderPhotoFragment.kt](file:///d:/mobile/ASD039/app/src/main/j
 - Click mở folder detail
 - Long click → selection mode
 - Empty state
+- SwipeRefresh
 
 #### [NEW] [VideoReceiveFragment.kt](file:///d:/mobile/ASD039/app/src/main/java/com/example/basekotlin/ui/files/videos/fragment/VideoReceiveFragment.kt)
 

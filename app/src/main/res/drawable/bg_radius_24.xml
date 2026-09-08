@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <!-- Nền màu trắng bán trong suốt 20% - 30% (Tạo độ mờ đục nhẹ) -->
-    <solid android:color="#33CECECE" />
+    <solid android:color="#5CFAFAFA" />
 
     <!-- Bo góc 24dp -->
     <corners android:radius="24dp" />

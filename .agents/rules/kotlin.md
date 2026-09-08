@@ -33,3 +33,28 @@ Requirements:
 - Add comments only when they explain non-obvious logic.
 - Do not comment obvious code.
 - Optimize for readability, maintainability, and idiomatic Kotlin.
+
+## Android SDK Version Rules
+
+- Before adding any `Build.VERSION.SDK_INT` check, always verify the project's `minSdk`.
+- Never write an SDK version condition that is impossible based on `minSdk`.
+
+Examples:
+- If `minSdk >= 29`, do NOT write:
+  `if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)`
+  because the condition is always true.
+- If `minSdk >= 29`, do NOT write checks such as:
+  `Build.VERSION.SDK_INT < 29`
+  because they are always false.
+
+- Remove unnecessary compatibility branches for Android versions below `minSdk`.
+- Only use `Build.VERSION.SDK_INT` checks when the API level condition can actually vary on supported devices.
+
+## Code Cleanliness Rules
+
+- Do not use redundant qualifier names.
+- If a class, object, or member can be referenced directly without ambiguity, prefer the shorter direct reference.
+- Avoid unnecessary fully-qualified names such as:
+  `android.os.Build.VERSION.SDK_INT`
+  when `Build.VERSION.SDK_INT` is sufficient.
+- Remove redundant imports, qualifiers, conditions, and compatibility code.

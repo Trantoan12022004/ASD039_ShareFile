@@ -21,6 +21,7 @@ import com.example.basekotlin.ui.files.documents.DocumentsActivity
 import com.example.basekotlin.ui.files.music.MusicActivity
 import com.example.basekotlin.ui.files.pdfconverter.PdfConverterActivity
 import com.example.basekotlin.ui.files.photos.PhotosActivity
+import com.example.basekotlin.ui.files.video.VideosActivity
 import com.example.basekotlin.ui.files.zips.ZipsActivity
 import com.example.basekotlin.ui.storage.StorageActivity
 import kotlinx.coroutines.launch
@@ -72,6 +73,9 @@ class FilesActivity : BaseActivity<ActivityFilesBinding>(ActivityFilesBinding::i
 
         binding.layoutStorage.tap {
             startNextActivity(StorageActivity::class.java, null)
+        }
+        binding.btnVideos.tap {
+            startNextActivity(VideosActivity::class.java, null)
         }
 
     }
