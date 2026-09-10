@@ -59,7 +59,7 @@
         android:layout_marginHorizontal="12dp"
         android:background="#E5E5E5" />
     <TextView
-        android:id="@+id/tv_add_to_playlist"
+        android:id="@+id/tv_move_safebox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawablePadding="16dp"

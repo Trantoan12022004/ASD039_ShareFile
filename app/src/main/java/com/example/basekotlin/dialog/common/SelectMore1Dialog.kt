@@ -20,7 +20,7 @@ class SelectMore1Dialog(
     private val onRename: (PhotoInfo) -> Unit,
     private val onConvertPdf: (List<PhotoInfo>) -> Unit,
     private val onInformation: (PhotoInfo) -> Unit,
-    private val onMoveSafeBox: (PhotoInfo) -> Unit,
+    private val onMoveSafeBox: (List<PhotoInfo>) -> Unit,
 ) : BaseDialog<PopupSelectionMore1Binding>(context, true) {
     override fun setBinding(): PopupSelectionMore1Binding {
         return PopupSelectionMore1Binding.inflate(layoutInflater)
@@ -82,6 +82,20 @@ class SelectMore1Dialog(
             if (selectedPhotos.size == 1) {
                 val photo = selectedPhotos[0]
                 onInformation(photo)
+                dismiss()
+            } else {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.please_select_at_least_one_item),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        // 4. Xử lý Chuyển vào SafeBox
+        binding.tvMoveSafebox.tap {
+            if (selectedPhotos.isNotEmpty()) {
+                onMoveSafeBox(selectedPhotos)
                 dismiss()
             } else {
                 Toast.makeText(

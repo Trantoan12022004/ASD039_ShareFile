@@ -22,6 +22,7 @@ import com.example.basekotlin.base.hideNavigation
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.base.visible
 import com.example.basekotlin.data.local.mediastore.MusicPlayerConnection
+import com.example.basekotlin.data.local.safebox.SafeBoxFileType
 import com.example.basekotlin.databinding.FragmentAllBinding
 import com.example.basekotlin.databinding.PopupMoreBinding
 import com.example.basekotlin.dialog.common.ConfirmActionDialog
@@ -37,6 +38,7 @@ import com.example.basekotlin.ui.files.music.adapter.MusicTrackAdapter
 import com.example.basekotlin.ui.files.music.playing.SongPlayActivity
 import com.example.basekotlin.ui.files.music.ringtone.RingtoneActivity
 import com.example.basekotlin.util.PopupMenuUtils
+import com.example.basekotlin.util.SafeBoxHelper
 import kotlinx.coroutines.launch
 import kotlin.getValue
 
@@ -110,15 +112,20 @@ class AllFragment : BaseFragment<FragmentAllBinding>() {
             }
         }
 
-//        binding.swipeRefresh.setOnRefreshListener {
-//            viewModel.refreshAllTracks()
-//        }
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.refreshAllTracks()
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
+                    viewModel.isRefreshing.collect { refreshing ->
+                        binding.swipeRefresh.isRefreshing = refreshing
+                    }
+                }
+
+                launch {
                     viewModel.allTracks.collect { tracks ->
-                        binding.swipeRefresh.isRefreshing = false
                         trackAdapter.addListData(tracks.toMutableList())
                         binding.tvCount.text = getString(R.string.song_count, tracks.size)
                         binding.tvCountSelect.text = tracks.size.toString()
@@ -264,9 +271,29 @@ class AllFragment : BaseFragment<FragmentAllBinding>() {
                 popupWindow.dismiss()
                 viewModel.enterSelectionMode(initialTrackId = track.id)
             }
-            // Các item khác (Play, Share, Delete, Add to favorite...) gắn tương tự tại đây
+            popupBinding.tvMoveToSafebox.tap {
+                popupWindow.dismiss()
+                moveToSafeBox(track)
+            }
         }
     }
+
+    private fun moveToSafeBox(track: MusicTrack) {
+        lifecycleScope.launch {
+            val success = SafeBoxHelper.moveToSafeBox(
+                context = requireContext(),
+                filePath = track.filePath,
+                fileType = SafeBoxFileType.AUDIO
+            )
+            if (success) {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_success), Toast.LENGTH_SHORT).show()
+                viewModel.refreshAllTracks()
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_failed), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 
     private fun showSelectPlaylistDialog(track: MusicTrack) {
         SelectPlaylistDialog(

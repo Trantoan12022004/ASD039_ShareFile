@@ -16,6 +16,7 @@ import com.example.basekotlin.base.gone
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.base.visible
 import com.example.basekotlin.data.local.mediastore.MusicPlayerConnection
+import com.example.basekotlin.data.local.safebox.SafeBoxFileType
 import com.example.basekotlin.databinding.FragmentAllBinding
 import com.example.basekotlin.databinding.PopupMoreBinding
 import com.example.basekotlin.dialog.common.ConfirmActionDialog
@@ -29,6 +30,7 @@ import com.example.basekotlin.ui.files.music.MusicViewModel
 import com.example.basekotlin.ui.files.music.adapter.MusicPlaylistAdapter2
 import com.example.basekotlin.ui.files.music.playlist.PlaylistActivity
 import com.example.basekotlin.util.PopupMenuUtils
+import com.example.basekotlin.util.SafeBoxHelper
 import kotlinx.coroutines.launch
 
 class PlaylistFragment : BaseFragment<FragmentAllBinding>() {
@@ -93,8 +95,18 @@ class PlaylistFragment : BaseFragment<FragmentAllBinding>() {
             }
         }
 
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.refreshAllTracks()
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.isRefreshing.collect { refreshing ->
+                        binding.swipeRefresh.isRefreshing = refreshing
+                    }
+                }
+
                 launch {
                     viewModel.playlists.collect { playlists ->
                         playlistAdapter.addListData(playlists.toMutableList())
@@ -193,12 +205,32 @@ class PlaylistFragment : BaseFragment<FragmentAllBinding>() {
 
             popupBinding.tvMoveToSafebox.tap {
                 popupWindow.dismiss()
-                // Move to SafeBox sẽ xử lý sau
+                viewModel.getPlaylistTracks(playlist.id) { tracks ->
+                    moveVideosToSafeBox(tracks)
+                }
             }
 
             popupBinding.tvDelete.tap {
                 popupWindow.dismiss()
                 showDeletePlaylistConfirmDialog(playlist)
+            }
+        }
+    }
+
+
+    private fun moveVideosToSafeBox(tracks: List<MusicTrack>) {
+        if (tracks.isEmpty()) return
+        lifecycleScope.launch {
+            val count = SafeBoxHelper.moveMultipleToSafeBox(
+                context = requireContext(),
+                filePaths = tracks.map { it.filePath },
+                fileType = SafeBoxFileType.VIDEOS
+            )
+            if (count > 0) {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_success), Toast.LENGTH_SHORT).show()
+                viewModel.refreshAllTracks()
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_failed), Toast.LENGTH_SHORT).show()
             }
         }
     }

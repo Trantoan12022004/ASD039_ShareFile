@@ -21,6 +21,7 @@ import com.example.basekotlin.base.BaseFragment
 import com.example.basekotlin.base.gone
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.base.visible
+import com.example.basekotlin.data.local.safebox.SafeBoxFileType
 import com.example.basekotlin.databinding.FragmentApps1Binding
 import com.example.basekotlin.databinding.PopupMoreAppBinding
 import com.example.basekotlin.dialog.common.ConfirmActionDialog
@@ -29,6 +30,7 @@ import com.example.basekotlin.model.AppInfo
 import com.example.basekotlin.ui.files.apps.AppsViewModel
 import com.example.basekotlin.ui.files.apps.adapter.ReceivedCardAdapter
 import com.example.basekotlin.util.PopupMenuUtils
+import com.example.basekotlin.util.SafeBoxHelper
 import kotlinx.coroutines.launch
 import java.io.File
 import kotlin.getValue
@@ -198,6 +200,25 @@ class ReceivedFragment : BaseFragment<FragmentApps1Binding>() {
             popupBinding.tvDelete.tap {
                 popupWindow.dismiss()
                 showDeleteConfirmDialog(appInfo)
+            }
+            popupBinding.tvMoveToSafebox.tap {
+                popupWindow.dismiss()
+                moveToSafeBox(appInfo)
+            }
+        }
+    }
+    private fun moveToSafeBox(app: AppInfo) {
+        lifecycleScope.launch {
+            val success = SafeBoxHelper.moveToSafeBox(
+                context = requireContext(),
+                filePath = app.apkFilePath,
+                fileType = SafeBoxFileType.OTHERS
+            )
+            if (success) {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_success), Toast.LENGTH_SHORT).show()
+                viewModel.refreshReceivedApps()
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_failed), Toast.LENGTH_SHORT).show()
             }
         }
     }

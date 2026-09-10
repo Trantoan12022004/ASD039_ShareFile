@@ -17,6 +17,7 @@ import com.example.basekotlin.base.gone
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.base.visible
 import com.example.basekotlin.data.local.mediastore.MusicPlayerConnection
+import com.example.basekotlin.data.local.safebox.SafeBoxFileType
 import com.example.basekotlin.databinding.FragmentAllBinding
 import com.example.basekotlin.databinding.PopupMoreBinding
 import com.example.basekotlin.dialog.common.ConfirmActionDialog
@@ -32,6 +33,7 @@ import com.example.basekotlin.ui.files.music.adapter.MusicTrackAdapter
 import com.example.basekotlin.ui.files.music.playing.SongPlayActivity
 import com.example.basekotlin.ui.files.music.ringtone.RingtoneActivity
 import com.example.basekotlin.util.PopupMenuUtils
+import com.example.basekotlin.util.SafeBoxHelper
 import kotlinx.coroutines.launch
 
 class SearchFragment : BaseFragment<FragmentAllBinding>() {
@@ -54,6 +56,7 @@ class SearchFragment : BaseFragment<FragmentAllBinding>() {
     override fun initView() {
         binding.rvMusic.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMusic.adapter = trackAdapter
+        binding.swipeRefresh.isEnabled = false
         MusicPlayerConnection.connect(requireContext())
     }
 
@@ -116,7 +119,6 @@ class SearchFragment : BaseFragment<FragmentAllBinding>() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.searchResults.collect { tracks ->
-                        binding.swipeRefresh.isRefreshing = false
                         trackAdapter.addListData(tracks.toMutableList())
                         binding.tvCount.text = getString(R.string.song_count, tracks.size)
                         binding.tvCountSelect.text = tracks.size.toString()
@@ -245,6 +247,27 @@ class SearchFragment : BaseFragment<FragmentAllBinding>() {
             popupBinding.tvSelect.tap {
                 popupWindow.dismiss()
                 viewModel.enterSelectionMode(initialTrackId = track.id)
+            }
+
+            popupBinding.tvMoveToSafebox.tap {
+                popupWindow.dismiss()
+                moveToSafeBox(track)
+            }
+        }
+    }
+
+    private fun moveToSafeBox(track: MusicTrack) {
+        lifecycleScope.launch {
+            val success = SafeBoxHelper.moveToSafeBox(
+                context = requireContext(),
+                filePath = track.filePath,
+                fileType = SafeBoxFileType.AUDIO
+            )
+            if (success) {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_success), Toast.LENGTH_SHORT).show()
+                viewModel.refreshAllTracks()
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_failed), Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -23,6 +23,7 @@ import com.example.basekotlin.base.gone
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.base.visible
 import com.example.basekotlin.data.local.mediastore.MusicPlayerConnection
+import com.example.basekotlin.data.local.safebox.SafeBoxFileType
 import com.example.basekotlin.databinding.ActivityPlaylistBinding
 import com.example.basekotlin.databinding.PopupMoreBinding
 import com.example.basekotlin.dialog.common.ConfirmActionDialog
@@ -39,6 +40,7 @@ import com.example.basekotlin.ui.files.music.playing.SongPlayActivity
 import com.example.basekotlin.ui.files.music.ringtone.RingtoneActivity
 import com.example.basekotlin.util.AlbumArtUtils
 import com.example.basekotlin.util.PopupMenuUtils
+import com.example.basekotlin.util.SafeBoxHelper
 import kotlinx.coroutines.launch
 import kotlin.getValue
 
@@ -637,7 +639,27 @@ class PlaylistActivity : BaseActivity<ActivityPlaylistBinding>(ActivityPlaylistB
                 popupWindow.dismiss()
                 viewModel.enterSelectionMode(initialTrackId = track.id)
             }
+            popupBinding.tvMoveToSafebox.tap {
+                popupWindow.dismiss()
+                moveToSafeBox(track)
+            }
             // Các item khác (Play, Share, Delete, Add to favorite...) gắn tương tự tại đây
+        }
+    }
+
+    private fun moveToSafeBox(track: MusicTrack) {
+        lifecycleScope.launch {
+            val success = SafeBoxHelper.moveToSafeBox(
+                context = this@PlaylistActivity,
+                filePath = track.filePath,
+                fileType = SafeBoxFileType.AUDIO
+            )
+            if (success) {
+                Toast.makeText(this@PlaylistActivity, getString(R.string.safe_box_move_success), Toast.LENGTH_SHORT).show()
+                viewModel.refreshAllTracks()
+            } else {
+                Toast.makeText(this@PlaylistActivity, getString(R.string.safe_box_move_failed), Toast.LENGTH_SHORT).show()
+            }
         }
     }
     override fun onBack() {

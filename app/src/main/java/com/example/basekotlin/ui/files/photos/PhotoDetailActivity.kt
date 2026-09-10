@@ -17,6 +17,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.basekotlin.R
 import com.example.basekotlin.base.BaseActivity
 import com.example.basekotlin.base.tap
+import com.example.basekotlin.data.local.safebox.SafeBoxFileType
 import com.example.basekotlin.databinding.ActivityPhotoDetailBinding
 import com.example.basekotlin.databinding.ActivityPhotosBinding
 import com.example.basekotlin.dialog.common.ConfirmActionDialog
@@ -27,6 +28,7 @@ import com.example.basekotlin.model.PhotoInfo
 import com.example.basekotlin.ui.files.pdfconverter.PdfConverterActivity
 import com.example.basekotlin.ui.files.pdfconverter.PdfViewModel
 import com.example.basekotlin.ui.files.photos.adapter.PhotoDetailAdapter
+import com.example.basekotlin.util.SafeBoxHelper
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -242,6 +244,20 @@ class PhotoDetailActivity : BaseActivity<ActivityPhotoDetailBinding>(ActivityPho
     }
     // 6. Chuyển vào SafeBox
     private fun moveToSafeBox(photo: PhotoInfo) {
-        // TODO: Xử lý chuyển ảnh vào Safe Box khi có tính năng Safe Box
+        lifecycleScope.launch {
+            val success = SafeBoxHelper.moveToSafeBox(
+                context = this@PhotoDetailActivity,
+                filePath = photo.filePath,
+                fileType = SafeBoxFileType.PICTURES
+            )
+            if (success) {
+                Toast.makeText(this@PhotoDetailActivity, getString(R.string.safe_box_move_success), Toast.LENGTH_SHORT).show()
+                viewModel.refreshAllPhotos()
+                finishThisActivity() // Đóng màn hình xem chi tiết ảnh vì ảnh đã chuyển vào SafeBox
+            } else {
+                Toast.makeText(this@PhotoDetailActivity, getString(R.string.safe_box_move_failed), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
 }

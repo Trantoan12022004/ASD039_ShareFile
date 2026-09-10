@@ -218,10 +218,26 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.files.video.VideoDetailActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:exported="false"
             android:launchMode="singleTask"
             android:supportsPictureInPicture="true"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.safebox.lock.SafeBoxLockActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.safebox.home.SafeBoxHomeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.safebox.home.SafeBoxFileListActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.download.DownloadCenterActivity"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>
 

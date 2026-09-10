@@ -3,19 +3,13 @@ package com.example.basekotlin.ui.files.photos
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -24,22 +18,16 @@ import com.example.basekotlin.base.BaseActivity
 import com.example.basekotlin.base.gone
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.base.visible
+import com.example.basekotlin.data.local.safebox.SafeBoxFileType
 import com.example.basekotlin.databinding.ActivityPhotosBinding
 import com.example.basekotlin.dialog.common.ConfirmActionDialog
 import com.example.basekotlin.dialog.common.InformationPhotoDialog
 import com.example.basekotlin.dialog.common.SelectMore1Dialog
-import com.example.basekotlin.dialog.common.SelectMoreDialog
 import com.example.basekotlin.dialog.common.TextInputDialog
-import com.example.basekotlin.model.DeleteResult
-import com.example.basekotlin.model.MusicSelectionTarget
-import com.example.basekotlin.model.MusicTrack
 import com.example.basekotlin.model.PhotoInfo
-import com.example.basekotlin.model.RenameResult
-import com.example.basekotlin.ui.files.music.ringtone.RingtoneActivity
-import com.example.basekotlin.ui.files.pdfconverter.PdfConverterActivity
 import com.example.basekotlin.ui.files.pdfconverter.PdfViewModel
 import com.example.basekotlin.ui.files.photos.fragment.AllPhotosFragment
-import com.example.basekotlin.util.ImageToPdfConverter
+import com.example.basekotlin.util.SafeBoxHelper
 import com.example.basekotlin.util.Utils
 import com.example.basekotlin.util.reduceDragSensitivity
 import com.google.android.material.tabs.TabLayoutMediator
@@ -315,8 +303,8 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
             onInformation = { photo ->
                 showPhotoInformationDialog(photo)
             },
-            onMoveSafeBox = { photo ->
-                moveToSafeBox(photo)
+            onMoveSafeBox = { photos ->
+                moveMultipleToSafeBox(photos)
             }
         ).show()
     }
@@ -361,8 +349,40 @@ class PhotosActivity : BaseActivity<ActivityPhotosBinding>(ActivityPhotosBinding
     }
     // 4. Di chuyển vào Safe Box
     private fun moveToSafeBox(photo: PhotoInfo) {
-        // TODO: Implement logic to move photo to safe box
+        lifecycleScope.launch {
+            val success = SafeBoxHelper.moveToSafeBox(
+                context = this@PhotosActivity,
+                filePath = photo.filePath,
+                fileType = SafeBoxFileType.PICTURES
+            )
+            if (success) {
+                Toast.makeText(this@PhotosActivity, getString(R.string.safe_box_move_success), Toast.LENGTH_SHORT).show()
+                viewModel.refreshAllPhotos()
+                viewModel.exitSelectionMode()
+            } else {
+                Toast.makeText(this@PhotosActivity, getString(R.string.safe_box_move_failed), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
+    private fun moveMultipleToSafeBox(photos: List<PhotoInfo>) {
+        lifecycleScope.launch {
+            val filePaths = photos.map { it.filePath }
+            val count = SafeBoxHelper.moveMultipleToSafeBox(
+                context = this@PhotosActivity,
+                filePaths = filePaths,
+                fileType = SafeBoxFileType.PICTURES
+            )
+            if (count > 0) {
+                Toast.makeText(this@PhotosActivity, getString(R.string.safe_box_move_success), Toast.LENGTH_SHORT).show()
+                viewModel.refreshAllPhotos()
+                viewModel.exitSelectionMode()
+            } else {
+                Toast.makeText(this@PhotosActivity, getString(R.string.safe_box_move_failed), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     // 4. Chia sẻ ảnh
     private fun sharePhotos(photos: List<PhotoInfo>) {
         val uris = ArrayList<Uri>()

@@ -24,6 +24,7 @@ import com.example.basekotlin.base.BaseActivity
 import com.example.basekotlin.base.gone
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.base.visible
+import com.example.basekotlin.data.local.safebox.SafeBoxFileType
 import com.example.basekotlin.databinding.ActivityVideosBinding
 import com.example.basekotlin.dialog.common.TextInputDialog
 import com.example.basekotlin.model.StorageItem
@@ -34,6 +35,7 @@ import com.example.basekotlin.ui.files.video.dialog.VideoMoreDialog
 import com.example.basekotlin.ui.files.video.fragment.FolderVideoDetailFragment
 import com.example.basekotlin.ui.files.video.model.VideoInfo
 import com.example.basekotlin.ui.storage.dialog.RenameDialog
+import com.example.basekotlin.util.SafeBoxHelper
 import com.example.basekotlin.util.Utils
 import com.example.basekotlin.util.VideoToAudioConverter
 import com.example.basekotlin.util.reduceDragSensitivity
@@ -240,11 +242,30 @@ class VideosActivity : BaseActivity<ActivityVideosBinding>(ActivityVideosBinding
             onInformation = { video ->
                 showVideoInformationDialog(video)
             },
-            onMoveSafeBox = { video ->
-//                moveToSafeBox(video)
+            onMoveSafeBox = { videos ->
+                moveVideosToSafeBox(videos)
             }
         ).show()
     }
+
+    private fun moveVideosToSafeBox(videos: List<VideoInfo>) {
+        if (videos.isEmpty()) return
+        lifecycleScope.launch {
+            val count = SafeBoxHelper.moveMultipleToSafeBox(
+                context = this@VideosActivity,
+                filePaths = videos.map { it.filePath },
+                fileType = SafeBoxFileType.VIDEOS
+            )
+            if (count > 0) {
+                Toast.makeText(this@VideosActivity, getString(R.string.safe_box_move_success), Toast.LENGTH_SHORT).show()
+                viewModel.refreshAllVideos()
+                viewModel.exitSelectionMode()
+            } else {
+                Toast.makeText(this@VideosActivity, getString(R.string.safe_box_move_failed), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 
     private fun showRenameDialog(video: VideoInfo){
         val targetFile = File(video.filePath)

@@ -21,6 +21,7 @@ import com.example.basekotlin.base.BaseFragment
 import com.example.basekotlin.base.gone
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.base.visible
+import com.example.basekotlin.data.local.safebox.SafeBoxFileType
 import com.example.basekotlin.databinding.FragmentAllDocumentsBinding
 import com.example.basekotlin.databinding.PopupMoreDocBinding
 import com.example.basekotlin.dialog.common.ConfirmActionDialog
@@ -30,6 +31,7 @@ import com.example.basekotlin.model.DocumentInfo
 import com.example.basekotlin.ui.files.documents.DocumentsViewModel
 import com.example.basekotlin.ui.files.documents.adapter.DocCardAdapter
 import com.example.basekotlin.util.PopupMenuUtils
+import com.example.basekotlin.util.SafeBoxHelper
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.io.File
@@ -245,7 +247,7 @@ class AllDocumentsFragment : BaseFragment<FragmentAllDocumentsBinding>() {
 
             popupBinding.tvMoveToSafebox.tap {
                 popupWindow.dismiss()
-                Toast.makeText(requireContext(), getString(R.string.move_to_safebox), Toast.LENGTH_SHORT).show()
+                moveToSafeBox(doc)
             }
 
             popupBinding.tvRename.tap {
@@ -264,6 +266,23 @@ class AllDocumentsFragment : BaseFragment<FragmentAllDocumentsBinding>() {
             }
         }
     }
+
+    private fun moveToSafeBox(doc: DocumentInfo) {
+        lifecycleScope.launch {
+            val success = SafeBoxHelper.moveToSafeBox(
+                context = requireContext(),
+                filePath = doc.filePath,
+                fileType = SafeBoxFileType.DOCUMENTS
+            )
+            if (success) {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_success), Toast.LENGTH_SHORT).show()
+                viewModel.refreshAllDocuments()
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_failed), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 
     private fun shareDocument(doc: DocumentInfo) {
         val file = File(doc.filePath)

@@ -17,6 +17,7 @@ import com.example.basekotlin.base.gone
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.base.visible
 import com.example.basekotlin.data.local.mediastore.MusicPlayerConnection
+import com.example.basekotlin.data.local.safebox.SafeBoxFileType
 import com.example.basekotlin.databinding.FragmentAllBinding
 import com.example.basekotlin.databinding.PopupMoreBinding
 import com.example.basekotlin.dialog.common.ConfirmActionDialog
@@ -32,6 +33,7 @@ import com.example.basekotlin.ui.files.music.MusicViewModel
 import com.example.basekotlin.ui.files.music.adapter.MusicFolderAdapter
 import com.example.basekotlin.ui.files.music.folder.FolderActivity
 import com.example.basekotlin.util.PopupMenuUtils
+import com.example.basekotlin.util.SafeBoxHelper
 import kotlinx.coroutines.launch
 
 class FoldersFragment : BaseFragment<FragmentAllBinding>() {
@@ -96,8 +98,18 @@ class FoldersFragment : BaseFragment<FragmentAllBinding>() {
             }
         }
 
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.refreshAllTracks()
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.isRefreshing.collect { refreshing ->
+                        binding.swipeRefresh.isRefreshing = refreshing
+                    }
+                }
+
                 launch {
                     viewModel.folders.collect { folders ->
                         folderAdapter.addListData(folders.toMutableList())
@@ -193,12 +205,31 @@ class FoldersFragment : BaseFragment<FragmentAllBinding>() {
 
             popupBinding.tvMoveToSafebox.tap {
                 popupWindow.dismiss()
-                // Move to SafeBox sẽ xử lý sau
+                val tracks = viewModel.getTracksInFolder(folder.folderPath)
+                moveVideosToSafeBox(tracks)
+
             }
 
             popupBinding.tvDelete.tap {
                 popupWindow.dismiss()
                 showDeleteFolderConfirmDialog(folder)
+            }
+        }
+    }
+
+    private fun moveVideosToSafeBox(tracks: List<MusicTrack>) {
+        if (tracks.isEmpty()) return
+        lifecycleScope.launch {
+            val count = SafeBoxHelper.moveMultipleToSafeBox(
+                context = requireContext(),
+                filePaths = tracks.map { it.filePath },
+                fileType = SafeBoxFileType.VIDEOS
+            )
+            if (count > 0) {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_success), Toast.LENGTH_SHORT).show()
+                viewModel.refreshAllTracks()
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.safe_box_move_failed), Toast.LENGTH_SHORT).show()
             }
         }
     }

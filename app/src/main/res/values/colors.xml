@@ -30,5 +30,12 @@
     <color name="glass_bg_clear">#5CFAFAFA</color>
     <color name="glass_bg_regular">#66000000</color>
     <color name="glass_stroke">#33FFFFFF</color>
+    <color name="error">#EF4444</color>
+
+    <color name="pattern_normal_dot">#94A3B8</color>
+    <color name="pattern_active">#22C55E</color>
+    <color name="pattern_active_ring">#3322C55E</color>
+    <color name="pattern_error">#EF4444</color>
+    <color name="pattern_error_ring">#33EF4444</color>
 
 </resources>

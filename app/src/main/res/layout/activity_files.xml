@@ -215,6 +215,7 @@
 
                     <!-- Item 7: SafeBox -->
                     <LinearLayout
+                        android:id="@+id/btnSafebox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -239,6 +240,7 @@
 
                     <!-- Item 8: Download -->
                     <LinearLayout
+                        android:id="@+id/btnDownload"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"

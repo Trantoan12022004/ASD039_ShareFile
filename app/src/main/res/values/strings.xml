@@ -322,6 +322,45 @@
     <string name="playing_mode_label">Playing Mode:</string>
     <string name="auto_play">Auto Play</string>
     <string name="loop">Loop</string>
+    <string name="safe_box">Safe Box</string>
+    <string name="safe_box_move_success">Moved to Safe Box successfully</string>
+    <string name="safe_box_move_failed">Failed to move to Safe Box</string>
+    <string name="safe_box_restore_success">File restored successfully</string>
+    <string name="safe_box_restore_failed">Failed to restore file</string>
+    <string name="safe_box_delete_success">Deleted permanently</string>
+    <string name="safe_box_delete_failed">Failed to delete file</string>
+    <string name="draw_pattern_to_lock">Draw your pattern to lock</string>
+    <string name="confirm_lock_pattern">Draw pattern again to confirm</string>
+    <string name="draw_pattern_to_unlock">Draw your pattern to unlock</string>
+    <string name="pattern_too_short">Drag at least 4 pointsto create yourpattern</string>
+    <string name="pattern_mismatch">Patterns did not match. Try again.</string>
+    <string name="pattern_incorrect">Incorrect pattern. Try again.</string>
+    <string name="create_pattern">Create your lock pattern</string>
+    <string name="too_many_attempts">Too many incorrect attempts</string>
+    <string name="redraw">Redraw</string>
+    <string name="pictures">Pictures</string>
+    <string name="audio">Audio</string>
+    <string name="others">Others</string>
+    <string name="category_files_count">%1$d files</string>
+    <string name="category_file_single_count">1 file</string>
+    <string name="restore_from_safebox">Restore from SafeBox</string>
+    <string name="delete_permanently">Delete Permanently</string>
+    <string name="restore_file_safebox_title">Restore File?</string>
+    <string name="restore_file_safebox_desc">Are you sure you want to restore “%1$s” back to your device?</string>
+    <string name="restore">Restore</string>
+    <string name="restore_success">Restored successfully</string>
+    <string name="restore_failed">Failed to restore file</string>
+    <string name="delete_file_safebox_title">Delete File?</string>
+    <string name="delete_file_safebox_desc">Are you sure you want to delete “%1$s” permanently? You won\\\'t be able to restore!</string>
+    <string name="delete_permanently_success">Deleted permanently</string>
+    <string name="delete_permanently_failed">Failed to delete file</string>
+    <string name="add">Add</string>
+
+    <string name="safebox_not_set_title">Protect Your Downloaded Files</string>
+    <string name="safebox_not_set_desc">You haven\'t set up a password for Safe Box yet. Create a pattern to protect your files.</string>
+    <string name="safebox_create_password">Create Password</string>
+    <string name="safebox_download_empty_title">No Safe Files</string>
+    <string name="safebox_download_empty_desc">Files moved to Safe Box from downloads will appear here.</string>
 
 
     <string-array name="random_notifications">

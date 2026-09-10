@@ -13,9 +13,11 @@ import com.example.basekotlin.model.MusicSelectionTarget
 import com.example.basekotlin.model.MusicSortOption
 import com.example.basekotlin.model.MusicTrack
 import com.example.basekotlin.model.RenameResult
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -41,6 +43,9 @@ class MusicViewModel(application: Application) : AndroidViewModel(application) {
     val selectedFolderPaths: StateFlow<Set<String>> = _selectedFolderPaths
     private val _selectedPlaylistIds = MutableStateFlow<Set<Long>>(emptySet())
     val selectedPlaylistIds: StateFlow<Set<Long>> = _selectedPlaylistIds
+
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
     val allTracks: StateFlow<List<MusicTrack>> = combine(
         repository.observeAllTracks(),
@@ -97,7 +102,15 @@ class MusicViewModel(application: Application) : AndroidViewModel(application) {
 
     fun refreshAllTracks() {
         viewModelScope.launch {
-            repository.refreshAllTracks()
+            _isRefreshing.value = true
+            try {
+                repository.refreshAllTracks()
+                delay(500)
+            } catch (e: Exception) {
+                // Bỏ qua lỗi nếu có
+            } finally {
+                _isRefreshing.value = false
+            }
         }
     }
     fun markPlayed(songId: Long) {

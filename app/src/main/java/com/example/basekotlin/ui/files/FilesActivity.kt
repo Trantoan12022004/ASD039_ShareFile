@@ -16,6 +16,7 @@ import com.example.basekotlin.base.BaseActivity
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.databinding.ActivityFilesBinding
 import com.example.basekotlin.dialog.exit.ExitAppDialog
+import com.example.basekotlin.ui.download.DownloadCenterActivity
 import com.example.basekotlin.ui.files.apps.AppsActivity
 import com.example.basekotlin.ui.files.documents.DocumentsActivity
 import com.example.basekotlin.ui.files.music.MusicActivity
@@ -23,9 +24,11 @@ import com.example.basekotlin.ui.files.pdfconverter.PdfConverterActivity
 import com.example.basekotlin.ui.files.photos.PhotosActivity
 import com.example.basekotlin.ui.files.video.VideosActivity
 import com.example.basekotlin.ui.files.zips.ZipsActivity
+import com.example.basekotlin.ui.safebox.lock.SafeBoxLockActivity
 import com.example.basekotlin.ui.storage.StorageActivity
 import kotlinx.coroutines.launch
 import kotlin.getValue
+import kotlin.jvm.java
 
 class FilesActivity : BaseActivity<ActivityFilesBinding>(ActivityFilesBinding::inflate) {
     private val viewModel: FilesViewModel by viewModels()
@@ -76,6 +79,12 @@ class FilesActivity : BaseActivity<ActivityFilesBinding>(ActivityFilesBinding::i
         }
         binding.btnVideos.tap {
             startNextActivity(VideosActivity::class.java, null)
+        }
+        binding.btnSafebox.tap {
+            startNextActivity(SafeBoxLockActivity::class.java, null)
+        }
+        binding.btnDownload.tap {
+            startNextActivity(DownloadCenterActivity::class.java, null)
         }
 
     }
