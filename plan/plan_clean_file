@@ -1,0 +1,403 @@
+# Implementation Plan — Clean File Feature
+
+## Mục tiêu
+Phát triển toàn bộ tính năng **Clean File** theo thiết kế trong [clean_file_analysis.md](file:///d:/mobile/ASD039/plan/clean_file_analysis.md), tuân thủ architecture và patterns hiện có trong project.
+
+## Architecture & Patterns hiện tại
+
+| Pattern | Cách dùng |
+|---------|-----------|
+| **Base classes** | `BaseActivity<VB>`, `BaseFragment<VB>`, `BaseAdapter<T, VB>`, `BaseDialog<VB>` |
+| **ViewModel** | `AndroidViewModel` + `StateFlow` + `viewModelScope` |
+| **Repository** | Interface + Impl (ví dụ: `AppsRepository` / `AppsRepositoryImpl`) |
+| **Data sources** | Object classes trong `data/local/` (ví dụ: `ApkFileScanner`, `InstalledAppSource`) |
+| **Popup menu** | `PopupMenuUtils.showAnchoredMenu()` với ViewBinding |
+| **Click handler** | Extension `View.tap {}` |
+| **Visibility** | Extensions `visible()`, `gone()`, `inVisible()` |
+
+---
+
+## Cấu trúc thư mục đề xuất
+
+```
+ui/cleanfile/
+├── CleanFileActivity.kt                    ← Màn chính
+├── CleanFileViewModel.kt
+├── apps/
+│   ├── AppsCleanupActivity.kt
+│   ├── AppsCleanupViewModel.kt
+│   ├── AppsCleanupPagerAdapter.kt          ← ViewPager2 adapter
+│   ├── installed/
+│   │   ├── InstalledAppsFragment.kt
+│   │   └── adapter/
+│   │       └── InstalledAppsAdapter.kt
+│   ├── apkpackage/
+│   │   ├── ApkPackageFragment.kt
+│   │   └── adapter/
+│   │       └── ApkPackageAdapter.kt
+│   └── dialog/
+│       ├── UninstallAppDialog.kt
+│       ├── DeleteApkDialog.kt
+│       └── DetailInformationDialog.kt
+├── bigfiles/
+│   ├── BigFilesActivity.kt
+│   ├── BigFilesViewModel.kt
+│   ├── adapter/
+│   │   └── BigFilesAdapter.kt
+│   └── dialog/
+│       └── DeleteFilesDialog.kt            ← Tái sử dụng cho Video/Photo/Audio/Duplicate
+├── videocleanup/
+│   ├── VideoCleanupActivity.kt
+│   ├── VideoCleanupViewModel.kt
+│   └── adapter/
+│       └── VideoCleanupAdapter.kt          ← Section-based adapter
+├── photocleanup/
+│   ├── PhotoCleanupActivity.kt
+│   ├── PhotoCleanupViewModel.kt
+│   └── adapter/
+│       └── PhotoCleanupAdapter.kt
+├── audiocleanup/
+│   ├── AudioCleanupActivity.kt
+│   ├── AudioCleanupViewModel.kt
+│   └── adapter/
+│       └── AudioCleanupAdapter.kt
+├── duplicate/
+│   ├── DuplicateFilesActivity.kt
+│   ├── DuplicateFilesViewModel.kt
+│   └── adapter/
+│       └── DuplicateFilesAdapter.kt
+└── messenger/
+    ├── MessengerCleanerActivity.kt         ← Dùng chung cho Telegram + WhatsApp
+    ├── MessengerCleanerViewModel.kt
+    ├── adapter/
+    │   └── CleanerCategoryAdapter.kt
+    └── detail/
+        ├── CleanerDetailActivity.kt
+        ├── CleanerDetailViewModel.kt
+        └── adapter/
+            └── CleanerDetailAdapter.kt
+
+data/local/
+├── cleanfile/
+│   ├── BigFileScanner.kt                   ← Quét file > 500MB
+│   ├── DuplicateFileScanner.kt             ← Quét file trùng lặp (hash-based)
+│   ├── MediaCleanupScanner.kt              ← Quét video/photo/audio theo folder
+│   ├── MessengerMediaScanner.kt            ← Quét thư mục Telegram/WhatsApp
+│   └── JunkFileScanner.kt                  ← Quét junk files (cache, temp)
+├── repository/cleanfile/
+│   ├── CleanFileRepository.kt              ← Interface
+│   └── CleanFileRepositoryImpl.kt          ← Implementation
+
+model/
+├── CleanFileItem.kt                        ← Model chung cho file cleanup
+├── CleanFileGroup.kt                       ← Model nhóm (folder / duplicate group)
+├── MessengerCategory.kt                    ← Model category (Photos/Videos/Audios/Files)
+└── CleanFileType.kt                        ← Enum: VIDEO, PHOTO, AUDIO, DOCUMENT, OTHER
+```
+
+---
+
+## Layouts cần tạo
+
+```
+res/layout/
+├── activity_clean_file.xml                 ← Màn chính Clean File
+├── activity_apps_cleanup.xml               ← Apps Cleanup (ViewPager2 + TabLayout)
+├── fragment_installed_apps.xml             ← Tab Installed Apps
+├── fragment_apk_package.xml                ← Tab APK Package
+├── item_installed_app.xml                  ← Item installed app
+├── item_apk_package.xml                    ← Item APK file
+├── popup_installed_app.xml                 ← Popup: Open / Uninstall
+├── popup_apk_package.xml                   ← Popup: Send / Share / Delete / Information
+├── dialog_uninstall_app.xml
+├── dialog_delete_apk.xml
+├── dialog_detail_information_apk.xml
+│
+├── activity_big_files.xml                  ← Big Files
+├── item_big_file.xml
+├── dialog_delete_files.xml                 ← Dialog xóa (tái sử dụng)
+│
+├── activity_media_cleanup.xml              ← Dùng chung cho Video/Photo/Audio Cleanup
+├── item_media_cleanup_header.xml           ← Section header (folder name + count)
+├── item_media_cleanup.xml                  ← Item file trong section
+│
+├── activity_duplicate_files.xml            ← Duplicate Files
+├── item_duplicate_group_header.xml
+├── item_duplicate_file.xml
+│
+├── activity_messenger_cleaner.xml          ← Telegram/WhatsApp Cleaner
+├── item_cleaner_category.xml
+├── activity_cleaner_detail.xml             ← Detail view
+├── item_cleaner_detail.xml
+```
+
+---
+
+## Phases phát triển
+
+### Phase 0: Models & Data Layer
+
+#### [NEW] `model/CleanFileItem.kt`
+```kotlin
+data class CleanFileItem(
+    val name: String,
+    val path: String,
+    val sizeBytes: Long,
+    val dateModifiedMillis: Long,
+    val type: CleanFileType,
+    val thumbnailUri: String? = null,
+    val folderName: String = "",
+    var isSelected: Boolean = false
+)
+```
+
+#### [NEW] `model/CleanFileType.kt`
+```kotlin
+enum class CleanFileType {
+    VIDEO, PHOTO, AUDIO, DOCUMENT, APK, OTHER
+}
+```
+
+#### [NEW] `model/CleanFileGroup.kt`
+```kotlin
+data class CleanFileGroup(
+    val groupName: String,
+    val totalSizeBytes: Long,
+    val items: List<CleanFileItem>,
+    var isExpanded: Boolean = true
+)
+```
+
+#### [NEW] `model/MessengerCategory.kt`
+```kotlin
+data class MessengerCategory(
+    val name: String,           // "Photos", "Videos", "Audios", "Files", "Junk Files"
+    val description: String,    // "Clean up photos in chats"
+    val iconRes: Int,
+    val sizeBytes: Long,
+    val isJunk: Boolean = false,
+    val hasJunk: Boolean = false
+)
+```
+
+---
+
+### Phase 1: Data Sources (Scanners)
+
+#### [NEW] `data/local/cleanfile/BigFileScanner.kt`
+- Quét toàn bộ storage, lọc file > 500MB
+- Trả về `List<CleanFileItem>` sort theo size giảm dần
+- Hỗ trợ filter theo type: All / Photo / Video / Music / Other
+
+#### [NEW] `data/local/cleanfile/MediaCleanupScanner.kt`
+- Dùng `MediaStore` để quét Video / Photo / Audio
+- Nhóm kết quả theo folder → trả về `List<CleanFileGroup>`
+- Hỗ trợ search theo tên file
+
+#### [NEW] `data/local/cleanfile/DuplicateFileScanner.kt`
+- Quét file trùng lặp dựa trên: tên file + kích thước (phase 1), MD5 hash (phase 2)
+- Gom nhóm → trả về `List<CleanFileGroup>`
+
+#### [NEW] `data/local/cleanfile/MessengerMediaScanner.kt`
+- Quét thư mục Telegram: `/Telegram/Telegram Images/`, `/Telegram/Telegram Video/`, ...
+- Quét thư mục WhatsApp: `/WhatsApp/Media/WhatsApp Images/`, ...
+- Trả về `List<MessengerCategory>` với tổng dung lượng mỗi loại
+
+#### [NEW] `data/local/cleanfile/JunkFileScanner.kt`
+- Quét cache, temp files, residual files
+- Trả về tổng dung lượng junk
+
+---
+
+### Phase 2: Repository
+
+#### [NEW] `data/local/repository/cleanfile/CleanFileRepository.kt`
+```kotlin
+interface CleanFileRepository {
+    // Junk
+    suspend fun scanJunkFiles(): Long
+    suspend fun cleanJunkFiles(): Boolean
+
+    // Big Files
+    suspend fun fetchBigFiles(minSizeBytes: Long = 500 * 1024 * 1024): List<CleanFileItem>
+
+    // Media Cleanup (Video / Photo / Audio)
+    suspend fun fetchMediaByFolder(type: CleanFileType): List<CleanFileGroup>
+
+    // Duplicate
+    suspend fun fetchDuplicateFiles(): List<CleanFileGroup>
+
+    // Messenger
+    suspend fun fetchMessengerCategories(messenger: String): List<MessengerCategory>
+    suspend fun fetchMessengerFiles(messenger: String, category: String): List<CleanFileItem>
+
+    // Delete
+    suspend fun deleteFiles(paths: List<String>): Boolean
+}
+```
+
+#### [NEW] `data/local/repository/cleanfile/CleanFileRepositoryImpl.kt`
+- Kết nối tất cả Scanners ở trên
+- Implement interface `CleanFileRepository`
+
+---
+
+### Phase 3: Màn Clean File chính
+
+#### [NEW] `ui/cleanfile/CleanFileActivity.kt`
+- Extends `BaseActivity<ActivityCleanFileBinding>`
+- Header: Hiển thị junk size + nút "Clean Up More"
+- System Cleaners: Grid 2 cột × 3 hàng (6 items)
+- Messenger Cleaners: 2 items (Telegram, WhatsApp)
+- Mỗi item tap → `startNextActivity()` tới màn tương ứng
+
+#### [NEW] `ui/cleanfile/CleanFileViewModel.kt`
+- Quét junk files → cập nhật header
+- Load dung lượng + số file cho mỗi System Cleaner
+- Check Telegram/WhatsApp có cài đặt không
+
+#### [NEW] Layout `activity_clean_file.xml`
+- NestedScrollView → LinearLayout
+- Include layout header (icon thùng rác + size + nút "Clean Up More")
+- GridLayout cho System Cleaners
+- LinearLayout cho Messenger Cleaners
+
+---
+
+### Phase 4: Apps Cleanup
+
+#### [NEW] `ui/cleanfile/apps/AppsCleanupActivity.kt`
+- Extends `BaseActivity`
+- ViewPager2 + TabLayout (2 tabs: Installed Apps / APK Package)
+
+#### [NEW] `ui/cleanfile/apps/AppsCleanupViewModel.kt`
+- Dùng `AppsRepository` đã có (tái sử dụng `AppsRepositoryImpl`)
+- `fetchInstalledApps()`, `fetchApkFiles()`
+- Selection state cho APK tab
+
+#### [NEW] `ui/cleanfile/apps/installed/InstalledAppsFragment.kt`
+- RecyclerView danh sách app
+- Popup menu: Open / Uninstall
+
+#### [NEW] `ui/cleanfile/apps/apkpackage/ApkPackageFragment.kt`
+- RecyclerView danh sách APK với checkbox
+- Popup menu: Send / Share / Delete / Information
+- Empty state
+
+#### [NEW] Dialogs: `UninstallAppDialog`, `DeleteApkDialog`, `DetailInformationDialog`
+- Extends `BaseDialog<VB>`
+- Pattern giống `DeleteFileDialog` đã có
+
+---
+
+### Phase 5: Big Files
+
+#### [NEW] `ui/cleanfile/bigfiles/BigFilesActivity.kt`
+- Toolbar + Select All + 5 Filter Tabs
+- RecyclerView + bottom Delete button
+
+#### [NEW] `ui/cleanfile/bigfiles/BigFilesViewModel.kt`
+- Dùng `CleanFileRepository.fetchBigFiles()`
+- Filter theo tab (All / Photo / Video / Music / Other)
+- Selection state (toggle, selectAll)
+
+#### [NEW] `ui/cleanfile/bigfiles/dialog/DeleteFilesDialog.kt`
+- Dialog xác nhận xóa, tái sử dụng cho tất cả màn cleanup khác
+
+---
+
+### Phase 6: Video / Photo / Audio Cleanup
+
+> 3 màn có cấu trúc gần giống nhau → dùng chung layout `activity_media_cleanup.xml` và item layouts
+
+#### [NEW] `ui/cleanfile/videocleanup/VideoCleanupActivity.kt`
+#### [NEW] `ui/cleanfile/photocleanup/PhotoCleanupActivity.kt`
+#### [NEW] `ui/cleanfile/audiocleanup/AudioCleanupActivity.kt`
+- Toolbar + Select All + Search bar
+- RecyclerView section-based (nhóm theo folder, expandable)
+- Bottom Delete button
+
+#### [NEW] ViewModels tương ứng
+- Dùng `CleanFileRepository.fetchMediaByFolder(type)`
+- Search filter
+- Selection + expand/collapse state
+
+#### Adapter section-based
+- Multi-viewType: Header (folder name + count + arrow) + Item (thumbnail + name + size + checkbox)
+- Có thể tạo base `SectionCleanupAdapter` dùng chung
+
+---
+
+### Phase 7: Duplicate Files
+
+#### [NEW] `ui/cleanfile/duplicate/DuplicateFilesActivity.kt`
+- Toolbar + Select All
+- RecyclerView section-based (nhóm theo duplicate group)
+- Bottom Delete button
+
+#### [NEW] `ui/cleanfile/duplicate/DuplicateFilesViewModel.kt`
+- Dùng `CleanFileRepository.fetchDuplicateFiles()`
+- Selection state
+
+---
+
+### Phase 8: Telegram & WhatsApp Cleaner
+
+#### [NEW] `ui/cleanfile/messenger/MessengerCleanerActivity.kt`
+- Dùng chung cho cả Telegram và WhatsApp (nhận intent extra để phân biệt)
+- Header xanh dương + tổng dung lượng
+- Danh sách 5 categories
+
+#### [NEW] `ui/cleanfile/messenger/MessengerCleanerViewModel.kt`
+- Nhận messenger type (Telegram / WhatsApp)
+- Dùng `CleanFileRepository.fetchMessengerCategories()`
+
+#### [NEW] `ui/cleanfile/messenger/detail/CleanerDetailActivity.kt`
+- Toolbar (X + title)
+- Danh sách file media trong category
+- Bottom Delete button
+- Empty state
+
+---
+
+### Phase 9: Đăng ký Manifest + Navigation
+
+#### [MODIFY] `AndroidManifest.xml`
+- Thêm tất cả Activity mới
+
+#### [MODIFY] `activity_files.xml` hoặc `MainActivity`
+- Thêm navigation từ màn chính vào `CleanFileActivity`
+
+---
+
+### Phase 10: Strings & Resources
+
+#### [MODIFY] `values/strings.xml`
+- Tất cả text phải đưa vào strings.xml (không hardcode)
+- Thêm strings cho: titles, descriptions, dialog messages, empty states, button labels
+
+#### [NEW] Drawable resources
+- Icons cho System Cleaners grid
+- Icons cho empty states
+- Background drawables cho buttons, headers
+
+---
+
+## Verification Plan
+
+### Build
+- Build project sau mỗi phase để đảm bảo không lỗi compile
+
+### Manual Testing
+- Kiểm tra navigation từ màn chính → từng màn cleanup
+- Kiểm tra select/deselect/selectAll
+- Kiểm tra dialog hiển thị đúng
+- Kiểm tra empty state
+- Kiểm tra xóa file thực tế
+- Kiểm tra search filter (Video/Photo/Audio Cleanup)
+- Kiểm tra expand/collapse sections
+
+---
+
+> [!IMPORTANT]
+> Plan này cần được review và approve trước khi bắt đầu implement. Mỗi phase sẽ được implement tuần tự và verify trước khi chuyển sang phase tiếp theo.

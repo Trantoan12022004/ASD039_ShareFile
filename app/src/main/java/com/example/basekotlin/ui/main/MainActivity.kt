@@ -27,6 +27,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         binding.viewTop.btnFiles.tap {
             startNextActivity(FilesActivity::class.java, null)
         }
+        binding.layoutJunkMemory.btnClean.tap {
+            startNextActivity(com.example.basekotlin.ui.cleanfile.CleanFileActivity::class.java, null)
+        }
+        binding.layoutJunkMemory.root.tap {
+            startNextActivity(com.example.basekotlin.ui.cleanfile.CleanFileActivity::class.java, null)
+        }
 
     }
     private fun showDialogQuit() {

@@ -199,12 +199,10 @@
     <string name="search_song">Search song...</string>
     <string name="no_app_available">No App Available</string>
     <string name="no_app_available_desc">There is no app in this section. Please import some</string>
-    <string name="not_installed">Not Installed</string>
     <string name="apk">APK Package</string>
     <string name="installed">Installed App</string>
     <string name="deletable">Deletable</string>
     <string name="information">Information</string>
-    <string name="delete_apk">Delete APK?</string>
     <string name="delete_apk_desc">Are you sure you want to delete “%1$s” from your device?</string>
     <string name="delete_apk_success">APK deleted successfully</string>
     <string name="delete_apk_failed">Failed to delete APK</string>
@@ -373,4 +371,85 @@
         <item>Save your finished design in high quality and share it with friends.</item>
         <item>Start creating stylish outfits with powerful and easy-to-use design tools.</item>
     </string-array>
+
+    <!-- Clean File Strings -->
+    <string name="clean_file">Clean File</string>
+    <string name="clean_up_more">Clean Up More</string>
+    <string name="system_cleaners">System Cleaners</string>
+    <string name="messenger_cleaners">Messenger Cleaners</string>
+    <string name="junk_files_cleaned">Cache &amp; junk files</string>
+    <string name="apps_cleanup">Apps Cleanup</string>
+    <string name="apps_cleanup_desc">Uninstall &amp; APK</string>
+    <string name="big_files">Big Files</string>
+    <string name="big_files_desc">&gt; 500 MB</string>
+    <string name="video_cleanup">Video Cleanup</string>
+    <string name="video_cleanup_desc">Free up video space</string>
+    <string name="photo_cleanup">Photo Cleanup</string>
+    <string name="photo_cleanup_desc">Free up photo space</string>
+    <string name="audio_cleanup">Audio Cleanup</string>
+    <string name="audio_cleanup_desc">Free up audio space</string>
+    <string name="duplicate_files">Duplicate Files</string>
+    <string name="duplicate_files_desc">Remove duplicates</string>
+    <string name="telegram_cleaner">Telegram Cleaner</string>
+    <string name="whatsapp_cleaner">WhatsApp Cleaner</string>
+    <string name="messenger_cleaner_desc">Clean photos, videos &amp; files</string>
+    <string name="not_installed">Not Installed</string>
+    <string name="installed_apps">Installed Apps</string>
+    <string name="apk_package">APK Package</string>
+    <string name="open_app">Open</string>
+    <string name="uninstall_app">Uninstall</string>
+    <string name="send_apk">Send APK</string>
+    <string name="share_apk">Share APK</string>
+    <string name="delete_apk">Delete</string>
+    <string name="uninstall_app_title">Uninstall App</string>
+    <string name="uninstall_app_desc">Do you want to uninstall %1$s from your device?</string>
+    <string name="delete_apk_title">Delete APK</string>
+    <string name="apk_info_title">APK Information</string>
+    <string name="apk_package_name">Package Name</string>
+    <string name="apk_version">Version</string>
+    <string name="apk_size">Size</string>
+    <string name="apk_path">Path</string>
+    <string name="no_apps_found">No Apps Found</string>
+    <string name="no_apk_found">No APK Package Found</string>
+    <string name="no_apk_desc">There is no APK file to be cleaned</string>
+    <string name="no_big_files_found">No Big Files To Cleanup</string>
+    <string name="no_big_files_desc">There is no file larger than 500 MB</string>
+    <string name="no_video_cleanup">No Videos To Cleanup</string>
+    <string name="no_video_cleanup_desc">There is no video to be cleaned</string>
+    <string name="no_photo_cleanup">No Photos To Cleanup</string>
+    <string name="no_photo_cleanup_desc">There is no photo to be cleaned</string>
+    <string name="no_audio_cleanup">No Audios To Cleanup</string>
+    <string name="no_audio_cleanup_desc">There is no audio to be cleaned</string>
+    <string name="no_duplicate_files">No Duplicate Files To Cleanup</string>
+    <string name="no_duplicate_desc">There is no duplicate file to be cleaned</string>
+    <string name="delete_with_count">Delete (%1$d)</string>
+
+
+    <string name="delete_selected_files">Delete Files</string>
+    <string name="delete_selected_files_desc">Do you want to delete %1$d selected files from this device?</string>
+    <string name="cleaning_junk">Cleaning junk files…</string>
+    <string name="junk_clean_success">Junk files cleaned successfully</string>
+    <string name="filter_all">All</string>
+    <string name="filter_photo">Photo</string>
+    <string name="filter_video">Video</string>
+    <string name="filter_music">Music</string>
+    <string name="filter_other">Other</string>
+    <string name="search_hint">Search files…</string>
+    <string name="category_photos">Photos</string>
+    <string name="category_photos_desc">Clean up photos in chats</string>
+    <string name="category_videos">Videos</string>
+    <string name="category_videos_desc">Clean up videos in chats</string>
+    <string name="category_audios">Audios</string>
+    <string name="category_audios_desc">Clean up voice and audios</string>
+    <string name="category_files_title">Files</string>
+    <string name="category_files_desc">Clean up received documents</string>
+    <string name="category_junk">Junk Files</string>
+    <string name="category_junk_desc">Temporary cache files</string>
+    <string name="no_files_in_category">No files in this category</string>
+    <string name="app_not_installed_msg">This app is not installed on your device</string>
+    <string name="delete_files_success">Delete Files Success</string>
+    <string name="delete_files_failed">Delete Files Failed</string>
+    <string name="cleanup_more">Cleanup more junk files such as phone cache</string>
+    <string name="installed1">Installed</string>
+    <string name="select_files">Select Files</string>
 </resources>

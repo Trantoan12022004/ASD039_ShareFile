@@ -86,6 +86,9 @@ class FilesActivity : BaseActivity<ActivityFilesBinding>(ActivityFilesBinding::i
         binding.btnDownload.tap {
             startNextActivity(DownloadCenterActivity::class.java, null)
         }
+        binding.btnClean.tap {
+            startNextActivity(com.example.basekotlin.ui.cleanfile.CleanFileActivity::class.java, null)
+        }
 
     }
 }

@@ -25,55 +25,16 @@
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:visibility="visible"
             android:layout_weight="1"
+            android:gravity="center_vertical"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/anton_regular"
-            android:text="@string/music"
+            android:text="@string/select_files"
             android:textColor="#0A1207"
             android:textSize="22sp" />
-
-        <LinearLayout
-            android:id="@+id/tvTitle1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="visible"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/selected"
-                android:textSize="22sp"
-                android:layout_marginEnd="2dp"
-                android:fontFamily="@font/outfit_semibold"
-                android:textColor="@color/black"/>
-
-            <TextView
-                android:id="@+id/tv_count_song"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" 0 "
-                android:textSize="22sp"
-                android:layout_marginEnd="2dp"
-                android:fontFamily="@font/outfit_semibold"
-                android:textColor="@color/primary_35"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/files1"
-                android:textSize="22sp"
-                android:fontFamily="@font/outfit_semibold"
-                android:textColor="@color/black"/>
-        </LinearLayout>
-
-        <!-- Nút Action bên phải (Nút Download / Receive) -->
 
         <ImageView
             android:id="@+id/btnSearch"
@@ -85,16 +46,34 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnSelect"
             app:layout_constraintTop_toTopOf="parent" />
-        <ImageView
-            android:id="@+id/btnSelect"
-            android:layout_width="48dp"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:layout_marginBottom="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutToolbar">
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:contentDescription="Action"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_select"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@drawable/bg_search_bar"
+            android:drawableEnd="@drawable/search"
+            android:hint="@string/search_apps"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingHorizontal="16dp"
+            android:textColor="#000000"
+            android:fontFamily="@font/outfit_medium"
+            android:textColorHint="#66000E00"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
@@ -117,32 +96,38 @@
         app:layout_constraintTop_toBottomOf="@id/layoutToolbar" />
 
     <LinearLayout
-        android:id="@+id/layoutSearch"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/_12sdp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutToolbar">
-
-        <EditText
-            android:id="@+id/edtSearch"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/bg_search_bar"
-            android:drawableEnd="@drawable/search"
-            android:hint="@string/search_apps"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingHorizontal="16dp"
-            android:textColor="#000000"
-            android:fontFamily="@font/outfit_medium"
-            android:textColorHint="#66000E00"
-            android:textSize="16sp" />
+        android:background="@drawable/bg_radius_24"
+        android:padding="8dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/btn_received"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/receive"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingVertical="6dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/outfit_semibold"
+            android:background="@drawable/bg_chip_selected" />
+        <TextView
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingVertical="6dp"
+            android:fontFamily="@font/outfit_semibold"
+            android:background="@drawable/bg_chip_unselected" />
     </LinearLayout>
+
+
 
 
 </LinearLayout>
