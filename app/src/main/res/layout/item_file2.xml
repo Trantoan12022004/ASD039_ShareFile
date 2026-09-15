@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="8dp">
+
+    <!-- Thumbnail bo góc 16dp -->
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imgThumbnail"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="14dp"
+        app:layout_constraintBottom_toTopOf="@id/divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <!-- Tên File -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/outfit_semibold"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_desc"
+        app:layout_constraintEnd_toStartOf="@id/btn_remove"
+        app:layout_constraintStart_toEndOf="@id/imgThumbnail"
+        app:layout_constraintTop_toTopOf="@id/imgThumbnail"
+        tools:text="VID_20222021_21239_OFFA32" />
+
+    <!-- Thông tin dung lượng và ngày tháng -->
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/outfit_medium"
+        android:maxLines="1"
+        android:textColor="#808080"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/imgThumbnail"
+        app:layout_constraintEnd_toStartOf="@id/btn_remove"
+        app:layout_constraintStart_toEndOf="@id/imgThumbnail"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:text="23 MB - Oct 03,2022" />
+
+    <!-- Checkbox chọn file -->
+    <ImageView
+        android:id="@+id/btn_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/btn_remove"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/imgThumbnail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imgThumbnail" />
+
+    <!-- Đường kẻ phân cách giữa các item -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginTop="8dp"
+        android:background="#14000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgThumbnail" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

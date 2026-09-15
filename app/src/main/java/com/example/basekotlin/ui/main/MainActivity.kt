@@ -18,6 +18,8 @@ import com.example.basekotlin.dialog.exit.ExitAppDialog
 import com.example.basekotlin.ui.files.FilesActivity
 import com.example.basekotlin.ui.language.LanguageActivity
 import com.example.basekotlin.ui.setting.SettingActivity
+import com.example.basekotlin.ui.transfer.received.ReceiveActivity
+import com.example.basekotlin.ui.transfer.send.SendFileActivity
 
 @UnstableApi
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
@@ -33,6 +35,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         binding.layoutJunkMemory.root.tap {
             startNextActivity(com.example.basekotlin.ui.cleanfile.CleanFileActivity::class.java, null)
         }
+        binding.viewTop.layoutSend.tap {
+            startNextActivity(SendFileActivity::class.java, null)
+        }
+        binding.viewTop.layoutReceive.tap {
+            startNextActivity(ReceiveActivity::class.java, null)
+        }
+
 
     }
     private fun showDialogQuit() {

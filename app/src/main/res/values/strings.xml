@@ -452,4 +452,124 @@
     <string name="cleanup_more">Cleanup more junk files such as phone cache</string>
     <string name="installed1">Installed</string>
     <string name="select_files">Select Files</string>
+
+    <!-- ===== TRANSFER FEATURE ===== -->
+    <!-- Chung -->
+    <string name="transfer_send">Send</string>
+    <string name="transfer_receive">Receive</string>
+    <string name="transfer_cancel">Cancel</string>
+    <string name="transfer_retry">Retry</string>
+    <string name="transfer_done">Done</string>
+
+    <!-- Send Files -->
+    <string name="send_files_title">Send Files</string>
+    <string name="send_tab_recent">Recent</string>
+    <string name="send_tab_installed">Installed</string>
+    <string name="send_tab_file">File</string>
+    <string name="send_tab_photo">Photo</string>
+    <string name="send_tab_video">Video</string>
+    <string name="send_tab_music">Music</string>
+    <string name="send_files_selected">%d files selected</string>
+    <string name="send_no_files">No files found</string>
+    <string name="send_tab_contacts">Contacts</string>
+    <string name="send_tab_apps">Apps</string>
+    <string name="received">Received</string>
+
+
+    <!-- QR Scanner -->
+    <string name="qr_scanner_title">Scan QR Code</string>
+    <string name="qr_scanner_hint">Point the camera at the receiver\'s QR code</string>
+    <string name="qr_scan_success">QR code recognized</string>
+
+
+    <!-- Receive -->
+    <string name="receive_title">Receive</string>
+    <string name="receive_scan_hint">Scan code to send files</string>
+    <string name="receive_ready">Ready to Receive</string>
+    <string name="receive_description">Other devices can find you in the same WiFi</string>
+    <string name="receive_device_name">Device\'s Name</string>
+    <string name="receive_wifi_network">WiFi Network</string>
+    <string name="receive_ip_address">IP Address</string>
+
+    <!-- Connection -->
+    <string name="connection_title">Connecting</string>
+    <string name="connection_searching">Searching for device…</string>
+    <string name="connection_connecting">Connecting to %s…</string>
+    <string name="connection_connected">Connected to %s</string>
+    <string name="connection_failed">Connection Failed</string>
+    <string name="connection_failed_message">Could not connect to the device. Please try again.</string>
+    <string name="connection_speed">%s/s</string>
+
+    <!-- Transfer Progress -->
+    <string name="transfer_progress_title">Transferring</string>
+    <string name="transfer_progress_to">To: %s</string>
+    <string name="transfer_progress_from">From: %s</string>
+    <string name="transfer_progress_files">%1$d/%2$d files</string>
+    <string name="transfer_progress_size">%s transferred</string>
+    <string name="transfer_cancel_confirm">Cancel transfer?</string>
+    <string name="transfer_cancel_message">The current transfer will be stopped. Files already transferred will be kept.</string>
+
+    <!-- Transfer Complete -->
+    <string name="transfer_complete_title">Transfer Complete!</string>
+    <string name="transfer_complete_files_sent">%d files sent</string>
+    <string name="transfer_complete_files_received">%d files received</string>
+    <string name="transfer_complete_total">Total: %s</string>
+    <string name="transfer_complete_time">Time: %s</string>
+    <string name="transfer_complete_speed">Avg Speed: %s/s</string>
+    <string name="transfer_complete_view_files">View Files</string>
+    <string name="transfer_complete_send_more">Send More</string>
+
+    <!-- Incoming Transfer Dialog -->
+    <string name="incoming_transfer_title">Incoming Transfer</string>
+    <string name="incoming_transfer_from">From: %s</string>
+    <string name="incoming_transfer_info">%1$d files (%2$s)</string>
+    <string name="incoming_transfer_accept">Accept</string>
+    <string name="incoming_transfer_reject">Reject</string>
+
+    <!-- Notification -->
+    <string name="transfer_notification_channel">File Transfer</string>
+    <string name="transfer_notification_sending">Sending files…</string>
+    <string name="transfer_notification_receiving">Receiving files…</string>
+    <string name="transfer_notification_complete">Transfer complete</string>
+    <string name="transfer_notification_failed">Transfer failed</string>
+
+    <!-- Hotspot -->
+    <string name="hotspot_starting">Starting hotspot…</string>
+    <string name="hotspot_active">Hotspot active</string>
+    <string name="hotspot_failed">Failed to start hotspot</string>
+    <string name="hotspot_ssid">SSID: %s</string>
+    <string name="hotspot_password">Password: %s</string>
+
+    <!-- History -->
+    <string name="history_title">Transfer History</string>
+    <string name="history_tab_sent">Sent</string>
+    <string name="history_tab_received">Received</string>
+    <string name="history_tab_all">All</string>
+    <string name="history_empty">No transfer history</string>
+    <string name="history_today">Today</string>
+    <string name="history_yesterday">Yesterday</string>
+
+    <!-- Errors -->
+    <string name="error_wifi_not_available">WiFi is not available</string>
+    <string name="error_hotspot_failed">Failed to create hotspot</string>
+    <string name="error_connection_timeout">Connection timed out</string>
+    <string name="error_transfer_failed">File transfer failed</string>
+    <string name="error_storage_full">Not enough storage space</string>
+    <string name="error_permission_required">Permission required</string>
+    <string name="device_s_found">device(s) found</string>
+    <string name="send_all">Send All</string>
+    <string name="search_for_devices">Search for devices</string>
+    <string name="scan_code_to_send">Scan code to send files</string>
+    <string name="ready_to_receive">Ready to Receive</string>
+    <string name="receive_wifi_desc">Other devices can find you in the same WiFi</string>
+    <string name="devices_name">Device’s Name</string>
+    <string name="wifi_network">WiFi Network</string>
+    <string name="ip_address">IP Address</string>
+    <string name="prompt_turn_on_wifi_to_connect">Please turn on Wi-Fi to connect to the receiver</string>
+    <string name="sending_files_count">Sending %1$d file(s)…</string>
+    <string name="permission_location_required_receive">Location permission is required to create receive connection</string>
+    <string name="location_permission_needed">Location permission needed</string>
+    <string name="prompt_turn_on_gps">Please turn on Location (GPS) on your device</string>
+    <string name="error_hotspot_failed_code">Failed to turn on Hotspot. Error code: %1$d</string>
+
 </resources>

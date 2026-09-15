@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 1. CameraX Preview View -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <!-- 3. Khung viền quét QR bo góc chính giữa -->
+    <ImageView
+        android:id="@+id/viewScanFrame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/scan_frame"
+        app:layout_constraintBottom_toTopOf="@id/layout_device"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutToolbar"
+        app:layout_constraintVertical_bias="0.4" />
+    <include
+        android:id="@+id/layoutToolbar"
+        layout="@layout/toolbar_scan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 8. Overlay hiển thị khi đang kết nối WiFi tới máy nhận -->
+    <LinearLayout
+        android:id="@+id/layoutConnecting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D9000000"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:indeterminateTint="@color/primary_35" />
+
+        <TextView
+            android:id="@+id/tvConnecting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/outfit_medium"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_device"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/bg_music_play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_btn_16"
+            android:backgroundTint="#D9D9D9" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="@string/search_for_devices"
+            android:fontFamily="@font/outfit_semibold"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/tv_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary_35"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/outfit_semibold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="2dp"
+                    android:text="@string/device_s_found"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/outfit_semibold"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btn_send_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send_all"
+                android:background="@drawable/bg_btn_create"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="12dp"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/outfit_semibold" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDevices"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:clipToPadding="false"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_device" />
+
+        <ProgressBar
+            android:id="@+id/pb_searching"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:indeterminateTint="@color/primary_35" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

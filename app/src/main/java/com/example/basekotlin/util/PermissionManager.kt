@@ -52,4 +52,11 @@ object PermissionManager {
     fun checkWritePermission(context: Context): Boolean {
         return Settings.System.canWrite(context)
     }
+
+    /**
+     * Kiểm tra quyền Đọc danh bạ (READ_CONTACTS)
+     */
+    fun checkContactsPermission(context: Context): Boolean {
+        return context.isGranted(Manifest.permission.READ_CONTACTS)
+    }
 }
