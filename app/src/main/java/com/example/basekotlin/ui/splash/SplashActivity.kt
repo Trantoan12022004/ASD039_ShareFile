@@ -3,7 +3,9 @@ package com.example.basekotlin.ui.splash
 import android.os.Handler
 import com.example.basekotlin.base.BaseActivity
 import com.example.basekotlin.databinding.ActivitySplashBinding
+import com.example.basekotlin.ui.files.FilesActivity
 import com.example.basekotlin.ui.language.LanguageStartActivity
+import com.example.basekotlin.ui.main.MainActivity
 import com.example.basekotlin.util.SharedPreUtils
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
@@ -18,7 +20,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     }
 
     private fun startNextActivity() {
-        startNextActivity(LanguageStartActivity::class.java, null)
+        startNextActivity(MainActivity::class.java, null)
         finishAffinity()
     }
 

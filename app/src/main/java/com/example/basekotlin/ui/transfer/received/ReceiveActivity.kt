@@ -2,6 +2,7 @@ package com.example.basekotlin.ui.transfer.received
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Build
@@ -18,6 +19,7 @@ import com.example.basekotlin.databinding.ActivityReceiveBinding
 import com.example.basekotlin.service.transfer.HotspotManager
 import com.example.basekotlin.service.transfer.TransferService
 import com.example.basekotlin.ui.transfer.model.ConnectionInfo
+import com.example.basekotlin.ui.transfer.progress.ProgressActivity
 import com.example.basekotlin.util.transfer.NetworkUtils
 import com.example.basekotlin.util.transfer.QrCodeHelper
 import kotlinx.coroutines.Dispatchers
@@ -32,62 +34,39 @@ class ReceiveActivity : BaseActivity<ActivityReceiveBinding>(ActivityReceiveBind
 
     private var port = 8888
     private var hotspotManager: HotspotManager? = null
+    private var lanDiscoveryHelper: com.example.basekotlin.util.transfer.LanDiscoveryHelper? = null
 
-    // 1. Launcher xin quyền Vị trí & Thiết bị lân cận
-    private val permissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissions ->
-        val fineLocationGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
-        if (fineLocationGranted) {
-            checkGpsAndStart()
-        } else {
-            Toast.makeText(this, getString(R.string.permission_location_required_receive), Toast.LENGTH_LONG).show()
-            binding.pbQrLoading.gone()
-            binding.tvIpAddress.text = getString(R.string.location_permission_needed)
-        }
-    }
+
 
     override fun initView() {
         binding.tvDeviceName.text = NetworkUtils.getDeviceName()
 
-        // 2. Kiểm tra quyền trước khi khởi chạy
-        checkPermissionsAndStart()
+        setupReceiver()
     }
+
+    private var isNavigatingToProgress = false
 
     override fun bindView() {
         binding.btnBack.tap {
             onBack()
         }
-    }
 
-    private fun checkPermissionsAndStart() {
-        val neededPermissions = mutableListOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            neededPermissions.add(Manifest.permission.NEARBY_WIFI_DEVICES)
-        }
-
-        val allGranted = neededPermissions.all {
-            ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
-        }
-
-        if (allGranted) {
-            checkGpsAndStart()
-        } else {
-            permissionLauncher.launch(neededPermissions.toTypedArray())
+        // Lắng nghe khi client kết nối vào server -> Tự động chuyển sang ProgressActivity
+        lifecycleScope.launch {
+            TransferService.isConnected.collect { connected ->
+                if (connected) {
+                    isNavigatingToProgress = true
+                    val intent = Intent(this@ReceiveActivity, ProgressActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
         }
     }
 
-    private fun checkGpsAndStart() {
-        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
-        if (!isGpsEnabled) {
-            Toast.makeText(this, getString(R.string.prompt_turn_on_gps), Toast.LENGTH_SHORT).show()
-        }
 
-        setupReceiver()
-    }
+
 
     private fun setupReceiver() {
         binding.pbQrLoading.visible()
@@ -155,7 +134,15 @@ class ReceiveActivity : BaseActivity<ActivityReceiveBinding>(ActivityReceiveBind
         android.util.Log.d(TAG, "[RECEIVER] Khởi động TransferService.startReceive(port = ${info.port})")
         TransferService.startReceive(this, port = info.port)
 
-        // 2. Tạo QR Code bất đồng bộ
+        // 2. Bắt đầu phát beacon tìm kiếm thiết bị trên mạng LAN
+        lanDiscoveryHelper = com.example.basekotlin.util.transfer.LanDiscoveryHelper(this)
+        lanDiscoveryHelper?.startBroadcasting(
+            deviceName = info.deviceName,
+            ipAddress = info.ipAddress,
+            port = info.port
+        )
+
+        // 3. Tạo QR Code bất đồng bộ
         lifecycleScope.launch(Dispatchers.IO) {
             val qrBitmap = QrCodeHelper.generateQrBitmap(info, size = 600)
             withContext(Dispatchers.Main) {
@@ -168,9 +155,11 @@ class ReceiveActivity : BaseActivity<ActivityReceiveBinding>(ActivityReceiveBind
     }
 
     override fun onDestroy() {
-        hotspotManager?.stopHotspot()
-        // SỬA LỖI: Hủy TransferService để đóng ServerSocket và giải phóng port khi thoát màn hình
-        TransferService.cancel(this)
+        lanDiscoveryHelper?.release()
+        if (!isNavigatingToProgress) {
+            hotspotManager?.stopHotspot()
+            TransferService.cancel(this)
+        }
         super.onDestroy()
     }
 }

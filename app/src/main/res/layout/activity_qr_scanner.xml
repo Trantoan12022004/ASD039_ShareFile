@@ -37,6 +37,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <!-- 8. Overlay hiển thị khi đang kết nối WiFi tới máy nhận -->
     <LinearLayout
         android:id="@+id/layoutConnecting"
@@ -81,6 +83,7 @@
             android:backgroundTint="#D9D9D9" />
 
         <TextView
+            android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -90,6 +93,7 @@
             android:gravity="center" />
 
         <LinearLayout
+            android:id="@+id/layoutDeviceCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -149,5 +153,7 @@
             android:layout_marginTop="16dp"
             android:indeterminateTint="@color/primary_35" />
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

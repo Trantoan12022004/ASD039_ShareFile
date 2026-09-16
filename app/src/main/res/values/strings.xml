@@ -532,6 +532,7 @@
     <string name="transfer_notification_receiving">Receiving files…</string>
     <string name="transfer_notification_complete">Transfer complete</string>
     <string name="transfer_notification_failed">Transfer failed</string>
+    <string name="transfer_preparing">Preparing transfer…</string>
 
     <!-- Hotspot -->
     <string name="hotspot_starting">Starting hotspot…</string>
@@ -571,5 +572,52 @@
     <string name="location_permission_needed">Location permission needed</string>
     <string name="prompt_turn_on_gps">Please turn on Location (GPS) on your device</string>
     <string name="error_hotspot_failed_code">Failed to turn on Hotspot. Error code: %1$d</string>
+
+    <!-- Preparations Screen -->
+    <string name="preparations_title">Preparations</string>
+    <string name="open_wlan">Open WLAN</string>
+    <string name="open_wlan_desc">WLAN is used to connect to your friend and transfer.</string>
+    <string name="open_gps">Open GPS</string>
+    <string name="open_gps_desc">Android 6.0 or above requires you to open location service to find friends nearby.</string>
+    <string name="btn_open">OPEN</string>
+    <string name="btn_opened">OPENED</string>
+    <string name="btn_next">NEXT</string>
+    <string name="transfered">transfered</string>
+    <string name="left">left</string>
+    <string name="enter_message">Enter message</string>
+
+
+    <!-- Progress & Chat Screen -->
+    <string name="status_online">Online</string>
+    <string name="status_offline">Offline</string>
+    <string name="device_status_online_fmt">%1$s online</string>
+    <string name="device_status_offline_fmt">%1$s offline</string>
+    <string name="status_canceled">Canceled</string>
+    <string name="status_error">Error</string>
+    <string name="status_declined">Declined</string>
+    <string name="action_open_file">Open</string>
+    <string name="action_view_in_folder">View in Folder</string>
+    <string name="action_share_file">Share</string>
+    <string name="dialog_exit_transfer_title">Disconnect Session?</string>
+    <string name="dialog_exit_transfer_msg">The connection between two devices will be closed.</string>
+    <string name="btn_exit">Exit</string>
+    <string name="btn_stay">Stay</string>
+    <string name="device_connected_msg">%1$s has connected</string>
+    <string name="device_disconnected_msg">%1$s has disconnected</string>
+    <string name="unit_mb">MB</string>
+    <string name="unit_sec">Sec</string>
+    <string name="unit_min">Min</string>
+    <string name="unit_hr">Hr</string>
+    <string name="progress_size_ratio">%1$s / %2$s</string>
+    <string name="no">No</string>
+    <string name="cancel_transfer_confirm_message">Are you sure you want to cancel sending this file? You can still send it by retry</string>
+    <string name="transfer_error_timeout">Connection timeout (10s). Peer disconnected</string>
+    <string name="group_share">Group Share</string>
+    <string name="group_desc">Send files to multiple devices at the same time in the same group</string>
+    <string name="join_group">Join Group</string>
+    <string name="create_group">Create Group</string>
+    <string name="instructions">Instructions</string>
+    <string name="see_more">See More</string>
+    <string name="info_desc">#1 Make sure all devices are on the same WiFi network (you can use an existing WiFi network, or turn on a mobile hotspot on one device and have others join it).\n#2 Press Create Group to start a new group and share the QR code with friends.\n#3 Press Join Group, then scan the QR code or enter the host’s IP address to join.\n#4 Friends using older versions can also join by pressing Send on the phone screen.</string>
 
 </resources>

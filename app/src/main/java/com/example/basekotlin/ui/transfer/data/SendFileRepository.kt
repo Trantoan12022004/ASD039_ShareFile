@@ -238,6 +238,7 @@ class SendFileRepository(private val context: Context) {
         val projection = arrayOf(
             MediaStore.Audio.Media._ID,
             MediaStore.Audio.Media.TITLE,
+            MediaStore.Audio.Media.DISPLAY_NAME,
             MediaStore.Audio.Media.SIZE,
             MediaStore.Audio.Media.DATE_MODIFIED,
             MediaStore.Audio.Media.ALBUM_ID
@@ -249,6 +250,7 @@ class SendFileRepository(private val context: Context) {
         )?.use { c ->
             val idCol = c.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
             val titleCol = c.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)
+            val fileNameCol = c.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME)
             val sizeCol = c.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE)
             val dateCol = c.getColumnIndexOrThrow(MediaStore.Audio.Media.DATE_MODIFIED)
             val albumIdCol = c.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID)
@@ -257,13 +259,14 @@ class SendFileRepository(private val context: Context) {
                 val id = c.getLong(idCol)
                 val uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id)
                 val title = c.getString(titleCol) ?: "Music"
+                val fileName = c.getString(fileNameCol) ?: "music.mp3"
                 val size = c.getLong(sizeCol)
                 val dateMod = c.getLong(dateCol) * 1000L
                 val firstChar = title.firstOrNull()?.uppercaseChar()?.toString()?.takeIf { it in "A".."Z" } ?: "#"
 
                 list.add(BaseFileItem(
                     id = uri.toString(),
-                    displayName = title,
+                    displayName = fileName,
                     subInfo = "${Formatter.formatShortFileSize(context, size)} - ${dateFormat.format(Date(dateMod))}",
                     sizeBytes = size,
                     dateModifiedMillis = dateMod,
@@ -288,9 +291,11 @@ class SendFileRepository(private val context: Context) {
                 val file = File(appInfo.sourceDir)
                 if (!file.exists()) return@mapNotNull null
                 val uri = Uri.fromFile(file)
+                val appLabel = pm.getApplicationLabel(appInfo).toString()
+
                 BaseFileItem(
                     id = appInfo.packageName,
-                    displayName = pm.getApplicationLabel(appInfo).toString(),
+                    displayName = "${appLabel}.apk",
                     subInfo = Formatter.formatShortFileSize(context, file.length()),
                     sizeBytes = file.length(),
                     dateModifiedMillis = file.lastModified(),
@@ -332,7 +337,7 @@ class SendFileRepository(private val context: Context) {
 
                     list.add(BaseFileItem(
                         id = apkPath,
-                        displayName = appName,
+                        displayName = "${appName}.apk",
                         subInfo = Formatter.formatShortFileSize(context, c.getLong(sizeCol)),
                         sizeBytes = c.getLong(sizeCol),
                         dateModifiedMillis = file.lastModified(),

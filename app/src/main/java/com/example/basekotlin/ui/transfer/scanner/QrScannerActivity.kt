@@ -38,6 +38,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.wifi.WifiManager
 import android.provider.Settings
+import com.example.basekotlin.ui.transfer.progress.ProgressActivity
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
@@ -58,6 +59,23 @@ class QrScannerActivity : BaseActivity<ActivityQrScannerBinding>(ActivityQrScann
     // SỬA LỖI: AtomicBoolean khóa scan tức thì, chỉ xử lý đúng 1 QR duy nhất
     private val isScanningLocked = AtomicBoolean(false)
     private var isTransferStarted = false
+
+    private var lanDiscoveryHelper: com.example.basekotlin.util.transfer.LanDiscoveryHelper? = null
+    private lateinit var deviceAdapter: DeviceAdapter
+    private val foundDevices = mutableListOf<com.example.basekotlin.ui.transfer.model.DeviceInfo>()
+
+    private val prepLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK || (isWifiEnabled() && isLocationGranted())) {
+            // Đã cấp quyền và bật Wi-Fi xong -> Khởi động Camera
+            checkCameraAndStart()
+        } else {
+            // Người dùng back ra mà chưa cấp đủ -> Thoát về SendFileActivity
+            finish()
+        }
+    }
+
 
     // 1. Tối ưu: Khởi tạo 1 scanner duy nhất, chuyên quét QR Code
     private val barcodeScanner by lazy {
@@ -88,22 +106,114 @@ class QrScannerActivity : BaseActivity<ActivityQrScannerBinding>(ActivityQrScann
     }
 
     override fun initView() {
-        binding.layoutToolbar.tvCount.text = "${filesToSend.size} File(s)"
+        binding.layoutToolbar.tvFileCount.text = "${filesToSend.size} File(s)"
         cameraExecutor = Executors.newSingleThreadExecutor()
         wifiHelper = WifiHelper(this)
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            startCamera()
+        setupDeviceRecyclerView()
+        startLanDeviceDiscovery()
+
+        // Kiểm tra 2 điều kiện: 1 là quyền vị trí, 2 là đã mở wifi hay chưa
+        if (!isLocationGranted() || !isWifiEnabled()) {
+            prepLauncher.launch(Intent(this, PreparationActivity::class.java))
         } else {
-            cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+            checkCameraAndStart()
         }
     }
 
     override fun bindView() {
         binding.layoutToolbar.btnBack.tap {
             onBack()
+        }
+    }
+
+    private fun setupDeviceRecyclerView() {
+        deviceAdapter = DeviceAdapter { selectedDevice ->
+            connectToDiscoveredDevice(selectedDevice)
+        }
+        binding.rvDevices.adapter = deviceAdapter
+
+        binding.btnSendAll.tap {
+            if (foundDevices.isNotEmpty()) {
+                connectToDiscoveredDevice(foundDevices.first())
+            }
+        }
+    }
+
+    private fun startLanDeviceDiscovery() {
+        // Trạng thái ban đầu khi đang tìm kiếm
+        binding.etSearch.visible()
+        binding.pbSearching.visible()
+        binding.layoutDeviceCount.gone()
+        binding.rvDevices.gone()
+
+        lanDiscoveryHelper = com.example.basekotlin.util.transfer.LanDiscoveryHelper(this)
+        lanDiscoveryHelper?.startDiscovery { device ->
+            runOnUiThread {
+                val cleanIp = com.example.basekotlin.util.transfer.LanDiscoveryHelper.normalizeIp(device.ipAddress)
+                val cleanDevice = device.copy(ipAddress = cleanIp)
+
+                // Kiểm tra trùng lặp theo cả tên thiết bị hoặc IP
+                val isDuplicate = foundDevices.any { existing ->
+                    existing.name.equals(cleanDevice.name, ignoreCase = true) || existing.ipAddress == cleanDevice.ipAddress
+                }
+
+                if (!isDuplicate) {
+                    foundDevices.add(cleanDevice)
+
+                    // Ẩn tiêu đề "Search for devices" (et_search) và vòng xoay loading khi đã tra xong / có thiết bị
+                    binding.etSearch.gone()
+                    binding.pbSearching.gone()
+
+                    // Hiển thị cụm đếm số thiết bị và danh sách kết quả
+                    binding.layoutDeviceCount.visible()
+                    binding.rvDevices.visible()
+                    binding.tvCount.text = "${foundDevices.size}"
+                    deviceAdapter.addListData(foundDevices)
+                }
+            }
+        }
+    }
+
+    private fun connectToDiscoveredDevice(device: com.example.basekotlin.ui.transfer.model.DeviceInfo) {
+        if (isTransferStarted) return
+        isScanningLocked.set(true)
+        imageAnalyzer?.clearAnalyzer()
+        lanDiscoveryHelper?.stopDiscovery()
+
+        vibratePhone()
+
+        val connectionInfo = ConnectionInfo(
+            ssid = "",
+            password = "",
+            ipAddress = device.ipAddress,
+            port = device.port,
+            deviceName = device.name
+        )
+
+        binding.layoutConnecting.visible()
+        binding.tvConnecting.text = getString(
+            R.string.connection_connecting, device.name
+        )
+        connectToReceiver(connectionInfo)
+    }
+
+    private fun isWifiEnabled(): Boolean {
+        val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        return wifiManager.isWifiEnabled
+    }
+    private fun isLocationGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this, Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+    private fun checkCameraAndStart() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            startCamera()
+        } else {
+            cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
         }
     }
 
@@ -294,29 +404,51 @@ class QrScannerActivity : BaseActivity<ActivityQrScannerBinding>(ActivityQrScann
         // Guard: chỉ cho phép gọi startSend đúng 1 lần duy nhất
         if (isTransferStarted) return
         isTransferStarted = true
+        lanDiscoveryHelper?.release()
 
-        // Ưu tiên gateway IP phát hiện từ DHCP (chính xác hơn QR code IP)
-        // Cần thiết vì một số thiết bị (Xiaomi, Samsung) dùng subnet khác chuẩn 192.168.49.x
-        val actualIp = WifiHelper.activeGatewayIp ?: connectionInfo.ipAddress
-        if (WifiHelper.activeGatewayIp != null && WifiHelper.activeGatewayIp != connectionInfo.ipAddress) {
+        // Ưu tiên gateway IP phát hiện từ DHCP khi kết nối Hotspot
+        val actualIp = if (connectionInfo.password.isNotEmpty()) {
+            WifiHelper.activeGatewayIp ?: connectionInfo.ipAddress
+        } else {
+            connectionInfo.ipAddress
+        }
+        if (connectionInfo.password.isNotEmpty() && WifiHelper.activeGatewayIp != null && WifiHelper.activeGatewayIp != connectionInfo.ipAddress) {
             Log.d(TAG, "[SENDER] Override IP từ QR (${connectionInfo.ipAddress}) -> Gateway DHCP ($actualIp)")
         }
 
-        TransferService.startSend(
+        TransferService.startSender(
             context = this,
             ip = actualIp,
             port = connectionInfo.port,
+            peerName = connectionInfo.deviceName,
             files = filesToSend,
-            wifiNetwork = WifiHelper.activeWifiNetwork
+            network = WifiHelper.activeWifiNetwork
         )
+        // Ẩn loading và đóng màn hình quét ngay khi chuyển sang ProgressActivity
+        binding.layoutConnecting.gone()
+        startNextActivity(ProgressActivity::class.java, null)
+        finishThisActivity()
+    }
 
-        Toast.makeText(this, getString(R.string.sending_files_count, filesToSend.size), Toast.LENGTH_LONG).show()
-        finish()
+    override fun onBack() {
+        Log.d(TAG, "[SENDER] 🛑 Người dùng bấm Back trên QrScannerActivity -> Ngắt kết nối ngay lập tức")
+        cancelConnectingAndDisconnect()
+        super.onBack()
+    }
+
+    private fun cancelConnectingAndDisconnect() {
+        lanDiscoveryHelper?.release()
+        binding.layoutConnecting.gone()
+        wifiHelper?.disconnectWifi()
+        WifiHelper.disconnectActiveWifi(this)
+        TransferService.disconnect(this)
+        isTransferStarted = false
     }
 
     override fun onDestroy() {
+        lanDiscoveryHelper?.release()
         cameraExecutor.shutdown()
-        // SỬA LỖI: Không ngắt kết nối Wi-Fi nếu đã chuyển sang TransferService gửi file
+        // Ngắt kết nối Wi-Fi nếu chưa bắt đầu gửi file
         if (!isTransferStarted) {
             wifiHelper?.disconnectWifi()
         }

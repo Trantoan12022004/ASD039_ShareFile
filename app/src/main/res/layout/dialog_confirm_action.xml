@@ -60,6 +60,7 @@
                 android:background="@drawable/bg_btn_cancel">
 
                 <TextView
+                    android:id="@+id/tvCancelConfirm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"

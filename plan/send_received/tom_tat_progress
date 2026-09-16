@@ -1,0 +1,162 @@
+
+
+Dưới đây là phần **review chi tiết hiện trạng**, **bản mô tả yêu cầu đầy đủ (Full Specification)** và **các đề xuất cải tiến/bổ sung** cho màn hình [activity_progress.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/activity_progress.xml) cùng hệ thống truyền nhận file.
+
+---
+
+## 1. Bản mô tả yêu cầu đầy đủ (Functional Requirements)
+
+### 1.1. Luồng hoạt động tổng thể (User Flow)
+1. **Khởi tạo & Điều hướng vào màn hình**:
+   - **Bên Gửi (Sender)**: Sau khi chọn file và quét QR thành công trên [QrScannerActivity](file:///d:/mobile/ASD039/app/src/main/java/com/example/basekotlin/ui/transfer/scanner/QrScannerActivity.kt), hệ thống thiết lập kết nối TCP Socket và chuyển ngay sang [ProgressActivity](file:///d:/mobile/ASD039/app/src/main/java/com/example/basekotlin/ui/transfer/progress/ProgressActivity.kt).
+   - **Bên Nhận (Receiver)**: Đang ở màn hình [ReceiveActivity](file:///d:/mobile/ASD039/app/src/main/java/com/example/basekotlin/ui/transfer/received/ReceiveActivity.kt) (chờ quét QR), ngay khi phát hiện thiết bị bên gửi kết nối vào Socket Server, tự động chuyển sang [ProgressActivity](file:///d:/mobile/ASD039/app/src/main/java/com/example/basekotlin/ui/transfer/progress/ProgressActivity.kt).
+   - Màn hình này hoạt động như một **phòng giao dịch / phòng chat 2 chiều (P2P)** giữa 2 thiết bị thông qua kết nối Socket đã thiết lập.
+
+2. **Theo dõi tiến trình truyền file (File Transfer Progress)**:
+   - **Toolbar ([toolbar_progress.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/toolbar_progress.xml))**:
+     - Hiển thị tên thiết bị đối phương (`tvDeviceName`).
+     - Tổng dung lượng đã truyền (`tvTotalSize` + đơn vị MB/GB).
+     - Ước tính thời gian còn lại (`tvTotalTime` Sec/Min Left).
+   - **Từng file trong danh sách**:
+     - Thumbnail định dạng file (ảnh, video, audio, apk, doc...).
+     - Tên file (`tvName`) và dung lượng gốc (`tvSize`).
+     - Dung lượng thực tế đang chuyển (`tv_size_progress`, ví dụ: `2,2 MB/3,3 MB`).
+     - Thanh `SeekBar` hiển thị phần trăm (0 - 100%). Khi hoàn thành sẽ ẩn SeekBar.
+
+3. **Giao tiếp tương tác dạng Chat (P2P Chat & Transfer)**:
+   - Danh sách hiển thị theo thứ tự thời gian (timeline) gồm cả **File** và **Tin nhắn văn bản (Text message)**.
+   - **Bên Mình (Me)**: Nằm lệch sang bên phải, có avatar bên phải ([layout_progress_send.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/layout_progress_send.xml)).
+   - **Bên Bạn (Peer)**: Nằm lệch sang bên trái, có avatar bên trái ([layout_progress_received.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/layout_progress_received.xml)).
+   - Nhập text tại ô `et_send` và nhấn nút `btn_send` để gửi tin nhắn tức thì sang máy đối phương.
+
+4. **Gửi thêm file trong phiên làm việc (`btn_add`)**:
+   - Người dùng bấm nút dấu cộng `btn_add` ở thanh công cụ dưới -> Mở màn hình SendActivity chọn thêm tài liệu, ảnh, video, app.
+   - Các file mới được đẩy thêm vào hàng đợi (Transfer Queue) và bắt đầu gửi tiếp mà không làm gián đoạn kết nối hay phải quét lại mã QR.
+
+5. **Xử lý trạng thái & Nút điều khiển từng file**:
+   - **Bên Gửi ([item_progress_send.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/item_progress_send.xml))**:
+     - *Đang gửi*: Hiển thị nút `iv_cancel` để dừng gửi file này.
+     - *Thành công*: Hiển thị icon `iv_done`.
+     - *Thất bại / Hủy / Bị từ chối*: Hiển thị `tv_status_error` (màu đỏ) với các trạng thái (`Canceled`, `Error`, `Declined`) và nút `iv_refresh` để người dùng bấm gửi lại (Reload/Retry).
+   - **Bên Nhận ([item_progress_receive.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/item_progress_receive.xml))**:
+     - *Đang nhận*: Hiển thị nút `iv_cancel` (nếu không muốn nhận file này).
+     - *Thành công*: Hiển thị icon menu 3 chấm `iv_more`. Nhấn vào sẽ hiển thị Popup Menu các tùy chọn: *Mở file*, *Xem trong thư mục*, *Chia sẻ*.
+     - *Lỗi / Hủy*: Hiển thị `tv_status_error`.
+
+6. **Theo dõi trạng thái Online / Offline thời gian thực**:
+   - Hai máy liên tục trao đổi gói tin kiểm tra (Ping / Heartbeat) qua Socket.
+   - Nếu kết nối bị đứt (mất Wi-Fi, đối phương thoát app, tắt màn hình sâu, v.v.):
+     - Hiển thị thông báo: `"[Tên thiết bị] offline"` (kèm chấm đỏ hoặc banner cảnh báo).
+     - Vô hiệu hóa nút gửi hoặc thông báo trạng thái tạm dừng.
+   - Khi kết nối lại được hoặc khi mới vào phòng:
+     - Hiển thị thông báo: `"[Tên thiết bị] online"` (kèm chấm xanh).
+
+---
+
+## 2. Review hiện trạng Layout & Đề xuất cải tiến kỹ thuật
+
+Qua việc kiểm tra trực tiếp các file layout và code dịch vụ hiện tại, có một số điểm bất hợp lý cần được chỉnh sửa:
+
+### ⚠️ Điểm cần khắc phục trong UI Layout
+1. **[activity_progress.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/activity_progress.xml) đang thiếu `RecyclerView`**:
+   - Màn hình hiện chỉ có `view_top` (toolbar) và `view_bottom` (thanh nhập tin nhắn), chưa có `RecyclerView` để hiển thị nội dung chat/tiến trình.
+   - TextView `Sony Xperia 5 Mark IV offline` (dòng 21-31) đang bị đặt ở đáy màn hình (`app:layout_constraintBottom_toBottomOf="parent"`), dẫn đến bị `view_bottom` đè lên hoàn toàn.
+   - 👉 **Đề xuất**: 
+     - Thêm `RecyclerView` chiếm trọn khoảng trống giữa `view_top` và `view_bottom`.
+     - Chuyển thông tin Online/Offline thành:
+       + *Phương án A*: Subtitle nhỏ ngay dưới tên máy ở Toolbar: `Sony Xperia 5 Mark IV` kèm chấm xanh/đỏ "Online" / "Offline".
+       + *Phương án B*: Một thanh Banner thông báo mảnh xuất hiện trượt xuống ngay dưới Toolbar hoặc một tin nhắn hệ thống (System Notification Bubble) ở giữa màn hình danh sách khi có sự kiện đổi trạng thái.
+
+2. **Cấu trúc lồng `RecyclerView` (`layout_progress_send.xml` & `layout_progress_received.xml`)**:
+   - Hiện tại trong [layout_progress_send.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/layout_progress_send.xml) bạn đang đặt `rvSends` bên trong một LinearLayout cùng với Avatar, và [layout_progress_received.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/layout_progress_received.xml) cũng có `rvReceive`.
+   - **Cảnh báo hiệu năng**: Việc lồng RecyclerView con bên trong từng item của RecyclerView cha (Nested RecyclerViews) sẽ gây giật lag (jank UI) nặng nề khi cuộn, đặc biệt là khi các progress bar đang cập nhật liên tục 200ms/lần.
+   - 👉 **Đề xuất tối ưu (Chuẩn Adapter Pattern)**:
+     - Chỉ dùng **1 `RecyclerView` duy nhất** trên màn hình chính với cơ chế `Multiple ViewTypes`:
+       - `VIEW_TYPE_SEND_FILE`: Hiển thị file mình gửi ([item_progress_send.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/item_progress_send.xml) kèm avatar bên phải).
+       - `VIEW_TYPE_RECEIVE_FILE`: Hiển thị file mình nhận ([item_progress_receive.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/item_progress_receive.xml) kèm avatar bên trái).
+       - `VIEW_TYPE_SEND_TEXT`: Bong bóng tin nhắn văn bản mình gửi (căn phải).
+       - `VIEW_TYPE_RECEIVE_TEXT`: Bong bóng tin nhắn nhận được (căn trái).
+       - `VIEW_TYPE_SYSTEM_EVENT`: Thông báo hệ thống ở giữa (ví dụ: "Đã kết nối", "Thiết bị ngắt kết nối").
+
+3. **Vị trí Avatar ở [layout_progress_received.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/layout_progress_received.xml)**:
+   - Trong file hiện tại, `ImageView` avatar (`ic_user2`) đang nằm **sau** `rvReceive` (tức là nằm bên phải).
+   - 👉 **Đề xuất**: Đối với tin nhắn/file nhận từ đối phương, Avatar phải nằm ở **bên trái** (`ImageView` -> rồi mới đến khối nội dung file).
+
+4. **Thiếu Layout cho tin nhắn văn bản (Chat Text Bubble)**:
+   - Bạn đã có ô nhập `et_send` và nút `btn_send`, nhưng chưa có layout hiển thị tin nhắn chat thường.
+   - 👉 **Đề xuất**: Bổ sung `item_chat_send.xml` và `item_chat_receive.xml` (thiết kế bo góc dạng bubble chat, hỗ trợ hiển thị text và thời gian gửi).
+
+---
+
+### ⚠️ Điểm cần nâng cấp trong tầng Socket & Service
+1. **Cơ chế Socket một chiều hiện tại ([FileTransferProtocol.kt](file:///d:/mobile/ASD039/app/src/main/util/transfer/FileTransferProtocol.kt))**:
+   - Hiện tại, socket hoạt động theo kiểu một chiều: Sender gửi hết file ban đầu là gọi `MSG_TRANSFER_COMPLETE` và đóng kết nối (`stopSelf()`).
+   - Để hỗ trợ:
+     - Gửi tin nhắn chat bất kỳ lúc nào.
+     - Bấm `btn_add` để gửi thêm file mới vào phiên đang mở.
+     - Bấm retry/reload file lỗi.
+     - Phát hiện Online/Offline.
+   - 👉 **Đề xuất**: Nâng cấp Socket thành **Phiên kết nối liên tục (Long-lived Session)**:
+     - Mở rộng thêm các Message Type trong `FileTransferProtocol`:
+       - `MSG_CHAT_TEXT = 20`: Gửi/nhận tin nhắn văn bản.
+       - `MSG_PING = 21` / `MSG_PONG = 22`: Gói tin Heartbeat để kiểm tra Online/Offline định kỳ (mỗi 3-5 giây).
+       - `MSG_CANCEL_FILE = 23`: Báo hủy riêng 1 file.
+       - `MSG_RETRY_FILE = 24`: Yêu cầu gửi lại 1 file.
+     - Giữ kết nối Socket mở cho đến khi người dùng chủ động bấm nút thoát hoặc ngắt kết nối vật lý.
+
+---
+
+## 3. Cấu trúc dữ liệu đề xuất (Data Model)
+
+Để gom cả file và tin nhắn văn bản vào cùng 1 timeline chat mượt mà, ta có thể định nghĩa model như sau:
+
+```kotlin
+sealed class ProgressItem(val id: String, val timestamp: Long) {
+    // Tin nhắn text
+    data class TextMessage(
+        val messageId: String,
+        val text: String,
+        val isMe: Boolean,
+        val timeFormatted: String
+    ) : ProgressItem(messageId, System.currentTimeMillis())
+
+    // File gửi/nhận
+    data class FileTransferItem(
+        val transferId: String,
+        val file: TransferFile,
+        val isMe: Boolean,
+        var status: TransferStatus, // QUEUED, TRANSFERRING, COMPLETED, CANCELED, ERROR, DECLINED
+        var bytesTransferred: Long = 0L,
+        var totalBytes: Long = 0L,
+        var speedBytesPerSec: Long = 0L,
+        var errorMessage: String? = null
+    ) : ProgressItem(transferId, System.currentTimeMillis())
+
+    // Sự kiện hệ thống (Online/Offline, Kết nối)
+    data class SystemEvent(
+        val eventId: String,
+        val message: String
+    ) : ProgressItem(eventId, System.currentTimeMillis())
+}
+```
+
+---
+
+## 4. Tóm tắt các bước triển khai dự kiến
+1. **Cập nhật Layouts**:
+   - Sửa [activity_progress.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/activity_progress.xml): Thêm `RecyclerView`, bố trí lại banner Online/Offline hợp lý.
+   - Tạo layout tin nhắn chat: `item_chat_send.xml` và `item_chat_receive.xml`.
+   - Cập nhật [layout_progress_received.xml](file:///d:/mobile/ASD039/app/src/main/res/layout/layout_progress_received.xml) (đưa avatar sang bên trái) hoặc hợp nhất vào ViewHolder.
+2. **Nâng cấp Protocol & Transfer Engine**:
+   - Bổ sung các mã thông điệp `MSG_CHAT_TEXT`, `MSG_PING`, `MSG_PONG`, `MSG_CANCEL_FILE` trong `FileTransferProtocol`.
+   - Hỗ trợ gửi tin nhắn và thêm file không đồng bộ (Asynchronous packet handling).
+3. **Phát triển Adapter & ViewModel**:
+   - Adapter kế thừa tối ưu theo rules: Payload update cho SeekBar/Status (không dùng `notifyDataSetChanged()`).
+   - Quản lý State: Online/Offline, danh sách Items, thống kê tổng dung lượng/thời gian.
+4. **Kết nối luồng điều hướng**:
+   - Điều hướng từ `QrScannerActivity` và `ReceiveActivity` vào `ProgressActivity`.
+   - Xử lý các sự kiện click: `btn_add` (chọn thêm file), `iv_cancel` (hủy), `iv_refresh` (thử lại), `iv_more` (popup menu mở/chia sẻ file).
+
+---
+
+Bạn có đồng ý với phương án và các đề xuất trên không? Tôi sẽ bắt đầu lên plan chi tiết và implement sau khi được xác nhận.

@@ -1,6 +1,11 @@
 package com.example.basekotlin.ui.transfer.send
 
+import android.content.ContentUris
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -18,10 +23,16 @@ import com.example.basekotlin.ui.transfer.send.adapter.FileGroupAdapter
 import com.example.basekotlin.ui.transfer.send.adapter.FileItem1Adapter
 import com.example.basekotlin.util.reduceDragSensitivity
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
 
 class SendFileActivity : BaseActivity<ActivitySendBinding>(ActivitySendBinding::inflate) {
-
+    companion object {
+        const val EXTRA_IS_PICK_MODE = "EXTRA_IS_PICK_MODE"
+        const val EXTRA_SELECTED_FILES = "EXTRA_SELECTED_FILES"
+    }
     private val viewModel: SendFilesViewModel by viewModels()
     private val adapter = FileItem1Adapter()
     private var isBottomListExpanded = false
@@ -249,18 +260,83 @@ class SendFileActivity : BaseActivity<ActivitySendBinding>(ActivitySendBinding::
     private fun handleSendFiles() {
         val selected = viewModel.selectedFiles.value
         if (selected.isEmpty()) return
-        // 1. Chuyển đổi sang ArrayList<TransferFile>
-        val transferFiles = ArrayList(selected.map { item ->
-            TransferFile(
-                uri = item.uri,
-                name = item.displayName,
-                size = item.sizeBytes,
-                mimeType = item.mimeType
-            )
-        })
-        // 2. Chuyển sang màn hình quét mã QR
-        val bundle = Bundle()
-        bundle.putParcelableArrayList("EXTRA_FILES", transferFiles)
-        startNextActivity(QrScannerActivity::class.java, bundle)
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            val transferFiles = ArrayList<TransferFile>()
+            for (item in selected) {
+                if (item.category == FileCategory.CONTACTS) {
+                    // Contact → export vCard (.vcf)
+                    val vcfFile = exportContactToVcf(item)
+                    if (vcfFile != null) {
+                        transferFiles.add(
+                            TransferFile(
+                                uri = Uri.fromFile(vcfFile),
+                                name = vcfFile.name,
+                                size = vcfFile.length(),
+                                mimeType = "text/x-vcard"
+                            )
+                        )
+                    }
+                } else {
+                    transferFiles.add(
+                        TransferFile(
+                            uri = item.uri,
+                            name = item.displayName,
+                            size = item.sizeBytes,
+                            mimeType = item.mimeType
+                        )
+                    )
+                }
+            }
+            withContext(Dispatchers.Main) {
+                val isPickMode = intent.getBooleanExtra(EXTRA_IS_PICK_MODE, false)
+                if (isPickMode) {
+                    // Chế độ chọn thêm file: Trả kết quả về ProgressActivity
+                    val resultIntent = Intent().apply {
+                        putParcelableArrayListExtra(EXTRA_SELECTED_FILES, transferFiles)
+                    }
+                    setResult(RESULT_OK, resultIntent)
+                    finishThisActivity()
+                } else {
+                    // Chế độ thông thường ban đầu: Mở màn hình quét QR
+                    val bundle = Bundle()
+                    bundle.putParcelableArrayList("EXTRA_FILES", transferFiles)
+                    startNextActivity(QrScannerActivity::class.java, bundle)
+                }
+            }
+        }
     }
+
+    private fun exportContactToVcf(item: TransferableItem): File? {
+        return try {
+            // Lấy lookupKey từ CONTACT_ID
+            val contactId = item.id.removePrefix("contact_")
+            val lookupUri = ContentUris.withAppendedId(
+                ContactsContract.Contacts.CONTENT_URI, contactId.toLong()
+            )
+            val cursor = contentResolver.query(
+                lookupUri, arrayOf(ContactsContract.Contacts.LOOKUP_KEY), null, null, null
+            )
+            val lookupKey = cursor?.use { c ->
+                if (c.moveToFirst()) c.getString(0) else null
+            } ?: return null
+
+            // Đọc vCard
+            val vcardUri = Uri.withAppendedPath(
+                ContactsContract.Contacts.CONTENT_VCARD_URI, lookupKey
+            )
+            val vcardData = contentResolver.openInputStream(vcardUri)?.use { it.readBytes() }
+                ?: return null
+
+            // Lưu file tạm
+            val safeName = item.displayName.replace(Regex("[^a-zA-Z0-9_\\-]"), "_")
+            val vcfFile = File(cacheDir, "${safeName}.vcf")
+            vcfFile.writeBytes(vcardData)
+            vcfFile
+        } catch (e: Exception) {
+            Log.e("DEBUG_SEND_FILE", "Lỗi export contact", e)
+            null
+        }
+    }
+
 }

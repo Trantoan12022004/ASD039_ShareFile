@@ -4,21 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_tool_bar_liquid"
+    android:background="@drawable/bg_tool_bar"
     android:elevation="6dp"
     android:padding="16dp">
 
     <!-- Nút Back bên trái -->
     <ImageView
         android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:contentDescription="Back"
         android:scaleType="centerInside"
-        android:src="@drawable/chevron_left"
-        android:padding="12dp"
-        app:tint="@color/black"
-        android:background="@drawable/bg_glass_100_clear"
+        android:src="@drawable/ic_arrow_left"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,31 +25,14 @@
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/anton_regular"
-        android:text="@string/scan"
+        android:text="@string/group_share"
         android:textColor="#0A1207"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tv_file_count"
         app:layout_constraintStart_toEndOf="@id/btnBack"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Nút Action bên phải (Nút Download / Receive) -->
-    <TextView
-        android:id="@+id/tv_file_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:text="2 File(s)"
-        android:background="@drawable/bg_glass_16_clear"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="@dimen/_12sdp"
-        android:fontFamily="@font/outfit_semibold"
-        android:textColor="@color/primary_35"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
