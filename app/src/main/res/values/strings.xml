@@ -619,5 +619,29 @@
     <string name="instructions">Instructions</string>
     <string name="see_more">See More</string>
     <string name="info_desc">#1 Make sure all devices are on the same WiFi network (you can use an existing WiFi network, or turn on a mobile hotspot on one device and have others join it).\n#2 Press Create Group to start a new group and share the QR code with friends.\n#3 Press Join Group, then scan the QR code or enter the host’s IP address to join.\n#4 Friends using older versions can also join by pressing Send on the phone screen.</string>
+    <string name="guideline">Guideline</string>
+    <string name="guideline_desc">Ask other devices to scan this QR code to join the group or send files quickly</string>
+    <string name="hotspot_guideline_desc">Connect Wi-Fi: %1$s | Pass: %2$s\nor scan QR code below</string>
+    <string name="ip_prefix">IP: </string>
+    <string name="close">Close</string>
+    <string name="select_how_to">Select how to</string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="scan_qr_desc">Use camera to scan QR from the host device</string>
+    <string name="enter_ip_address">Enter IP Address</string>
+    <string name="enter_ip_desc">Enter IP address manually if QR scan is not possible</string>
+    <string name="enter_ip_host_desc">Enter the IP of the group host device</string>
+    <string name="hint_enter_ip">eg: 192.169.1.123</string>
+    <string name="connect">Connect</string>
+    <string name="group_member">Group Member</string>
+    <string name="role_host">Host</string>
+    <string name="role_member">Member</string>
+    <string name="dialog_exit_group_title">Leave Group</string>
+    <string name="dialog_exit_group_msg">Are you sure you want to leave the group? Connection and file transfer will be stopped.</string>
+    <string name="device_joined_fmt">%1$s joined the group</string>
+    <string name="device_left_fmt">%1$s left the group</string>
+    <string name="error_invalid_ip">Please enter a valid IP address</string>
+    <string name="group_name_default">Group Share</string>
+    <string name="status_members_count_fmt">%1$d members in group</string>
+    <string name="status_disconnected">Disconnected</string>
 
 </resources>

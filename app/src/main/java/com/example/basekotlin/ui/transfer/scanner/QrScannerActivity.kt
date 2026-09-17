@@ -97,6 +97,9 @@ class QrScannerActivity : BaseActivity<ActivityQrScannerBinding>(ActivityQrScann
     }
 
     override fun getData() {
+        if (intent.getBooleanExtra("EXTRA_IS_JOIN_GROUP", false)) {
+            return
+        }
         @Suppress("DEPRECATION")
         filesToSend = intent.getParcelableArrayListExtra("EXTRA_FILES") ?: arrayListOf()
         if (filesToSend.isEmpty()) {
@@ -106,7 +109,11 @@ class QrScannerActivity : BaseActivity<ActivityQrScannerBinding>(ActivityQrScann
     }
 
     override fun initView() {
-        binding.layoutToolbar.tvFileCount.text = "${filesToSend.size} File(s)"
+        if (intent.getBooleanExtra("EXTRA_IS_JOIN_GROUP", false)) {
+            binding.layoutToolbar.tvFileCount.text = getString(R.string.join_group)
+        } else {
+            binding.layoutToolbar.tvFileCount.text = "${filesToSend.size} File(s)"
+        }
         cameraExecutor = Executors.newSingleThreadExecutor()
         wifiHelper = WifiHelper(this)
 
@@ -296,6 +303,75 @@ class QrScannerActivity : BaseActivity<ActivityQrScannerBinding>(ActivityQrScann
     private fun onQrCodeDetected(connectionInfo: ConnectionInfo) {
         vibratePhone()
 
+        val isJoinGroup = intent.getBooleanExtra("EXTRA_IS_JOIN_GROUP", false)
+        val currentWifi = NetworkUtils.getConnectedWifiName(this)
+        val isAlreadySameWifi = connectionInfo.password.isEmpty() ||
+                (NetworkUtils.isWifiConnected(this) && currentWifi.equals(connectionInfo.ssid, ignoreCase = true))
+
+        if (isJoinGroup) {
+            runOnUiThread {
+                imageAnalyzer?.clearAnalyzer()
+                if (isAlreadySameWifi) {
+                    // Đã cùng mạng Wi-Fi
+                    finishWithJoinResult(connectionInfo.ipAddress, connectionInfo.port, connectionInfo.deviceName)
+                } else {
+                    // Host đang phát Hotspot -> Kết nối vào Hotspot trước khi vào nhóm
+                    val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
+                    if (wifiManager?.isWifiEnabled == false) {
+                        binding.layoutConnecting.gone()
+                        Toast.makeText(this, getString(R.string.prompt_turn_on_wifi_to_connect), Toast.LENGTH_LONG).show()
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            try { startActivity(Intent(Settings.Panel.ACTION_WIFI)) } catch (_: Exception) {}
+                        }
+                        binding.root.postDelayed({ resetScanning() }, 2500)
+                        return@runOnUiThread
+                    }
+
+                    binding.layoutConnecting.visible()
+                    binding.tvConnecting.text = getString(R.string.connection_connecting, connectionInfo.deviceName)
+
+                    wifiHelper?.connectToWifi(
+                        ssid = connectionInfo.ssid,
+                        password = connectionInfo.password,
+                        listener = object : WifiHelper.WifiConnectionListener {
+                            override fun onConnected(network: android.net.Network) {
+                                Log.d(TAG, "[MEMBER] Đã kết nối vào Hotspot của Host: ${connectionInfo.ssid}")
+                                isTransferStarted = true
+                                val actualIp = if (connectionInfo.password.isNotEmpty()) {
+                                    WifiHelper.activeGatewayIp ?: connectionInfo.ipAddress
+                                } else {
+                                    connectionInfo.ipAddress
+                                }
+                                runOnUiThread {
+                                    binding.layoutConnecting.gone()
+                                    finishWithJoinResult(actualIp, connectionInfo.port, connectionInfo.deviceName)
+                                }
+                            }
+
+                            override fun onDisconnected() {
+                                Log.d(TAG, "[MEMBER] Mất kết nối tới Hotspot")
+                                runOnUiThread {
+                                    binding.layoutConnecting.gone()
+                                    Toast.makeText(this@QrScannerActivity, R.string.connection_failed_message, Toast.LENGTH_SHORT).show()
+                                    binding.root.postDelayed({ resetScanning() }, 1500)
+                                }
+                            }
+
+                            override fun onFailed() {
+                                Log.e(TAG, "[MEMBER] Kết nối Hotspot thất bại")
+                                runOnUiThread {
+                                    binding.layoutConnecting.gone()
+                                    Toast.makeText(this@QrScannerActivity, R.string.connection_failed, Toast.LENGTH_SHORT).show()
+                                    binding.root.postDelayed({ resetScanning() }, 1500)
+                                }
+                            }
+                        }
+                    )
+                }
+            }
+            return
+        }
+
         runOnUiThread {
             // Dừng analyzer để tránh hao pin, CPU và ngăn quét lặp
             imageAnalyzer?.clearAnalyzer()
@@ -306,6 +382,16 @@ class QrScannerActivity : BaseActivity<ActivityQrScannerBinding>(ActivityQrScann
             )
             connectToReceiver(connectionInfo)
         }
+    }
+
+    private fun finishWithJoinResult(ip: String, port: Int, deviceName: String) {
+        val resultIntent = Intent().apply {
+            putExtra("EXTRA_HOST_IP", ip)
+            putExtra("EXTRA_HOST_PORT", port)
+            putExtra("EXTRA_DEVICE_NAME", deviceName)
+        }
+        setResult(RESULT_OK, resultIntent)
+        finish()
     }
 
     private fun vibratePhone() {

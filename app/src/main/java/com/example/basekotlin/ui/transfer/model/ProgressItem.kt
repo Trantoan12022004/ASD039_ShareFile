@@ -21,7 +21,8 @@ sealed class ProgressItem(open val id: String, open val timestamp: Long) {
         val text: String,
         val isMe: Boolean,
         val timeFormatted: String,
-        override val timestamp: Long = System.currentTimeMillis()
+        override val timestamp: Long = System.currentTimeMillis(),
+        val senderName: String? = null
     ) : ProgressItem(id, timestamp)
 
     // File truyền nhận
@@ -36,7 +37,8 @@ sealed class ProgressItem(open val id: String, open val timestamp: Long) {
         var savedPath: String? = null,
         var errorMessage: String? = null,
         var thumbnailBase64: String? = null,
-        override val timestamp: Long = System.currentTimeMillis()
+        override val timestamp: Long = System.currentTimeMillis(),
+        val senderName: String? = null
     ) : ProgressItem(id, timestamp)
 
     // Thông báo sự kiện hệ thống (Online/Offline, Kết nối)

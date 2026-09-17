@@ -151,6 +151,10 @@
             android:name=".service.transfer.TransferService"
             android:exported="false"
             android:foregroundServiceType="connectedDevice|dataSync" />
+        <service
+            android:name=".service.group.GroupShareService"
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice|dataSync" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -330,6 +334,10 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.group_share.GroupShareActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.group_share.GroupShareDetailActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>

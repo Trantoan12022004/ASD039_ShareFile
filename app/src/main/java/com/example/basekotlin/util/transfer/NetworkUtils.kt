@@ -132,14 +132,46 @@ object NetworkUtils {
     }
 
     /**
-     * Kiểm tra WiFi có đang kết nối không
+     * Kiểm tra WiFi có đang kết nối không (hỗ trợ cả khi 4G đang là activeNetwork)
      */
     fun isWifiConnected(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val network = connectivityManager.activeNetwork ?: return false
-        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-        return capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNet = cm.activeNetwork
+        if (activeNet != null) {
+            val caps = cm.getNetworkCapabilities(activeNet)
+            if (caps?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true) return true
+        }
+        return cm.allNetworks.any { net ->
+            val caps = cm.getNetworkCapabilities(net)
+            caps?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+        }
+    }
+
+    /**
+     * Lấy IP Gateway của mạng Wi-Fi/Hotspot đang kết nối từ DHCP
+     */
+    fun getWifiGatewayIp(context: Context): String? {
+        try {
+            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val wifiNet = cm.allNetworks.firstOrNull { net ->
+                cm.getNetworkCapabilities(net)?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+            } ?: return null
+            val lp = cm.getLinkProperties(wifiNet) ?: return null
+            val gw = lp.routes.mapNotNull { route ->
+                val g = route.gateway
+                if (g is Inet4Address && g.hostAddress != "0.0.0.0") g.hostAddress else null
+            }.firstOrNull()
+            if (gw != null) return gw
+
+            val wm = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
+            @Suppress("DEPRECATION")
+            val dhcp = wm?.dhcpInfo
+            if (dhcp != null && dhcp.gateway != 0) {
+                val ip = dhcp.gateway
+                return String.format(Locale.US, "%d.%d.%d.%d", ip and 0xff, ip shr 8 and 0xff, ip shr 16 and 0xff, ip shr 24 and 0xff)
+            }
+        } catch (_: Exception) {}
+        return null
     }
 
     /**
