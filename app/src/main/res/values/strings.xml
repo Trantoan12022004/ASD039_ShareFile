@@ -643,5 +643,33 @@
     <string name="group_name_default">Group Share</string>
     <string name="status_members_count_fmt">%1$d members in group</string>
     <string name="status_disconnected">Disconnected</string>
+    <string name="clone_phone">Clone Phone</string>
+    <string name="clone_phone_desc">Transfer your data via connecting to the same WiFi</string>
+    <string name="receive_data_from_your_old_phone">Receive data from your old phone</string>
+    <string name="send_data_to_your_new_phone">Send data to your new phone</string>
+    <string name="this_is_the">This is the</string>
+    <string name="phone">Phone</string>
+    <string name="old_label">OLD</string>
+    <string name="new_label">NEW</string>
+    <string name="select_data_to_copy">Select data to copy</string>
+    <string name="contacts">Contacts</string>
+    <string name="songs">Songs</string>
+    <string name="create_qr_code">Create QR Code</string>
+    <string name="this_device_s_ip">This device’s IP:</string>
+    <string name="open_the_app_on_the_new_phone_select_new_phone_scan_this_qr_code">Open the app on the new phone → Select NEW Phone → Scan this QR code</string>
+    <string name="make_sure_both_devices_are_connecting_to_the_same_wifi">Make sure both devices are connecting to the same WiFi</string>
+    <string name="connecting">Connecting</string>
+    <string name="please_keep_both_devices_connect_to_the_same_wifi">Please keep both devices connect to the same WiFi</string>
+    <string name="done">Done</string>
+    <string name="all_selected_data_transferred">All of the selected data is transferred</string>
+    <string name="status_waiting">Waiting...</string>
+    <string name="status_complete">Complete</string>
+    <string name="status_fail">Fail</string>
+    <string name="overall_progress">Overall progress</string>
+    <string name="display_qr_for_new_phone">Display QR for new phone</string>
+    <string name="waiting_for_the_new_phone_to_scan_qr">Waiting for the new phone to scan QR...</string>
+    <string name="dialog_cancel_clone_title">Cancel Clone?</string>
+    <string name="dialog_cancel_clone_msg">Are you sure you want to stop the cloning process? The file transfer will be interrupted.</string>
+    <string name="stop">Stop</string>
 
 </resources>

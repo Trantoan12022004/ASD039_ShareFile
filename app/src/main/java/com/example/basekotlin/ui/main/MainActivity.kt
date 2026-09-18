@@ -15,6 +15,7 @@ import com.example.basekotlin.base.BaseActivity
 import com.example.basekotlin.base.tap
 import com.example.basekotlin.databinding.ActivityMainBinding
 import com.example.basekotlin.dialog.exit.ExitAppDialog
+import com.example.basekotlin.ui.clone_phone.ClonePhoneActivity
 import com.example.basekotlin.ui.files.FilesActivity
 import com.example.basekotlin.ui.group_share.GroupShareActivity
 import com.example.basekotlin.ui.language.LanguageActivity
@@ -44,6 +45,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
         binding.layoutQuickTools.btnGroupShare.tap {
             startNextActivity(GroupShareActivity::class.java, null)
+        }
+
+        binding.layoutQuickTools.btnClonePhone.tap {
+            startNextActivity(ClonePhoneActivity::class.java, null)
         }
 
 

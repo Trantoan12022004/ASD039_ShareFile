@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".ui.clone_phone.QrCodeFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="@string/display_qr_for_new_phone"
+        android:fontFamily="@font/outfit_semibold"
+        android:textSize="22sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#99000E00"
+        android:textSize="12sp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/outfit_medium"
+        android:text="@string/waiting_for_the_new_phone_to_scan_qr"/>
+
+        <ImageView
+            android:id="@+id/iv_qr"
+            android:layout_width="264dp"
+            android:layout_height="246dp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:src="@drawable/qr_demo"/>
+
+
+    <LinearLayout
+        android:id="@+id/layout_ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/this_device_s_ip"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/outfit_medium"/>
+
+        <TextView
+            android:id="@+id/tv_ip_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/primary_35"
+            android:textSize="16sp"
+            android:fontFamily="@font/outfit_semibold"
+            tools:text="192.168.1.1"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/open_the_app_on_the_new_phone_select_new_phone_scan_this_qr_code"
+        android:textColor="@color/sub_title"
+        android:fontFamily="@font/outfit_medium"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/make_sure_both_devices_are_connecting_to_the_same_wifi"
+        android:textColor="#F57C00"
+        android:fontFamily="@font/outfit_medium"
+        android:layout_marginTop="4dp"/>
+
+
+
+</LinearLayout>

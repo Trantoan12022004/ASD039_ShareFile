@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ui.clone_phone.SelectDataFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_radius_24">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:fontFamily="@font/outfit_semibold"
+                android:textSize="20sp"
+                android:text="@string/select_data_to_copy"/>
+
+            <TextView
+                android:id="@+id/btn_select_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_all"
+                android:textSize="14sp"
+                android:fontFamily="@font/outfit_semibold"
+                android:textColor="@color/primary_35"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/select_all"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/btn_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_radius_24"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:src="@drawable/ic_contacts" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="2dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/contacts"
+                    android:fontFamily="@font/outfit_semibold"/>
+
+                <TextView
+                    android:id="@+id/tv_contact_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/folder_item_count"
+                    android:textSize="12sp"
+                    android:textColor="#99000E00"
+                    android:fontFamily="@font/outfit_medium"/>
+
+
+            </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/cb_contacts"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_checkbox_checked" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/btn_photos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_radius_24"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:src="@drawable/ic_photos" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="2dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/photos"
+                    android:fontFamily="@font/outfit_semibold"/>
+
+                <TextView
+                    android:id="@+id/tv_photo_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/folder_item_count"
+                    android:textSize="12sp"
+                    android:textColor="#99000E00"
+                    android:fontFamily="@font/outfit_medium"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/cb_photos"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_checkbox_checked" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_videos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_radius_24"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:src="@drawable/ic_videos" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="2dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/videos"
+                    android:fontFamily="@font/outfit_semibold"/>
+
+                <TextView
+                    android:id="@+id/tv_video_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/folder_item_count"
+                    android:textSize="12sp"
+                    android:textColor="#99000E00"
+                    android:fontFamily="@font/outfit_medium"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/cb_videos"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_checkbox_checked" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_audios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_radius_24"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:src="@drawable/ic_songs" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="2dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/songs"
+                    android:fontFamily="@font/outfit_semibold"/>
+                <TextView
+                    android:id="@+id/tv_audio_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/folder_item_count"
+                    android:textSize="12sp"
+                    android:textColor="#99000E00"
+                    android:fontFamily="@font/outfit_medium"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/cb_audios"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_checkbox_checked" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_documents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_radius_24"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:src="@drawable/ic_docs" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="2dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/documents"
+                    android:fontFamily="@font/outfit_semibold"/>
+                <TextView
+                    android:id="@+id/tv_document_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/folder_item_count"
+                    android:textSize="12sp"
+                    android:textColor="#99000E00"
+                    android:fontFamily="@font/outfit_medium"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/cb_documents"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_checkbox_checked" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/btn_apps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_radius_24"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:src="@drawable/ic_app" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="2dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/apps"
+                    android:fontFamily="@font/outfit_semibold"/>
+                <TextView
+                    android:id="@+id/tv_apps_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/folder_item_count"
+                    android:textSize="12sp"
+                    android:textColor="#99000E00"
+                    android:fontFamily="@font/outfit_medium"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/cb_apps"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_checkbox_checked" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+    
+    <LinearLayout
+        android:id="@+id/btn_create_qr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="12dp"
+        android:gravity="center"
+        android:background="@drawable/bg_btn_create_1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_create_qr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            app:tint="@color/white_disable"
+            android:src="@drawable/qr_code"/>
+        <TextView
+            android:id="@+id/tv_create_qr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_disable"
+            android:textSize="16sp"
+            android:fontFamily="@font/outfit_semibold"
+            android:text="@string/create_qr_code"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -37,5 +37,6 @@
     <color name="pattern_active_ring">#3322C55E</color>
     <color name="pattern_error">#EF4444</color>
     <color name="pattern_error_ring">#33EF4444</color>
+    <color name="sub_title1">#99000E00</color>
 
 </resources>

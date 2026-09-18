@@ -340,6 +340,15 @@
             android:name=".ui.group_share.GroupShareDetailActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.clone_phone.ClonePhoneActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <service
+            android:name="com.example.basekotlin.service.clone.ClonePhoneService"
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice|dataSync" />
     </application>
 
 </manifest>
