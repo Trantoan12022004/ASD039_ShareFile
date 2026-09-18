@@ -671,5 +671,21 @@
     <string name="dialog_cancel_clone_title">Cancel Clone?</string>
     <string name="dialog_cancel_clone_msg">Are you sure you want to stop the cloning process? The file transfer will be interrupted.</string>
     <string name="stop">Stop</string>
+    <string name="nearby_play">Nearby Play</string>
+    <string name="make_sure_both_devices_are_connected_to_the_same_wifi_network">Make sure both devices are connected to the same WiFi network</string>
+    <string name="play_music_on_a_nearby_device">Play music on a nearby device</string>
+    <string name="receive_music">Receive Music</string>
+    <string name="use_this_device_as_a_speaker">Use this device as a speaker</string>
+    <string name="found">Found</string>
+    <string name="devices">devices</string>
+    <string name="enter_ip">Enter IP</string>
+    <string name="available_devices">Available Devices</string>
+    <string name="ip">IP</string>
+    <string name="waiting_for_connection">Waiting for connection...</string>
+    <string name="playing">Playing</string>
+    <string name="playing_on">Playing on %1$s</string>
+    <string name="device_disconnected">Speaker disconnected</string>
+    <string name="cannot_connect">Cannot connect to speaker</string>
+    <string name="stop_receiver">Stop Receiver</string>
 
 </resources>

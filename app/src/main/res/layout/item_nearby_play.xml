@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="6dp"
+    android:layout_marginBottom="8dp"
+    android:orientation="horizontal">
+<!--  Đang phát nhạc thì dùng play_arro1, đang đợi đến lượt phát thì dùng music_note1  -->
+    <ImageView
+        android:id="@+id/iv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/play_arrow1"/>
+<!--    Tên bài hát-->
+    <TextView
+        android:id="@+id/tv_name_song"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_weight="1"
+        android:textColor="@color/black"
+        android:fontFamily="@font/outfit_medium"
+        android:text="SKYLIGHT"/>
+
+<!--    Đang phát thì set playing, chờ phát thì dùng send, ấn vào thì chuyển đổi giữa bài được bấm và đang phát-->
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/primary_35"
+        android:fontFamily="@font/outfit_medium"
+        android:layout_marginStart="8dp"
+        android:text="Playing" />
+
+
+
+
+</LinearLayout>

@@ -346,9 +346,22 @@
             android:windowSoftInputMode="adjustResize" />
 
         <service
-            android:name="com.example.basekotlin.service.clone.ClonePhoneService"
+            android:name=".service.clone.ClonePhoneService"
             android:exported="false"
             android:foregroundServiceType="connectedDevice|dataSync" />
+
+        <activity
+            android:name=".ui.nearby_play.NearbyPlayActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.nearby_play.FindDeviceActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.nearby_play.ReceiverActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

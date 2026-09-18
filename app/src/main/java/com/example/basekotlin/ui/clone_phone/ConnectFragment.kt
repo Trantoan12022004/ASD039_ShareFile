@@ -79,7 +79,6 @@ class ConnectFragment : BaseFragment<FragmentConnectBinding>() {
                         .placeholder(R.drawable.ic_clone)
                         .error(R.drawable.ic_clone)
                         .into(binding.ivStatus)
-//                    binding.ivStatus.setImageResource(R.drawable.ic_connect)
                     binding.tvStatus.text = getString(R.string.connecting)
                     binding.tvStatusDesc.text = getString(R.string.please_keep_both_devices_connect_to_the_same_wifi)
                     binding.progressBarOverall.progress = overall.overallPercent

@@ -32,6 +32,7 @@ class SendFileActivity : BaseActivity<ActivitySendBinding>(ActivitySendBinding::
     companion object {
         const val EXTRA_IS_PICK_MODE = "EXTRA_IS_PICK_MODE"
         const val EXTRA_SELECTED_FILES = "EXTRA_SELECTED_FILES"
+        const val EXTRA_INITIAL_TAB = "EXTRA_INITIAL_TAB"
     }
     private val viewModel: SendFilesViewModel by viewModels()
     private val adapter = FileItem1Adapter()
@@ -99,6 +100,13 @@ class SendFileActivity : BaseActivity<ActivitySendBinding>(ActivitySendBinding::
                 updateSubTabUI(position)
             }
         })
+
+        val initialTab = intent.getIntExtra(EXTRA_INITIAL_TAB, -1)
+        if (initialTab in 0 until tabTitles.size) {
+            binding.viewPager.post {
+                binding.viewPager.setCurrentItem(initialTab, false)
+            }
+        }
     }
 
     override fun bindView() {

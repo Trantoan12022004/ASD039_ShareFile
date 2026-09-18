@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    tools:context=".ui.nearby_play.ReceiverActivity">
+
+    <include
+        android:id="@+id/view_top"
+        layout="@layout/tool_nearby_play"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_12sdp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_top"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="@drawable/bg_radius_24">
+            <ImageView
+                android:id="@+id/iv_qr_code"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/qr_demo" />
+
+            <TextView
+                android:id="@+id/tv_device_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Sony Xperia 10 Mark V"
+                android:textSize="16sp"
+                android:fontFamily="@font/outfit_semibold"/>
+
+            <LinearLayout
+                android:id="@+id/layout_ip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ip"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/outfit_medium"/>
+
+                <TextView
+                    android:id="@+id/tv_ip_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/primary_35"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/outfit_semibold"
+                    tools:text="192.168.1.1"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_waiting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/black"
+                android:text="@string/waiting_for_connection"
+                android:fontFamily="@font/outfit_medium" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_radius_24"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+            <ImageView
+                android:id="@+id/iv_play_pause"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:src="@drawable/ic_play1" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="2dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/sub_title"
+                    android:textSize="12sp"
+                    android:text="@string/playing"
+                    android:fontFamily="@font/outfit_medium"/>
+
+                <TextView
+                    android:id="@+id/tv_device"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sony Xperia 10 Mark V"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/outfit_semibold"/>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_quit"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_quit" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/btn_stop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/stop_receiver"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:fontFamily="@font/outfit_semibold"
+            android:background="@drawable/bg_btn_create"
+            android:paddingVertical="12dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/black"
+            android:text="@string/make_sure_both_devices_are_connected_to_the_same_wifi_network"
+            android:fontFamily="@font/outfit_medium"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
